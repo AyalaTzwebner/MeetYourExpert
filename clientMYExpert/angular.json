@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clientMeetYE": {
+    "clientMYExpert": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/clientMeetYE",
+            "outputPath": "dist/clientMYExpert",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "clientMeetYE:build"
+            "browserTarget": "clientMYExpert:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "clientMeetYE:build:production"
+              "browserTarget": "clientMYExpert:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "clientMeetYE:build"
+            "browserTarget": "clientMYExpert:build"
           }
         },
         "test": {
@@ -114,15 +114,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "clientMeetYE:serve"
+            "devServerTarget": "clientMYExpert:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "clientMeetYE:serve:production"
+              "devServerTarget": "clientMYExpert:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "clientMeetYE"
+  "defaultProject": "clientMYExpert"
 }
