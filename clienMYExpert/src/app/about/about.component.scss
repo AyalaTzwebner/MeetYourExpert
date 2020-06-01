@@ -1,0 +1,10 @@
+$basicFont:Segue-Ui;
+$basicColor:gray;
+$basicBack:lightblue;
+$basicWidth:100vw;
+
+div{
+    background-color:$basicBack;
+    color:$basicColor;
+    width:$basicWidth;
+    height:60vh;}

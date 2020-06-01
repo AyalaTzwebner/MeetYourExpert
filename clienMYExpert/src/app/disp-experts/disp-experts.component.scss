@@ -1,0 +1,14 @@
+@use '../general' as *;
+.exp{
+    background-color:$colorB;
+    padding:10px;
+    margin:15px 25px;
+    height:100px;}
+.picture{
+    width:100px;
+    height:100px;
+    background-color:$colorD;
+    float:$r;}
+.details{
+    width:90vw;
+    position:$pos;}

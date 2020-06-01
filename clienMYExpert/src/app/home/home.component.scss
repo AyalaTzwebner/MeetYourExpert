@@ -1,0 +1,15 @@
+$basicFont:Segue-Ui;
+$basicColor:#7171ff;
+$basicBack:lightgray;
+$basicWidth:100vw;
+
+div{
+    background-color:$basicBack;
+    color:$basicColor;
+    width:$basicWidth;
+    height:30vh;}
+button{
+    width:140px;
+    height:46px;
+    border-radius:8px;
+    background-color:$basicColor;}
