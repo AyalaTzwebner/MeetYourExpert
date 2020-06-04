@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsersService {
+  url="http://localhost:3000/users/";
   allUsers: User[] = [];
   constantId: number = 10000;
   constructor(private http: HttpClient,private cities: CitiesService) {
@@ -21,7 +22,7 @@ export class UsersService {
   getAllUsers(): User[] {
     return this.allUsers;
   }
-  login(user: User) {
-    return this.http.post("http://localhost:3000/users/login",user)
+  login(user:User) {
+    return this.http.post(this.url+"login",user);
    }
 }

@@ -3,10 +3,10 @@ var db = require('../sqlDB')
 
 var getUserByLogin = (user) => {
   return db
-    .executeStatementy(`select * from allUsers 
+    .executeStatement(`select * from allUsers 
     where userName ='${user.userName}' and userPassword='${user.userPassword}'` )
-    .then((studyInfo) => 
-       studyInfo
+    .then((userInfo) => 
+       userInfo
       )
     }
 
