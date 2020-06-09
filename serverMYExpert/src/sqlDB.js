@@ -10,28 +10,28 @@ const config = {
   userName:'1',
   username:'1',
   user:'2',
-  password:'',
+  password:'123',
+  port:'1433',
   options: {
     // userName:'3',
     // user:'4',
     trustedConnection: true,
     useUTC: true
-  }
-  // authentication: {
+  },
+  authentication: {
 
-  //   options: {
-  //     userName:''
-  //   //   userName: process.env.USER_NAME,
-  //   //   password: process.env.PASSWORD
-  //   },
-  //   type: "default"
-  // },
-  // server: 'localhost',
-  // options: {
-  //   database: 'MeetYourExpert',
-  //   encrypt: true,
-  //   useColumnNames: true
-  // }
+    options: {
+      userName:'DESKTOP-1HT6NS2',
+password:'',
+    },
+    type: "default"
+  },
+  server: 'localhost',
+  options: {
+    database: 'MeetYourExpert',
+    encrypt: true,
+    useColumnNames: true
+  }
 };
 var connection;
 
@@ -88,7 +88,7 @@ module.exports = {
 }
 
 
-
+// ewgular password for ssms
 
 // var sql = require("mssql");
 

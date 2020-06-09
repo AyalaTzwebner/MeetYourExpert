@@ -11,6 +11,10 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MakeMeetComponent } from './make-meet/make-meet.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
+import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +22,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutComponent,
     DispExpertsComponent,
     DispExpertComponent,
-    LoginComponent
+    LoginComponent,
+    MakeMeetComponent,
+    SignUpComponent,
+    SignUpExpertComponent,
+    SignUpUserComponent
   ],
   imports: [
     BrowserModule,

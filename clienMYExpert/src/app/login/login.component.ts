@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
    
   }
   log_in() {
-    this.userService.login(this.user).subscribe(res=>alert(res),err=>console.log(err))
+    this.userService.login(this.user).subscribe(res=>alert("response: "+res),err=>console.log(err))
   }
   ngOnInit(): void {
   }
