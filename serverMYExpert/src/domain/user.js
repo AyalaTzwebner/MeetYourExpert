@@ -1,12 +1,15 @@
 
-var db = require('../sqlDB')
+var db = require('../mySqlDb')
 
 var getUserByLogin = (user) => {
   return db
-    .executeStatement(`select * from allUsers 
+    .executeStatement(`select * from users 
     where userName ='${user.userName}' and userPassword='${user.userPassword}'` )
-    .then((userInfo) => 
-       userInfo
+    .then((userInfo) => {
+
+  console.log(userInfo)
+    return userInfo.length?"user exists":"not exists"
+        }
       )
     }
 

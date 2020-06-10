@@ -18,20 +18,20 @@ const config = {
     trustedConnection: true,
     useUTC: true
   },
-  authentication: {
+//   authentication: {
 
-    options: {
-      userName:'DESKTOP-1HT6NS2',
-password:'',
-    },
-    type: "default"
-  },
-  server: 'localhost',
-  options: {
-    database: 'MeetYourExpert',
-    encrypt: true,
-    useColumnNames: true
-  }
+//     options: {
+//       userName:'DESKTOP-1HT6NS2',
+// password:'',
+//     },
+//     type: "default"
+//   },
+//   server: 'localhost',
+//   options: {
+//     database: 'MeetYourExpert',
+//     encrypt: true,
+//     useColumnNames: true
+//   }
 };
 var connection;
 
