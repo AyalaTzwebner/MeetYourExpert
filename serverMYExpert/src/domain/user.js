@@ -1,6 +1,7 @@
 
 var db = require('../mySqlDb')
 
+//check if username and password are valid, for a login process. 
 var getUserByLogin = (user) => {
   return db
     .executeStatement(`select * from users 

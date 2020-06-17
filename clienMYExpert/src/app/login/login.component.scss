@@ -3,8 +3,16 @@ form{
     margin: auto;
     background-color: #e0e0e0;
     padding: 20px;
+    direction: rtl;
 }
 input,button{
     margin-top:15px
+}
+.invalid{
+    border: 2px solid red;
+}
+.invalidp{
+    color:red;
+    font-size:smaller;
 }
 

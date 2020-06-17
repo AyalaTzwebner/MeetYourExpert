@@ -1,25 +1,17 @@
 <div class="form-group form wrapper" dir="rtl">
     <p><b>מלא את פרטיך</b></p>
-    <input type="text" placeholder="*שם פרטי" class="form-control"/>
-    <input type="text" placeholder="*שם משפחה" class="form-control"/>
-    <input type="email" placeholder="*כתובת מייל" class="form-control"/>
-    <input type="text" pattern="[0-9]+" placeholder="מספר פלאפון" class="form-control"/>
-    <select class="form-control">
-        <option disabled selected>בחר עיר</option>
-        <option>ירושלים</option>
-        <option>בני ברק</option>
-        <option>בית שמש</option>
-        <option>חיפה</option>
-        <option>באר שבע</option>
-    </select>
-    <input list="prof" class="form-control" placeholder="תחום התמקצעות"/>
+    <input type="text" placeholder="*שם פרטי" class="form-control" required="required"/>
+    <input type="text" placeholder="*שם משפחה" class="form-control" required="required"/>
+    <input type="email" placeholder="*כתובת מייל" class="form-control" required="required"/>
+    <input type="text" pattern="[0-9]+" placeholder="מספר פלאפון" class="form-control"  required="required" />
+    <div>בחר עיר:</div>
+    <input list="city" class="form-control" placeholder="בחר עיר" required="required" />
+    <datalist id="city">
+        <option *ngFor = "let c of cities" [value] = "c.name">
+    </datalist>
+    <input list="prof" class="form-control" placeholder="תחום התמקצעות" required="required" />
     <datalist id="prof">
-        <option value="תחום א">
-        <option value="תחום ב">
-        <option value="תחום ג">
-        <option value="תחום ד">
-        <option value="תחום ה">
-        <option value="תחום ו">
+        <option *ngFor="let s of subjects" [value]="s.name">
     </datalist>
     <button class="btn btn-outline-secondary btn-block">הרשם</button>
 </div>

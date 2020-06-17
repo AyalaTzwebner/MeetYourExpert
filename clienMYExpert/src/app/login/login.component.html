@@ -1,7 +1,9 @@
 <form class="form-group" dir="rtl">
    <p><b>מלא פרטי משתמש</b></p>
-        <input name="userName" placeholder='שם משתמש או דוא"ל' [(ngModel)]="user.userName" type="text" id="nameField" class="form-control" />
+        <input name="userName" placeholder='שם משתמש או דוא"ל' [(ngModel)]="user.userName" type="text" id="nameField" class="form-control" [class.invalid]="nameinValid" (blur)="userNameValidation('הכנס שם משתשמש')" />
+        <p *ngIf="nameinValid" class="invalidp">הכנס שם משתמש</p>
         <input name="userPassword" placeholder="סיסמא" [(ngModel)]="user.userPassword" type="text" id="passwordField"
-            class="form-control" />
+            class="form-control" [class.invalid]="passwordinvalid" (blur)="passwordValidation('הכנס סיסמא')"  />
+            <p *ngIf="passwordinvalid" class="invalidp">הכנס סיסמא</p>
     <input type="submit" (click)="log_in()" class="btn btn-outline-secondary btn-block" value="OK" />
 </form>

@@ -26,7 +26,7 @@ import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
     MakeMeetComponent,
     SignUpComponent,
     SignUpExpertComponent,
-    SignUpUserComponent
+    SignUpUserComponent,
   ],
   imports: [
     BrowserModule,
