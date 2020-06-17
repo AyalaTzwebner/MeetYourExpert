@@ -7,5 +7,10 @@ router.post('/login', async function (req, res) {
   console.log(userLogin)
   res.send(userLogin)
 })
+router.post('/signup',async function(req,res){
+  console.log("post here!")
+  var userSignup= await userDomain.insertUser(req.body)
+  res.send(userSignup)
+})
 
 module.exports = router

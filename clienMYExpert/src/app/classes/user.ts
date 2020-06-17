@@ -4,8 +4,8 @@ export class User {
     userName:string;
     userPassword:string;
     email:string;
-    city:City;
-    constructor(id?:number,userName?:string,userPassword?:string,email?:string,city?:City){
+    city:string;
+    constructor(id?:number,userName?:string,userPassword?:string,email?:string,city?:string){
         this.id=id;
         this.userName=userName;
         this.userPassword=userPassword;

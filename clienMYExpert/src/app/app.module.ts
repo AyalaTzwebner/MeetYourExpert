@@ -15,6 +15,12 @@ import { MakeMeetComponent } from './make-meet/make-meet.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
+import { RecommendComponent } from './recommend/recommend.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +33,7 @@ import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
     SignUpComponent,
     SignUpExpertComponent,
     SignUpUserComponent,
+    RecommendComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,12 @@ import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatCardModule,
+    MatIconModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

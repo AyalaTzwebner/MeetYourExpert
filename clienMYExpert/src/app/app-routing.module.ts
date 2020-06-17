@@ -8,11 +8,12 @@ import { MakeMeetComponent } from './make-meet/make-meet.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
+import { RecommendComponent } from './recommend/recommend.component';
 
 
 const routes: Routes = [{
   path:"",
-  component:MakeMeetComponent
+  component:RecommendComponent
 },{
   path:"login",
   component:LoginComponent
