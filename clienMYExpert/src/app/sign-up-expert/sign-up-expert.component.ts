@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CitiesService } from '../services/cities.service';
 import { SubjectsService } from '../services/subjects.service';
+import { Expert } from '../classes/expert';
+import { ExpertsService } from '../services/experts.service';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-sign-up-expert',
@@ -10,12 +13,19 @@ import { SubjectsService } from '../services/subjects.service';
 export class SignUpExpertComponent implements OnInit {
   cities;
   subjects;
-  constructor(private cityService:CitiesService, private subjectService:SubjectsService) { }
+  expert:Expert=new Expert();
+  fname:string;
+  lname:string;
+  constructor(private cityService:CitiesService, private subjectService:SubjectsService, private expertService:ExpertsService) { }
+
 
   ngOnInit(): void {
     this.cityService.getAllCities().subscribe(res=>this.cities=res,err=>console.log(err));
     console.log(this.cities);
     this.subjectService.getAllSubjects().subscribe(res=>this.subjects=res, err=>console.log(err));
   }
-
+signup(){
+  this.expert.userName=this.fname+" "+this.lname;
+this.expertService.signup(this.expert).subscribe(res => console.log("response: " + res), err => console.log(err))
+}
 }

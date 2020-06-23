@@ -3,6 +3,7 @@ import { Expert } from '../classes/expert';
 import { User } from '../classes/user';
 import { ExpertsService } from '../services/experts.service';
 import { UsersService } from '../services/users.service';
+import { Subject } from '../classes/subject';
 
 @Component({
   selector: 'app-disp-experts',
@@ -10,19 +11,22 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./disp-experts.component.scss']
 })
 export class DispExpertsComponent implements OnInit {
-  allExperts:Expert[]=[]
-  person:Expert;
-  justUser:User
+
+  allexperts:Expert[];
+
   constructor(private experts:ExpertsService,private users:UsersService) {
-    this.allExperts=experts.getAllExperts();
-     }
+    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
+    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
+    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
+    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
+    this.experts.getAllExperts().subscribe(
+      (res: Expert[]) => {
+        this.allexperts = res;
+      },
+      err => console.log(err))
+  }
+
   ngOnInit(): void {
-
+   
   }
-  showName(e:Expert):string{
-    if(e.id!=null)
-    return e.id.userName;
-return "no name";
-  }
-
 }

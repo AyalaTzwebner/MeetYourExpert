@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { Expert } from '../classes/expert';
 import { SubjectsService } from './subjects.service';
 import { UsersService } from './users.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpertsService {
   allExperts:Expert[]=[]
-  expertsCnt=1000
-  constructor(private subjects:SubjectsService,private users:UsersService) {
-    // this.allExperts.push(new Expert(users.getUserById(10000),subjects.getSubjectById(1)))
-    // this.allExperts.push(new Expert(users.getUserById(10002),subjects.getSubjectById(4)))
-    // this.allExperts.push(new Expert(users.getUserById(10003),subjects.getSubjectById(6)))
+  expertsCnt=1000;
+  url = "http://localhost:3000/experts/";
+  constructor(private subjects:SubjectsService,private users:UsersService,private http:HttpClient) {
    }
-   getAllExperts():Expert[]{
-    return this.allExperts;
+  signup(expert:Expert){
+    return this.http.post(this.url + "signup", expert);
+  }
+  getAllExperts(){
+    return this.http.get(this.url+"all");
   }
 }

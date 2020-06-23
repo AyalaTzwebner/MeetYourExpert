@@ -9,7 +9,7 @@ import { DispExpertsComponent } from './disp-experts/disp-experts.component';
 import { DispExpertComponent } from './disp-expert/disp-expert.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MakeMeetComponent } from './make-meet/make-meet.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -18,8 +18,9 @@ import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
 import { RecommendComponent } from './recommend/recommend.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,9 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserAnimationsModule,
     MatSliderModule,
     MatCardModule,
-    MatIconModule
-    
+    MatIconModule,
+    MatDividerModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

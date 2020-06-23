@@ -13,5 +13,5 @@
     <datalist id="prof">
         <option *ngFor="let s of subjects" [value]="s.name">
     </datalist>
-    <button class="btn btn-outline-secondary btn-block">הרשם</button>
+    <button class="btn btn-outline-secondary btn-block" (click)="signup()">הרשם</button>
 </div>

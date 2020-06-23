@@ -16,8 +16,10 @@ app.use(express.static('public'))
 var usersAction = require('./action/user')
 var cityAction = require('./action/city')
 var subjectAction = require('./action/profession')
+var expertAction = require('./action/expert');
 app.use('/users', usersAction)
 app.use('/cities', cityAction )
 app.use('/subject', subjectAction)
+app.use('/experts', expertAction)
 app.get('/', (req, res) => res.send('Api Meet Your Expert'))
 module.exports = app
