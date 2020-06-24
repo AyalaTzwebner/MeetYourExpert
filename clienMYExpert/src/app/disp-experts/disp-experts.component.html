@@ -1,19 +1,10 @@
-<mat-card *ngFor="let x of allexperts">
+<mat-card *ngFor="let x of allexperts"><a routerLink="/experts/{{x.id}}">
     <mat-card-header>
         <mat-card-title>{{x.userName}}</mat-card-title>
-        <mat-card-subtitle>{{x.proSubject.subName}}</mat-card-subtitle>
-        <img mat-card-avatar src="{{x.imgUrl}}">
+        <mat-card-subtitle>{{x.proSubject}}</mat-card-subtitle>
+        <!-- <img mat-card-avatar src="{{x.imgUrl}}"> -->
     </mat-card-header>
     <mat-card-content>
         <p>some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text | some text</p>
     </mat-card-content>
-</mat-card>
-
-
-<!-- <div class="exp">
-    <div class="details">
-    <a ><h3>pers.id.userName</h3></a>
-    <p>pers.proSubject.subName</p>
-</div>
-    <div class="picture">PICTURE</div>
-</div> -->
+</a></mat-card>

@@ -12,7 +12,7 @@ app.use(express.static('public'))
 //   // await db.openConnection()
 //   next()
 // })
-
+console.log("server 1")
 var usersAction = require('./action/user')
 var cityAction = require('./action/city')
 var subjectAction = require('./action/profession')

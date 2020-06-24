@@ -12,28 +12,35 @@ import { RecommendComponent } from './recommend/recommend.component';
 
 
 const routes: Routes = [{
-  path:"",
-  component:DispExpertsComponent
-},{
-  path:"login",
-  component:LoginComponent
-},{
-  path:"about",
-  component:AboutComponent
-},{
-  path:"signup",
-  component:SignUpComponent,
-  children:[{
-    path:"sign-up-expert",
-    component:SignUpExpertComponent,
-  },{
-    path:"sign-up-user",
-    component:SignUpUserComponent
-  },{
-    path:"",
-    component:SignUpUserComponent
+  path: "",
+  component: AboutComponent
+}, {
+  path: "login",
+  component: LoginComponent
+}, {
+  path: "about",
+  component: AboutComponent
+}, {
+  path: "signup",
+  component: SignUpComponent,
+  children: [{
+    path: "sign-up-expert",
+    component: SignUpExpertComponent,
+  }, {
+    path: "sign-up-user",
+    component: SignUpUserComponent
+  }, {
+    path: "",
+    component: SignUpUserComponent
   }]
-}];
+}, {
+  path: "experts",
+  component: DispExpertsComponent,
+}, {
+  path: "experts/:id",
+  component: DispExpertComponent
+}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

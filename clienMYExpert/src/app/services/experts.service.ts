@@ -19,4 +19,8 @@ export class ExpertsService {
   getAllExperts(){
     return this.http.get(this.url+"all");
   }
+  getById(id:number){
+    console.log("4");
+    return this.http.get("http://localhost:3000/experts/"+id)
+  }
 }

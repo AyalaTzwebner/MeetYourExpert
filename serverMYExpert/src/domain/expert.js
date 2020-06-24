@@ -12,14 +12,32 @@ var insertExpert = (expert) => {
       return err
     });
 }
+// var getExperts = () => {
+//   console.log("1");
+//   return db
+//   .executeStatement(`SELECT * FROM professional p INNER JOIN users u ON p.id = u.id`)
+//   .then((getInfo)=>{
+//   }).catch(err=>{
+//     return err;
+//   })
+//   }
 var getExperts = async () => {
+  console.log("server 3")
   try {
-    return await db.executeStatement(`SELECT * FROM proffesional p INNER JOIN user u ON p.id = u.id`)
+    return await db.executeStatement(`SELECT * FROM professional p INNER JOIN users u ON p.id = u.id`)
   } catch (e) {
-
   }
   console.log()
 }
-module.exports = { insertExpert, getExperts }
+
+var getExpertById = async (id) => {
+  
+  try {
+    return await db.executeStatement(`SELECT * FROM professional p INNER JOIN users u ON p.id = u.id WHERE p.id = '${id}'`)
+  } catch (e) {
+  }
+}
+
+module.exports = { insertExpert, getExperts , getExpertById }
 
 

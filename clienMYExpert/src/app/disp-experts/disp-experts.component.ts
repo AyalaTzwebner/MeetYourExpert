@@ -22,8 +22,11 @@ export class DispExpertsComponent implements OnInit {
     this.experts.getAllExperts().subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
+        console.log(this.allexperts)
       },
-      err => console.log(err))
+      err => {
+        console.log("some error:",err)
+      })
   }
 
   ngOnInit(): void {
