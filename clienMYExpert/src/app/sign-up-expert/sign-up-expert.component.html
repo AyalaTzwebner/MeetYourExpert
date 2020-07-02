@@ -9,9 +9,9 @@
     <datalist id="city">
         <option *ngFor = "let c of cities" [value] = "c.name">
     </datalist>
-    <input list="prof" class="form-control" placeholder="תחום התמקצעות" required="required" />
+    <input  type="text" list="prof" class="form-control" placeholder="תחום התמקצעות" required="required"  [(ngModel)]='currentSubject' (change)="onSubjectChanged(currentSubject)" />
     <datalist id="prof">
-        <option *ngFor="let s of subjects" [value]="s.name">
+        <option *ngFor="let s of subjects" [value]="s.subName">{{s.subName}}</option>
     </datalist>
     <button class="btn btn-outline-secondary btn-block" (click)="signup()">הרשם</button>
 </div>

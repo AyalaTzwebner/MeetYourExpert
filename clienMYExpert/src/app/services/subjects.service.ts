@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from '../classes/subject';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class SubjectsService {
   //     return subject;
   //   });
   //   return null;
-  // }
+  // }: Observable<Subject[]>
   getAllSubjects(){
     return this.http.get(this.url);
   }
