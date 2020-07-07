@@ -1,8 +1,8 @@
 export class City {
     id:number;
-    cityName:string;
+    name:string;
     constructor(id?:number,cityName?:string){
 this.id=id;
-this.cityName=cityName;
+this.name=cityName;
     }
 }

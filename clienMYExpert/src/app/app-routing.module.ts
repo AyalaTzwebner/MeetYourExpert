@@ -13,7 +13,7 @@ import { RecommendComponent } from './recommend/recommend.component';
 
 const routes: Routes = [{
   path: "",
-  component: AboutComponent
+  component: RecommendComponent
 }, {
   path: "login",
   component: LoginComponent

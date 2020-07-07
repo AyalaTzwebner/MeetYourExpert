@@ -5,6 +5,7 @@ import { Expert } from '../classes/expert';
 import { ExpertsService } from '../services/experts.service';
 import { User } from '../classes/user';
 import { Subject } from '../classes/subject';
+import { City } from '../classes/city';
 
 @Component({
   selector: 'app-sign-up-expert',
@@ -12,27 +13,24 @@ import { Subject } from '../classes/subject';
   styleUrls: ['./sign-up-expert.component.scss']
 })
 export class SignUpExpertComponent implements OnInit {
-  cities;
-  subjects:any;
+  allCities:City[];
+  allSubjects:Subject[];
   expert: Expert = new Expert();
   fname: string;
   lname: string;
-  currentSubject: any;
+  currentSubject: string;
+  currentCity:string;
   constructor(private cityService: CitiesService, private subjectService: SubjectsService, private expertService: ExpertsService) { }
 
 
   ngOnInit(): void {
-    this.cityService.getAllCities().subscribe(res =>
-      this.cities = res, err => console.log(err));
-    console.log(this.cities);
-    this.subjectService.getAllSubjects().subscribe(res =>
-      this.subjects = res, err => console.log(err));
+    this.allCities=this.cityService.getAllCities();
+    this.allSubjects=this.subjectService.getChildrenSubjects();
   }
   signup() {
     this.expert.userName = this.fname + " " + this.lname;
+    this.expert.proSubject=this.subjectService.getSubjectByName(this.currentSubject)
+    this.expert.city=this.cityService.getCityByName(this.currentCity)
     this.expertService.signup(this.expert).subscribe(res => console.log("response: " + res), err => console.log(err))
-  }
-  onSubjectChanged(selectedName: string): any {
-    return this.subjects.find(s => s.subName === selectedName);
   }
 }

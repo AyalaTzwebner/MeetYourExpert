@@ -19,7 +19,7 @@ var subjectAction = require('./action/profession')
 var expertAction = require('./action/expert');
 app.use('/users', usersAction)
 app.use('/cities', cityAction )
-app.use('/subject', subjectAction)
+app.use('/subjects', subjectAction)
 app.use('/experts', expertAction)
 app.get('/', (req, res) => res.send('Api Meet Your Expert'))
 module.exports = app

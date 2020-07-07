@@ -7,33 +7,44 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SubjectsService {
-  // allSubject;
-  // subjectId:number=0;
-  url="http://localhost:3000/subject/subjects.json";
-  constructor(private http:HttpClient) {
-    // this.allSubject.push(new Subject(this.subjectId++,"carpentry"))
-    // this.allSubject.push(new Subject(this.subjectId++,"electrical engineering"))
-    // this.allSubject.push(new Subject(this.subjectId++,"plumbing"))
-    // this.allSubject.push(new Subject(this.subjectId++,"technician"))
-    // this.allSubject.push(new Subject(this.subjectId++,"Computer Technician",this.getSubjectById(this.subjectId-1)))
-    // this.allSubject.push(new Subject(this.subjectId++,"Tar"))
-    // this.allSubject.push(new Subject(this.subjectId++,"painting"))
-   }
-  //  getSubjectById(id:number):Subject{
-  //   let s:Subject;
-  //   s=this.allSubject.find(subject=>subject.id==id);
-  //   if(s!=null)
-  //   return s;
-  //   return new Subject();
-  // }
-  // getSubjectByName(name:string):Subject{
-  //   this.allSubject.forEach(subject => {
-  //     if(subject.subName==name)
-  //     return subject;
-  //   });
-  //   return null;
-  // }: Observable<Subject[]>
-  getAllSubjects(){
-    return this.http.get(this.url);
+ 
+  allSubject: Subject[] = [];
+  url = "http://localhost:3000/subjects/";
+  constructor(private http: HttpClient) {
+    console.log("subjects")
+    this.http.get<Subject[]>(this.url + "all").subscribe(
+      (res: Subject[]) => {
+        this.allSubject = res
+      },
+      err =>
+        console.log(err)
+    )
+  }
+  getSubjectById(id: number): Subject {
+    let s: Subject;
+    s = this.allSubject.find(subject => subject.id == id);
+    if (s != null)
+      return s;
+    return new Subject();
+  }
+  getSubjectByName(name: string): number {
+    var subject = this.allSubject.filter(x => x.subName == name);
+    if (!subject || subject.length == 0) {
+      return null;
+    }
+    return subject[0].id;
+
+
+  }
+  getAllSubjects(parent: number) {
+
+    return this.allSubject.filter(x=>x.parent == parent);
+  }
+  getChildrenSubjects() {
+
+    return this.allSubject.filter(x=>x.parent != null);
+  }
+  getAllParentsSubjects(): Subject[] {
+    return this.allSubject.filter(x=>x.parent == null);
   }
 }

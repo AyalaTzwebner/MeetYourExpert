@@ -1,14 +1,13 @@
 <div class="form-group form" dir="rtl">
     <p><b>מלא את פרטיך</b></p>
-    <input type="text" placeholder="*שם פרטי" class="form-control" [(ngModel)]="fname"/>
-    <input type="text" placeholder="*שם משפחה" class="form-control"  [(ngModel)]="lname"/>
-    <input type="email" placeholder="*כתובת מייל" class="form-control" [(ngModel)]="user.email"/>
-    <input type="text" placeholder="*סיסמא" class="form-control" [(ngModel)]="user.userPassword"/>
-    <div>בחר עיר:</div>
-    <input list="city" class="form-control" placeholder="בחר עיר" />
-    <datalist id="city"  [(ngModel)]="user.city">
+    <input type="text" placeholder="*שם פרטי" class="form-control" [(ngModel)]="fname" name="firstName" />
+    <input type="text" placeholder="*שם משפחה" class="form-control"  [(ngModel)]="lname" name="lastName"/>
+    <input type="email" placeholder="*כתובת מייל" class="form-control" [(ngModel)]="user.email" name="email"/>
+    <input type="text" placeholder="*סיסמא" class="form-control" [(ngModel)]="user.userPassword" name="password"/>
+    <input list="city" class="form-control" placeholder="בחר עיר" name="city"  [(ngModel)]="city"/>
+    <datalist id="city" >
         <option disabled selected>בחר עיר</option>
-        <option *ngFor = "let c of cities" [value] = "c.name">
+        <option *ngFor = "let c of allCities" [value] = "c.name">
     </datalist>
     <button class="btn btn-outline-secondary btn-block" (click)="postUser()">הרשם</button>
-</div>
+</div> 

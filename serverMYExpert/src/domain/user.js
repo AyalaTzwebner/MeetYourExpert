@@ -15,11 +15,13 @@ var insertUser = (user) => {
   console.log("Im here!");
   return db
     .executeStatement(`INSERT INTO users (userName,userPassword,email,city) 
-      VALUES('${user.userName}','${user.userPassword}','${user.email}','${user.city}')`)
+      VALUES('${user.userName}','${user.userPassword}','${user.email}',${user.city})`)
     .then((userInfo) => {
+      console.log("true");
      return true
     }
     ).catch(err => {
+      console.log(err)
       return err
     })
 }

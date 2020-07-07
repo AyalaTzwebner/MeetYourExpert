@@ -1,8 +1,8 @@
 export class Subject {
     id:number;
     subName:string;
-    parent:Subject;
-    constructor(id?:number,subName?:string,parent?:Subject){
+    parent?:number;
+    constructor(id?:number,subName?:string,parent?:number){
         this.id=id;
         this.subName=subName;
         this.parent=parent;

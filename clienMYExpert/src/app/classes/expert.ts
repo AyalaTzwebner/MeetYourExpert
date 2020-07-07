@@ -5,10 +5,10 @@ export class Expert {
     userName: string;
     userPassword: string;
     email: string;
-    city: string;
-    proSubject: Subject;
+    city: number;
+    proSubject: number;
     imgUrl:string;
-    constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: string, proSubject?: Subject,img?:string) {
+    constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string) {
         this.id = id;
         this.userName = userName;
         this.userPassword = userPassword;

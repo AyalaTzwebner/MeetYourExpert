@@ -2,8 +2,58 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
-body{
-//  overflow-y: hidden;
-}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body,
+html {
+
+    margin: 0;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("~/assets/bg.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Display & Opacity */
+    position: relative;
+    opacity: 0.65;
+}
+
+.body-content,
+.body-content-large {
+    padding: 40px 20px;
+    position: absolute;
+    width: 30%;
+    right: 5%;
+    top: 10%;
+    background: rgba(255, 255, 255, 0.6);
+    height: 90%;
+    text-align: center;
+    direction: rtl;
+    color: #000000;
+}
+
+.body-content-large {
+    padding: 30px 20px;
+    width: 70%;
+}
+
+.form-content .row {
+    margin: 0px;
+}
+
+.form-content input {
+    border: none;
+}
+
+.form-content span {
+    font-size: 14px;
+    font-weight: 500;
+}
