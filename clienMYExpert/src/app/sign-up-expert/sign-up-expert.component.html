@@ -1,17 +1,33 @@
 <div class="form-group form wrapper" dir="rtl">
     <p><b>מלא את פרטיך</b></p>
+<<<<<<< Updated upstream
     <input type="text" placeholder="*שם פרטי" class="form-control" required="required"  [(ngModel)]="fname"/>
     <input type="text" placeholder="*שם משפחה" class="form-control" required="required"  [(ngModel)]="lname"/>
     <input type="email" placeholder="*כתובת מייל" class="form-control" required="required"  [(ngModel)]="expert.email"/>
     <input type="text" placeholder="*סיסמא" class="form-control" required="required"  [(ngModel)]="expert.userPassword"/>
     <div>בחר עיר:</div>
     <input list="city" class="form-control" placeholder="בחר עיר" required="required"  [(ngModel)]='currentCity' name="expertCity" ngDefaultControl/>
+=======
+    <input type="text" placeholder="*שם פרטי" class="form-control" required="required" [(ngModel)] = "fname"/>
+    <input type="text" placeholder="*שם משפחה" class="form-control" required="required" required="required" [(ngModel)] = "lname"/>
+    <input type="email" placeholder="*כתובת מייל" class="form-control" required="required" required="required" [(ngModel)] = "expert.email"/>
+    <input type="text" pattern="[0-9]+" placeholder="מספר פלאפון" class="form-control"  required="required"  required="required"/>
+    <div>בחר עיר:</div>
+    <input list="city" class="form-control" placeholder="בחר עיר" required="required"  required="required" [(ngModel)] = "expert.city"/>
+>>>>>>> Stashed changes
     <datalist id="city">
         <option *ngFor = "let c of allCities" [value] = "c.name">
     </datalist>
+<<<<<<< Updated upstream
     <input  type="text" list="prof" class="form-control" placeholder="תחום התמקצעות" required="required"  [(ngModel)]='currentSubject' name="expertField" ngDefaultControl />
     <datalist id="prof" >
         <option *ngFor="let s of allSubjects" [value]="s.subName">{{s.subName}}</option>
+=======
+    <input list="prof" class="form-control" placeholder="תחום התמקצעות" required="required" required="required" [(ngModel)] = "expert.proSubject" />
+    <datalist id="prof">
+        <option *ngFor="let s of subjects" [value]="s.name">
+>>>>>>> Stashed changes
     </datalist>
+    <input type="password" placeholder="סיסמה" required="required" [(ngModel)] = "expert.userPassword" class="form-control">
     <button class="btn btn-outline-secondary btn-block" (click)="signup()">הרשם</button>
 </div>

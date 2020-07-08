@@ -30,6 +30,5 @@ export class SignUpUserComponent implements OnInit {
     this.user.userName = this.fname + " " + this.lname;
     this.userService.post(this.user).subscribe(res => alert("response: " + res), err => console.log(err))
   }
-
 }
  

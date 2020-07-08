@@ -4,6 +4,8 @@ var expertDomain = require('../domain/expert')
 
 router.post('/signup',async function(req,res){
   var expSignup= await expertDomain.insertExpert(req.body)
+  console.log("signup occured!!!")
+  console.log(expSignup)
   res.send(expSignup)
 })
 router.get('/all',async function(req,res){
