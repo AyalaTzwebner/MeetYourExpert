@@ -7,6 +7,8 @@ import { Subject } from '../classes/subject';
 import { City } from '../classes/city';
 import { SubjectsService } from '../services/subjects.service';
 import { CitiesService } from '../services/cities.service';
+import { strict } from 'assert';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-disp-experts',
@@ -19,10 +21,12 @@ export class DispExpertsComponent implements OnInit {
   allCities: City[];
   allSubjects: Subject[];
   allParentsSubjects: Subject[];
+  allChildrenSubjects: Subject[];
   currentParentSubject: string;
   currentSubject: string;
   currentCity: string;
   name: string;
+  param:Subject;
   constructor(private experts: ExpertsService, private users: UsersService,
     private cityService: CitiesService, private subjectService: SubjectsService) {
 
@@ -38,16 +42,23 @@ export class DispExpertsComponent implements OnInit {
       err => {
         console.log("some error:", err)
       })
+
   }
 
   ngOnInit(): void {
     this.allCities = this.cityService.getAllCities();
     //  this.allSubjects=this.subjectService.getAllSubjects();
     this.allParentsSubjects = this.subjectService.getAllParentsSubjects();
+    
   }
   filter() {
     //TODO: currentParentSubject - add
-    this.experts.filterExperts(this.currentSubject, this.currentCity, this.name).subscribe(
+    const s = this.currentParentSubject && this.currentParentSubject!='' ? this.subjectService.getSubjectByName(this.currentParentSubject).toString() : '';
+    const s1 = this.currentSubject && this.currentSubject!='' ? this.subjectService.getSubjectByName(this.currentSubject).toString(): '';
+    
+    const c = this.currentCity && this.currentCity!="" ? this.cityService.getCityByName(this.currentCity).toString(): '';
+    const n = this.name && this.name!= '' ? this.name : '';
+    this.experts.filterExperts(s,s1, c, n).subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
         console.log(this.allexperts)
@@ -70,5 +81,29 @@ export class DispExpertsComponent implements OnInit {
         console.log("some error:", err)
       })
 
-  }
+      }
+      getChildren():void
+      {
+        let s:number;
+        s = this.subjectService.getSubjectByName(this.currentParentSubject);
+        this.allChildrenSubjects = this.subjectService.getChildrenSubjects(s.toString());
+      }
+      getSubjectService():SubjectsService
+      {
+        return this.subjectService;
+      }
+      clearParent():void{
+          this.currentParentSubject = "";
+      }
+      clearChild():void
+      {
+        this.currentSubject = "";
+      }
+      clearCity():void
+      {
+        this.currentCity = "";
+      }
+      clearName():void{
+        this.name = "";
+      }
 }

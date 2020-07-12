@@ -16,7 +16,6 @@ export class DispExpertComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
         this.expert = res[0];
-        console.log(this.expert)
       },
         err => {
           console.log(err)

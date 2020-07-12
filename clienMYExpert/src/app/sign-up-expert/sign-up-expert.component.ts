@@ -20,17 +20,21 @@ export class SignUpExpertComponent implements OnInit {
   lname: string;
   currentSubject: string;
   currentCity:string;
+  companyName:string;
+  description:string;
   constructor(private cityService: CitiesService, private subjectService: SubjectsService, private expertService: ExpertsService) { }
 
 
   ngOnInit(): void {
     this.allCities=this.cityService.getAllCities();
-    this.allSubjects=this.subjectService.getChildrenSubjects();
+    this.allSubjects=this.subjectService.getAllSubjects();
   }
   signup() {
+
     this.expert.userName = this.fname + " " + this.lname;
     this.expert.proSubject=this.subjectService.getSubjectByName(this.currentSubject)
     this.expert.city=this.cityService.getCityByName(this.currentCity)
     this.expertService.signup(this.expert).subscribe(res => console.log("response: " + res), err => console.log(err))
   }
+
 }

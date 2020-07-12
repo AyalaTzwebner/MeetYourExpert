@@ -10,35 +10,34 @@ import { FormGroup, FormBuilder,ReactiveFormsModule } from '@angular/forms';
 export class LoginComponent implements OnInit {
   // login: FormGroup;
   user:User=new User();
-  nameinValid:boolean;
+  nameinvalid:boolean;
   passwordinvalid:boolean;
   constructor(private userService: UsersService, private formBuilder: FormBuilder) {
     // this.login = formBuilder.group({
     //   userName:[''],
     //   userPassword:[''],
     // })
-    this.nameinValid = false;
+    this.nameinvalid = false;
    
   }
   log_in() {
-    this.passwordValidation(' ');
-    this.userNameValidation(' ');
-    if (this.nameinValid||this.passwordinvalid)
+    this.passwordValidation();
+    this.userNameValidation();
+    if (this.nameinvalid||this.passwordinvalid)
         return false;
     else
         this.userService.login(this.user).subscribe(res=>alert("response: "+res),err=>console.log(err))
   }
-  userNameValidation(msg:string):void{
+  userNameValidation():void{
     // alert((<HTMLInputElement>document.getElementById("nameField")).value);
     if ((<HTMLInputElement>document.getElementById("nameField")).value.length<1)
       {
-          // alert(msg);
-          this.nameinValid = true;
+          this.nameinvalid = true;
       }
         else
-        this.nameinValid = false;
+        this.nameinvalid = false;
   }
-  passwordValidation(msg:string):void{
+  passwordValidation():void{
     // alert((<HTMLInputElement>document.getElementById("passwordField")).value);
     if ((<HTMLInputElement>document.getElementById("passwordField")).value.length<1)
       {

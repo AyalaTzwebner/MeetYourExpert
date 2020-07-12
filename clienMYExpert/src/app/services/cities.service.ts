@@ -22,8 +22,6 @@ export class CitiesService {
       return null;
     }
     return city[0].id;
-
-
   }
   getCityById(id:number):City{
     this.allCities.forEach(city => {

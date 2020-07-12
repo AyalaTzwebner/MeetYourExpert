@@ -1,17 +1,35 @@
 var express = require('express')
 var router = express.Router()
-var profDomain = require('../domain/profession')
+var profDomain = require('../domain/profession');
+const { all } = require('./city');
 
-<<<<<<< Updated upstream
  router.get('/all', async function (req, res) {
     var allFields=await profDomain.getAllFields();
     res.send(allFields);
-=======
-//sending a JSON file with data of all professions 
- router.get('/subjects.json', async function (req, res) {
-    console.log("connection occured") 
-    res.json(prof)
->>>>>>> Stashed changes
    })
   
+   router.get('/parents', async function (req, res)
+   {
+      console.log("parents sent");
+      var allParents = await profDomain.getParents();
+      console.log(allParents);
+      res.send(allParents);
+   }
+   )
+
+   router.get('/children', async function (req, res)
+   {
+      var allChildren = await profDomain.getChildren(req.query.id);
+      console.log(allChildren);
+      res.send(allChildren);
+   }
+   )
+   
+   router.get('/getSubjectByName', async function (req, res)
+   {
+   var subject = await profDomain.getSubjectByName();
+   res.send(subject);
+   }
+   )
+
    module.exports = router

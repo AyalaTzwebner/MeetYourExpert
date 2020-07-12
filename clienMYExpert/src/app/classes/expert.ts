@@ -7,6 +7,8 @@ export class Expert {
     email: string;
     city: number;
     proSubject: number;
+    businessName: string;
+    description: string;
     imgUrl:string;
     constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string) {
         this.id = id;

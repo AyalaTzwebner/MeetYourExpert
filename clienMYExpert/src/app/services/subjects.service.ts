@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from '../classes/subject';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 export class SubjectsService {
  
   allSubject: Subject[] = [];
+  parentSubjects: Subject[] = [];
+  childrenSubjects: Subject[] = [];
   url = "http://localhost:3000/subjects/";
   constructor(private http: HttpClient) {
     console.log("subjects")
@@ -19,6 +21,14 @@ export class SubjectsService {
       err =>
         console.log(err)
     )
+    this.http.get<Subject[]>(this.url + "parents").subscribe(
+      (res:Subject[]) => {
+        this.parentSubjects = res;
+      },
+      err =>
+      console.log(err)
+    )
+
   }
   getSubjectById(id: number): Subject {
     let s: Subject;
@@ -36,15 +46,25 @@ export class SubjectsService {
 
 
   }
-  getAllSubjects(parent: number) {
-
-    return this.allSubject.filter(x=>x.parent == parent);
+  getAllSubjects() {
+    return this.allSubject;
   }
-  getChildrenSubjects() {
+  getChildrenSubjects(ID:string):Subject[] {
 
-    return this.allSubject.filter(x=>x.parent != null);
+    // return this.allSubject.filter(x=>x.parent != null);
+    if (ID=='-1')
+      return null;
+    this.http.get<Subject[]>(this.url + "children", { params: new HttpParams().set('id' , ID) }).subscribe(
+
+      (res:Subject[]) => {
+        this.childrenSubjects = res;
+      },
+      err =>
+      console.log(err)
+    )
+      return this.childrenSubjects;
   }
-  getAllParentsSubjects(): Subject[] {
-    return this.allSubject.filter(x=>x.parent == null);
+  getAllParentsSubjects():Subject[] {
+    return this.parentSubjects;
   }
 }

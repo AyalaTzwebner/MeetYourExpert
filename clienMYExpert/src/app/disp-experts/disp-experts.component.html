@@ -1,27 +1,27 @@
 <div class="row">
     <div class="col-3">
-        <input type="text" list="prof" class="form-control" placeholder="שם" required="required"
-            [(ngModel)]='name' name="name" ngDefaultControl />
+        <input type="text" class="form-control" placeholder="שם" required="required"
+            [(ngModel)]='name' name="name" (focus)="clearName()" ngDefaultControl />
     </div>
     <div class="col-3">
         <input list="city" class="form-control" placeholder="בחר עיר" required="required" [(ngModel)]='currentCity'
-            name="expertCity" ngDefaultControl />
+            name="expertCity" (focus) = "clearCity()" ngDefaultControl />
         <datalist id="city">
             <option *ngFor="let c of allCities" [value]="c.name">
         </datalist>
     </div>
     <div class="col-3">
-        <input type="text" list="prof" class="form-control" placeholder="תחום התמקצעות" required="required"
-            [(ngModel)]='currentSubject' name="expertField" ngDefaultControl />
-        <datalist id="prof">
-            <option *ngFor="let s of allSubjects" [value]="s.subName">{{s.subName}}</option>
+        <input id="micro" list="field" class="form-control" placeholder="תחום התמקצעות" required="required"
+            [(ngModel)]='currentSubject' name="expertField" (focus) = "clearChild()"  ngDefaultControl />
+        <datalist id="field">
+            <option *ngFor="let c of allChildrenSubjects" [value]="c.subName">{{c.subName}}</option>
         </datalist>
     </div>
     <div class="col-3">
-        <input type="text" list="prof" class="form-control" placeholder="קטגוריות" required="required"
-            [(ngModel)]='currentParentSubject' name="expertField" ngDefaultControl />
+        <input id="category" type="text" list="prof" class="form-control" placeholder="קטגוריות" required="required"
+            [(ngModel)]='currentParentSubject' name="expertField" ngDefaultControl (change) = "getChildren()" (focus) = "clearParent()"/>
         <datalist id="prof">
-            <option *ngFor="let s of allParentsSubjects" [value]="s.subName">{{s.subName}}</option>
+            <option *ngFor="let s of allParentsSubjects" [value]="s.subName" >{{s.subName}}</option>
         </datalist>
     </div>
     <div>
@@ -34,12 +34,10 @@
 <mat-card *ngFor="let x of allexperts"><a routerLink="/experts/{{x.id}}">
         <mat-card-header>
             <mat-card-title>{{x.userName}}</mat-card-title>
-            <mat-card-subtitle>{{x.proSubject}}</mat-card-subtitle>
+            <mat-card-subtitle>{{getSubjectService().getSubjectById(x.proSubject).subName}}</mat-card-subtitle>
             <!-- <img mat-card-avatar src="{{x.imgUrl}}"> -->
         </mat-card-header>
         <mat-card-content>
-            <p>some text | some text | some text | some text | some text | some text | some text | some text | some text
-                | some text | some text | some text | some text | some text | some text | some text | some text | some
-                text | some text | some text | some text</p>
+            <p>{{x.description}}</p>
         </mat-card-content>
     </a></mat-card>

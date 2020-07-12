@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Expert } from '../classes/expert';
 import { SubjectsService } from './subjects.service';
 import { UsersService } from './users.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class ExpertsService {
   
-  filterExperts(currentSubject: string, currentCity: string, name: string) : Observable<Expert[]>{
-    return this.http.get<Expert[]>(this.url+"filter/");
+  filterExperts(currentCategory:string, currentSubject: string, currentCity: string, name: string) : Observable<Expert[]>{
+    return this.http.get<Expert[]>(this.url+"filter", { params: new HttpParams().set('subject' , currentSubject).set('city', currentCity).set('name', name).set('category', currentCategory) } );
   }
   allExperts:Expert[]=[]
   url = "http://localhost:3000/experts/";

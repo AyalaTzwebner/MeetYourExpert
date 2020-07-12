@@ -12,6 +12,12 @@ router.get('/all',async function(req,res){
   var getExperts=await expertDomain.getExperts();
   res.send(getExperts);
 })
+
+router.get('/filter', async function(req, res){
+  var getFilteredExperts = await expertDomain.getFilteredExperts(req.query.category, req.query.subject, req.query.city, req.query.name);
+  res.send(getFilteredExperts);
+})
+
 router.get('/:id',async function(req,res){
 
   console.log("server 2");

@@ -6,8 +6,8 @@ var insertExpert = (expert) => {
     .executeStatement(`INSERT INTO users (userName,userPassword,email,city) 
       VALUES('${expert.userName}','${expert.userPassword}','${expert.email}',${expert.city})`)
     .then((insInfo) => {
-      return db.executeStatement(`INSERT INTO professional (id,proSubject,scores) 
-      VALUES('${insInfo.insertId}',${expert.proSubject},0)`)
+      return db.executeStatement(`INSERT INTO professional (id,proSubject, businessName, description, scores) 
+      VALUES('${insInfo.insertId}',${expert.proSubject}, '${expert.businessName}','${expert.description}' ,0)`)
     }).catch(err => {
       return err
     });
@@ -38,6 +38,42 @@ var getExpertById = async (id) => {
   }
 }
 
-module.exports = { insertExpert, getExperts, getExpertById }
+var getFilteredExperts = async (category, subject, city, name) => {
+  try {
+    var sqlQuery = "SELECT * FROM professional p inner join users u ON p.id = u.id ";
+    var whereQuery = "WHERE";
+    var hasCondition = false;
+    if (category && category != "") {
+      hasCondition = true;
+      whereQuery += ` p.proSubject in (SELECT proSubject FROM meet_your_expert.fields WHERE parent=${category}) or p.proSubject=${category} and `;
+
+    }
+    if (subject && subject != "") {
+      hasCondition = true;
+      whereQuery += ` p.proSubject = ${subject} and `;
+
+    }
+    if (city && city != "") {
+      hasCondition = true;
+      whereQuery += ` u.city = ${city} and `
+    }
+    if (name && name != "") {
+      hasCondition = true;
+      whereQuery += ` u.userName like '%${name}%' and `
+    }
+    if (hasCondition) {
+      sqlQuery += whereQuery;
+      sqlQuery = sqlQuery.substr(0, sqlQuery.length - 4);
+      sqlQuery += ";";
+    }
+    console.log(sqlQuery);
+    return db.executeStatement(sqlQuery);
+  }
+  catch (e) {
+
+    }
+  }
+
+module.exports = { insertExpert, getExperts, getExpertById, getFilteredExperts}
 
 
