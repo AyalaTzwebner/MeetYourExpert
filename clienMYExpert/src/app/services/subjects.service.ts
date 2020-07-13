@@ -30,12 +30,12 @@ export class SubjectsService {
     )
 
   }
-  getSubjectById(id: number): Subject {
+  getSubjectById(id: number): string {
     let s: Subject;
     s = this.allSubject.find(subject => subject.id == id);
     if (s != null)
-      return s;
-    return new Subject();
+      return s.subName;
+    return "";
   }
   getSubjectByName(name: string): number {
     var subject = this.allSubject.filter(x => x.subName == name);

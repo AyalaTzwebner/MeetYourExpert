@@ -13,3 +13,70 @@ $l:left;
 $scroll:scroll;
 $noscroll:hidden;
 /*@use '../general' as *;*/
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: black !important;
+   }
+  
+//    ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    // background-color: green !important;
+//   } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: #ffb252 !important;;
+  }
+
+// customed button design
+  .mat-button.mat-customed,
+.mat-stroked-button.mat-customed {
+    margin:5px;
+    color: #ffb252;
+    text-shadow: 1px 1px 0px black;
+}
+.mat-button.mat-customed:hover,
+.mat-stroked-button.mat-customed:hover {
+  background-color: rgb(255, 255, 239);
+}
+
+.mat-raised-button.mat-customed,
+.mat-flat-button.mat-customed,
+.mat-fab.mat-customed,
+.mat-mini-fab.mat-customed {
+  color: white;
+  background-color: #ffb252;
+  text-shadow: 0px 1px 2px black;
+}
+
+.mat-icon-button.mat-customed {
+    color:lightgoldenrodyellow
+}
+// header button design
+.mat-button.mat-header,
+.mat-stroked-button.mat-header {
+    margin:5px;
+    color: #ffb252;
+    // text-shadow: 1px 1px 0px black;
+}
+.mat-button.mat-header:hover,
+.mat-stroked-button.mat-header:hover {
+  background-color: #ffffef66;
+}
+
+.mat-raised-button.mat-header,
+.mat-flat-button.mat-header,
+.mat-fab.mat-header,
+.mat-mini-fab.mat-header {
+  color: black;
+  background-color: #ffffef66;
+  font-weight: bold;
+  margin:10px;
+//   text-shadow: 0px 1px 2px black;
+}
+
+.mat-icon-button.mat-header {
+    color:lightgoldenrodyellow
+}
+button:focus { outline: none; }

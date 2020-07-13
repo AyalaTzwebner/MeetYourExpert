@@ -10,7 +10,10 @@ export class Expert {
     businessName: string;
     description: string;
     imgUrl:string;
-    constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string) {
+    businessName:string;
+    description:string;
+    score:number
+    constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string,businessName?:string,description?:string,score?:number) {
         this.id = id;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -18,5 +21,8 @@ export class Expert {
         this.city = city;
         this.proSubject = proSubject;
         this.imgUrl=img;
+        this.businessName=businessName;
+        this.description=description;
+        this.score=score
     }
 }

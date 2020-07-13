@@ -1,19 +1,69 @@
+@use '../general' as *;
 $basicFont:Segue-Ui;
 $basicColor:#7171ff;
 $basicBack:lightgray;
 $basicWidth:100vw;
 
+
 div{
-    background-color:$basicBack;
-    color:$basicColor;
-    // width:$basicWidth;
-    height:30vh;}
+
+    // background-image:url('https://image.freepik.com/free-photo/young-businesspeople-putting-their-hands-together_23-2148187231.jpg');
+    // background-repeat: no-repeat;
+    // background-clip: content-box;
+    width:100vw;
+    height:40vh;
+}
+a{
+    color:black
+
+}
+a:after{
+    color:white;
+    font-weight: bolder;
+}
+nav{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+.logo{
+    margin-left: -10px;
+}
 button{
-    width:140px;
-    height:46px;
-    border-radius:8px;
-    background-color:$basicColor;}
+    color:white;
+    border:0px;
+
+}
+
 a{
     margin:10px;
     text-decoration: none;
+    border: 0px;
+}
+li{
+    border: 0px;
+}
+#navbarNavDropdown{
+    z-index: 0;
+    height: 45px;
+    position: absolute;
+}
+.active{
+    border:none
+}
+.mat-focus-indicator{
+    border: none;
+}
+.head-wrapper{
+    width: 100vw;
+    height: 50vh;
+    background-color: lightyellow;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    background-image: url("../../img/2471617.jpg");
+    box-shadow: 0px 2px 5px black;
+    
+    
 }

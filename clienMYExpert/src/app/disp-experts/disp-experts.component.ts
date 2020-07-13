@@ -8,7 +8,9 @@ import { City } from '../classes/city';
 import { SubjectsService } from '../services/subjects.service';
 import { CitiesService } from '../services/cities.service';
 import { strict } from 'assert';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map,startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-disp-experts',
@@ -27,13 +29,17 @@ export class DispExpertsComponent implements OnInit {
   currentCity: string;
   name: string;
   param:Subject;
+
+  citySelect = new FormControl();
+  subjectSelect=new FormControl();
+  categorySelect = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredCities: Observable<string[]>;
+  filteredSubjects: Observable<string[]>;
+  filteredCategories: Observable<string[]>;
+
   constructor(private experts: ExpertsService, private users: UsersService,
     private cityService: CitiesService, private subjectService: SubjectsService) {
-
-    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
-    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
-    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
-    // this.allexperts.push(new Expert(1,"a","1231","edfrb@fgf.fgh","bney brack",new Subject(1,"some field"),""))
     this.experts.getAllExperts().subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
@@ -46,10 +52,14 @@ export class DispExpertsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filteredCities = this.citySelect.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
     this.allCities = this.cityService.getAllCities();
-    //  this.allSubjects=this.subjectService.getAllSubjects();
     this.allParentsSubjects = this.subjectService.getAllParentsSubjects();
     
+
   }
   filter() {
     //TODO: currentParentSubject - add
@@ -68,6 +78,7 @@ export class DispExpertsComponent implements OnInit {
       })
   }
   clear() {
+    this.citySelect.setValue("");
     this.currentSubject = "";
     this.currentCity = "";
     this.name = "";
@@ -106,4 +117,22 @@ export class DispExpertsComponent implements OnInit {
       clearName():void{
         this.name = "";
       }
+
+  getSubjectName(id:number):string{
+    return this.subjectService.getSubjectById(id);
+  }
+  //>>>>>copied session
+  // myControl = new FormControl();
+  // options: string[] = ['One', 'Two', 'Three'];
+  // filteredOptions: Observable<string[]>;
+  // // ngOnInit() {
+
+  // // }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(value)
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  //<<<<<<
 }

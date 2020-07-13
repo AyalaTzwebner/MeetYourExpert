@@ -1,1 +1,12 @@
-<h1>hello {{expert.userName}}</h1>
+<mat-card dir="rtl">
+    <h1>{{expert.businessName}}</h1>
+    <h3>{{expert.userName}}</h3>
+    <img src="{{expert.imgUrl}}" />
+    <h4>אנו עובדים באזור {{expert.city}} ובאזורי נוספים...</h4>
+    <p><b>{{expert.description}}</b></p>
+    <div id="stars" *ngFor="let s of fullStars()" [ngSwitch]="s">
+        <mat-icon *ngSwitchCase="1" style="color:gold">star</mat-icon>
+        <mat-icon *ngSwitchCase="0.5" style="color:gold">star_half</mat-icon>
+        <mat-icon *ngSwitchCase="0" style="color:gold">star_border</mat-icon>
+    </div>
+</mat-card>

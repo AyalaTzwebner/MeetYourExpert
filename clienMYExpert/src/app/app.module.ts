@@ -20,7 +20,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';;
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +40,8 @@ import { MatDividerModule } from '@angular/material/divider';
     SignUpComponent,
     SignUpExpertComponent,
     SignUpUserComponent,
-    RecommendComponent
+    RecommendComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,12 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSliderModule,
     MatCardModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule
 
   ],
   providers: [],
