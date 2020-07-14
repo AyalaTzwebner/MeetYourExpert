@@ -10,8 +10,6 @@ export class Expert {
     businessName: string;
     description: string;
     imgUrl:string;
-    businessName:string;
-    description:string;
     score:number
     constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string,businessName?:string,description?:string,score?:number) {
         this.id = id;

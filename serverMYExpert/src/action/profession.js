@@ -12,7 +12,6 @@ const { all } = require('./city');
    {
       console.log("parents sent");
       var allParents = await profDomain.getParents();
-      console.log(allParents);
       res.send(allParents);
    }
    )
@@ -20,7 +19,6 @@ const { all } = require('./city');
    router.get('/children', async function (req, res)
    {
       var allChildren = await profDomain.getChildren(req.query.id);
-      console.log(allChildren);
       res.send(allChildren);
    }
    )

@@ -9,8 +9,8 @@ import { SubjectsService } from '../services/subjects.service';
 import { CitiesService } from '../services/cities.service';
 import { strict } from 'assert';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map,startWith } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-disp-experts',
@@ -24,16 +24,14 @@ export class DispExpertsComponent implements OnInit {
   allSubjects: Subject[];
   allParentsSubjects: Subject[];
   allChildrenSubjects: Subject[];
-  currentParentSubject: string;
-  currentSubject: string;
-  currentCity: string;
-  name: string;
-  param:Subject;
+  currentParentSubject: string;//לא צריך
+  currentSubject: string;//לא צריך
+  searchName: string;
+  param: Subject;
 
   citySelect = new FormControl();
-  subjectSelect=new FormControl();
+  subjectSelect = new FormControl();
   categorySelect = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
   filteredCities: Observable<string[]>;
   filteredSubjects: Observable<string[]>;
   filteredCategories: Observable<string[]>;
@@ -48,27 +46,34 @@ export class DispExpertsComponent implements OnInit {
       err => {
         console.log("some error:", err)
       })
-
   }
 
   ngOnInit(): void {
-    this.filteredCities = this.citySelect.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-    this.allCities = this.cityService.getAllCities();
-    this.allParentsSubjects = this.subjectService.getAllParentsSubjects();
-    
+    this.cityService.getAllCities().subscribe((res: City[]) => {
+      this.allCities = res;
+      this.filteredCities = this.citySelect.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterCity(value))
+      );
+    }, err => console.log(err))
+    this.subjectService.getAllParentsSubjects().subscribe((res: Subject[]) => {
+      this.allParentsSubjects = res;
+      this.filteredCategories = this.categorySelect.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterCategory(value))
+      );
+    }, err => console.log(err))
 
   }
+
   filter() {
-    //TODO: currentParentSubject - add
-    const s = this.currentParentSubject && this.currentParentSubject!='' ? this.subjectService.getSubjectByName(this.currentParentSubject).toString() : '';
-    const s1 = this.currentSubject && this.currentSubject!='' ? this.subjectService.getSubjectByName(this.currentSubject).toString(): '';
-    
-    const c = this.currentCity && this.currentCity!="" ? this.cityService.getCityByName(this.currentCity).toString(): '';
-    const n = this.name && this.name!= '' ? this.name : '';
-    this.experts.filterExperts(s,s1, c, n).subscribe(
+
+    const s = this.categorySelect.value && this.categorySelect.value != '' ? this.subjectService.getSubjectByName(this.categorySelect.value).toString() : '';
+    const s1 = this.currentSubject && this.currentSubject != '' ? this.subjectService.getSubjectByName(this.currentSubject).toString() : '';
+    const c = this.citySelect.value && this.citySelect.value != "" ? this.cityService.getCityByName(this.citySelect.value).toString() : '';
+    const n = this.searchName && this.searchName != '' ? this.searchName : '';
+    console.log(s, s1, c, n);
+    this.experts.filterExperts(s, s1, c, n).subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
         console.log(this.allexperts)
@@ -77,12 +82,12 @@ export class DispExpertsComponent implements OnInit {
         console.log("some error:", err)
       })
   }
+
   clear() {
     this.citySelect.setValue("");
-    this.currentSubject = "";
-    this.currentCity = "";
-    this.name = "";
-    this.currentParentSubject = "";
+    this.subjectSelect.setValue("");
+    this.categorySelect.setValue("");
+    this.searchName = "";
     this.experts.getAllExperts().subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
@@ -91,48 +96,69 @@ export class DispExpertsComponent implements OnInit {
       err => {
         console.log("some error:", err)
       })
+  }
 
-      }
-      getChildren():void
-      {
-        let s:number;
-        s = this.subjectService.getSubjectByName(this.currentParentSubject);
-        this.allChildrenSubjects = this.subjectService.getChildrenSubjects(s.toString());
-      }
-      getSubjectService():SubjectsService
-      {
-        return this.subjectService;
-      }
-      clearParent():void{
-          this.currentParentSubject = "";
-      }
-      clearChild():void
-      {
-        this.currentSubject = "";
-      }
-      clearCity():void
-      {
-        this.currentCity = "";
-      }
-      clearName():void{
-        this.name = "";
-      }
+  getChildren(): void {
+    debugger
+    let s: number;
+    s = this.subjectService.getSubjectByName(this.categorySelect.value);
+    this.subjectService.getChildrenSubjects(s.toString()).subscribe(
+      (res: Subject[]) => {
+        this.allChildrenSubjects = res;
+        this.filteredSubjects = this.subjectSelect.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterSubject(value)))
+      }, err => console.log(err)
+    )
 
-  getSubjectName(id:number):string{
+    debugger
+    // this.filteredCategories = this.categorySelect.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filterCategory(value))
+    // );
+
+  }
+
+  getSubjectService(): SubjectsService {
+    return this.subjectService;
+  }
+
+  clearParent(): void {
+    this.currentParentSubject = "";
+  }
+
+  clearChild(): void {
+    this.currentSubject = "";
+  }
+
+  clearCity(): void {
+    this.citySelect.setValue("");
+  }
+
+  clearName(): void {
+    this.searchName = "";
+  }
+
+  getSubjectName(id: number): string {
     return this.subjectService.getSubjectById(id);
   }
-  //>>>>>copied session
-  // myControl = new FormControl();
-  // options: string[] = ['One', 'Two', 'Three'];
-  // filteredOptions: Observable<string[]>;
-  // // ngOnInit() {
 
-  // // }
-
-  private _filter(value: string): string[] {
+  private _filterCity(value: string): string[] {
     const filterValue = value.toLowerCase();
-    console.log(value)
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    let array: string[] = this.allCities.map(city => { return city.name })
+    let filtered = array.filter(option => { return option.toLowerCase().includes(filterValue) });
+    return filtered
   }
-  //<<<<<<
+  private _filterCategory(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    let array: string[] = this.allParentsSubjects.map(cate => { return cate.subName })
+    let filtered = array.filter(option => { return option.toLowerCase().includes(filterValue) });
+    return filtered;
+  }
+  private _filterSubject(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    let array: string[] = this.allChildrenSubjects.map(sub => { return sub.subName })
+    let filtered = array.filter(option => { return option.toLowerCase().includes(filterValue) });
+    return filtered
+  }
 }

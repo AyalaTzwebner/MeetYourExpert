@@ -17,7 +17,8 @@ export class SignUpUserComponent implements OnInit {
   allCities:City[];
   constructor(private cityService: CitiesService, private userService: UsersService) {
     console.log("Got here!")
-    this.allCities=cityService.getAllCities();
+    this.cityService.getAllCities().subscribe((res:City[])=>{
+      this.allCities=res;},err=>console.log(err))
   }
   //  this.userService.login(this.user).subscribe(res=>alert("response: "+res),err=>console.log(err))
   ngOnInit(): void {

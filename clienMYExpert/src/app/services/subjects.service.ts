@@ -13,15 +13,15 @@ export class SubjectsService {
   childrenSubjects: Subject[] = [];
   url = "http://localhost:3000/subjects/";
   constructor(private http: HttpClient) {
-    console.log("subjects")
-    this.http.get<Subject[]>(this.url + "all").subscribe(
+    this.getAllSubjects().subscribe(
       (res: Subject[]) => {
         this.allSubject = res
       },
       err =>
         console.log(err)
     )
-    this.http.get<Subject[]>(this.url + "parents").subscribe(
+
+    this.getAllParentsSubjects().subscribe(
       (res:Subject[]) => {
         this.parentSubjects = res;
       },
@@ -46,25 +46,27 @@ export class SubjectsService {
 
 
   }
-  getAllSubjects() {
-    return this.allSubject;
+  getAllSubjects():Observable<Subject[]> {
+    return this.http.get<Subject[]>(this.url + "all")
   }
-  getChildrenSubjects(ID:string):Subject[] {
+  getChildrenSubjects(ID:string):Observable<Subject[]> {
 
     // return this.allSubject.filter(x=>x.parent != null);
     if (ID=='-1')
       return null;
-    this.http.get<Subject[]>(this.url + "children", { params: new HttpParams().set('id' , ID) }).subscribe(
+    return this.http.get<Subject[]>(this.url + "children", { params: new HttpParams().set('id' , ID) })
+    // .subscribe(
 
-      (res:Subject[]) => {
-        this.childrenSubjects = res;
-      },
-      err =>
-      console.log(err)
-    )
-      return this.childrenSubjects;
+    //   (res:Subject[]) => {
+    //     this.childrenSubjects = res;  
+    //      return this.childrenSubjects;
+    //   },
+    //   err =>
+    //   console.log(err)
+    // )
+   
   }
-  getAllParentsSubjects():Subject[] {
-    return this.parentSubjects;
+  getAllParentsSubjects():Observable<Subject[]> {
+    return this.http.get<Subject[]>(this.url + "parents");
   }
 }

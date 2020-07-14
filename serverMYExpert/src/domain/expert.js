@@ -27,7 +27,6 @@ var getExperts = async () => {
     return await db.executeStatement(`SELECT * FROM professional p INNER JOIN users u ON p.id = u.id`)
   } catch (e) {
   }
-  console.log()
 }
 
 var getExpertById = async (id) => {
@@ -66,7 +65,6 @@ var getFilteredExperts = async (category, subject, city, name) => {
       sqlQuery = sqlQuery.substr(0, sqlQuery.length - 4);
       sqlQuery += ";";
     }
-    console.log(sqlQuery);
     return db.executeStatement(sqlQuery);
   }
   catch (e) {
