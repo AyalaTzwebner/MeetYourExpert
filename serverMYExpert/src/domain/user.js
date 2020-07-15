@@ -5,11 +5,14 @@ var db = require('../mySqlDb')
 var getUserByLogin = (user) => {
   return db
     .executeStatement(`select * from users 
-    where userName ='${user.userName}' and userPassword='${user.userPassword}'`)
+    where userName ='${user.email}' and userPassword='${user.password}'`)
     .then((userInfo) => { console.log("login:" + userInfo)
-      return userInfo.length ? "user exists" : "not exists"
+      return userInfo.length ? userInfo[0] : null
     }
-    )
+    ).catch(err=>{
+      console.log(err);
+      return err;
+    })
 }
 var insertUser = (user) => {
   console.log("Im here!");

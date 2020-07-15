@@ -1,18 +1,29 @@
-form{
-    width:30vw;
+@use '../general' as *;
+
+mat-card{
+    min-width: 150px;
+    max-width: 350px;
+    width: 100%;
     margin: auto;
-    background-color: #e0e0e0;
     padding: 20px;
     direction: rtl;
 }
-input,button{
-    margin-top:15px
-}
-.invalid{
-    border: 2px solid red;
-}
-.invalidp{
-    color:red;
-    font-size:smaller;
-}
 
+input,button{
+    margin-top:15px;
+    // min-width:100px;
+    // max-width:250px;
+    width:100%
+ 
+}
+mat-form-field{
+       width:100%
+}
+mat-card-actions{
+    margin:0px
+}
+.something-wrong{
+    font-style: italic;
+    text-align: center;
+    font-size: small;
+}

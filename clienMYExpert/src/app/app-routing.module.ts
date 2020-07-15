@@ -9,15 +9,16 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
 import { RecommendComponent } from './recommend/recommend.component';
+import { AddRecommendComponent } from './add-recommend/add-recommend.component';
 
 
 const routes: Routes = [{
   path: "",
-  component: DispExpertComponent
+  component: AddRecommendComponent
 }, {
   path: "login",
   component: LoginComponent
-}, {
+},  {
   path: "about",
   component: AboutComponent
 }, {
@@ -41,6 +42,9 @@ const routes: Routes = [{
   component: DispExpertComponent
 }
 ];
+/*
+{path: "add-rental", canActivate: [LoginGuardService], component: AddRentalComponent},
+*/
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

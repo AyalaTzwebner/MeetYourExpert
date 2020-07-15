@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { CitiesService } from './cities.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,8 @@ export class UsersService {
   getAllUsers(): User[] {
     return this.allUsers;
   }
-  login(user: User) {
-
-    return this.http.post(this.url + "login", user);
+  login(user: any):Observable<User> {
+    return this.http.post<User>(this.url + "login", user);
   }
   post(user: User) {
     console.log("ng post!")

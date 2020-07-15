@@ -1,0 +1,15 @@
+<form dir="rtl" >
+<mat-form-field appearance="outline" >
+    <mat-label>תמצת את העבודה</mat-label>
+    <input matInput [formControl]="details" autocomplete="none">
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label >תאר חוויה שחוית, רישומים שנותרו בך</mat-label>
+    <textarea matInput [formControl]="description"></textarea>
+  </mat-form-field>
+  <div id="wrap-stars">
+  <mat-label><i>דרג את בעל המקצוע</i></mat-label>
+<app-star-rating  [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+</div>
+<button mat-raised-button type="submit" color="customed">שמור המלצה</button>
+</form>

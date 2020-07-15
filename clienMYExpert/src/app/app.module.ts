@@ -26,6 +26,10 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';;
 import {MatInputModule} from '@angular/material/input';
+import { AddRecommendComponent } from './add-recommend/add-recommend.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -41,6 +45,8 @@ import {MatInputModule} from '@angular/material/input';
     SignUpExpertComponent,
     SignUpUserComponent,
     RecommendComponent,
+    AddRecommendComponent,
+    StarRatingComponent,
    
   ],
   imports: [
@@ -59,7 +65,9 @@ import {MatInputModule} from '@angular/material/input';
     MatSelectModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
+    MatTooltipModule
 
   ],
   providers: [],

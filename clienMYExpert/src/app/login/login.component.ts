@@ -1,52 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/user';
 import { UsersService } from '../services/users.service';
-import { FormGroup, FormBuilder,ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  // login: FormGroup;
-  user:User=new User();
-  nameinvalid:boolean;
-  passwordinvalid:boolean;
+  loginForm: FormGroup;
+  details: any;
+  user: User;
+  somethingWrong:boolean=false;
   constructor(private userService: UsersService, private formBuilder: FormBuilder) {
-    // this.login = formBuilder.group({
-    //   userName:[''],
-    //   userPassword:[''],
-    // })
-    this.nameinvalid = false;
-   
+    this.loginForm = formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    })
   }
   log_in() {
-    this.passwordValidation();
-    this.userNameValidation();
-    if (this.nameinvalid||this.passwordinvalid)
-        return false;
-    else
-        this.userService.login(this.user).subscribe(res=>alert("response: "+res),err=>console.log(err))
-  }
-  userNameValidation():void{
-    // alert((<HTMLInputElement>document.getElementById("nameField")).value);
-    if ((<HTMLInputElement>document.getElementById("nameField")).value.length<1)
-      {
-          this.nameinvalid = true;
+    console.log("login")
+    this.userService.login(this.loginForm.value).subscribe((res: User) => {
+      if(res==null){
+this.somethingWrong=true
       }
-        else
-        this.nameinvalid = false;
-  }
-  passwordValidation():void{
-    // alert((<HTMLInputElement>document.getElementById("passwordField")).value);
-    if ((<HTMLInputElement>document.getElementById("passwordField")).value.length<1)
-      {
-          this.passwordinvalid = true;
-      }
-        else
-        this.passwordinvalid = false;
+      else{
+      this.user = res;
+      alert("response: " + res);
+      localStorage.setItem("user", JSON.stringify(this.user))}
+    }, err => console.log(err))
   }
   ngOnInit(): void {
   }
+  check(): void {
+    console.log(this.loginForm.value.email, ", ", this.loginForm.value.email.valid)
+  }
+  get email() {
+    return this.loginForm.get("email");
+  }
 
+  get password() {
+    return this.loginForm.get("password");
+  }
+  getPasswordErrorMessage() {
+    if (this.password.hasError('required')) {
+      return 'שדה חובה';
+    }
+    else if (this.password.hasError('minlength'))
+      return ' סיסמא חייבת להיות בת 8 תוים לפחות'
+    else return 'ערך לא חוקי'
+
+  }
+  getEmailErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'שדה חובה';
+    }
+    else if (this.email.hasError('email'))
+      return 'כתובת מייל לא תקינה'
+    else return 'ערך לא חוקי'
+
+  }
 }
