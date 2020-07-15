@@ -1,5 +1,5 @@
 <mat-card dir="rtl">
-    <h1>{{expert.businessName}}</h1>
+    <h1 >{{expert.businessName}}</h1>
     <h3>{{expert.userName}}</h3>
     <img src="http://turag.co.il/wp-content/uploads/2018/06/man.jpg" />
     <h4>אנו עובדים באזור {{cityString}} ובאזורי נוספים...</h4>
@@ -9,4 +9,7 @@
         <mat-icon *ngSwitchCase="0.5" style="color:gold">star_half</mat-icon>
         <mat-icon *ngSwitchCase="0" style="color:gold">star_border</mat-icon>
     </div>
+    <div> ממוצע דירוגים: {{expert.scores}}</div>
+    <a routerLink="recommend">הוסף המלצה לבעל מקצוע זה</a>
+    <router-outlet></router-outlet>
 </mat-card>

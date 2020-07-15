@@ -1,6 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
-import { User } from '../classes/user';
-import { UsersService } from '../services/users.service';
+import { User } from '../../classes/user';
+import { UsersService } from '../../services/users.service';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ManagerLoginComponent implements OnInit {
   loginForm: FormGroup;
   details: any;
   user: User;
@@ -21,14 +22,14 @@ export class LoginComponent implements OnInit {
   }
   log_in() {
     console.log("login")
-    this.userService.login(this.loginForm.value).subscribe((res: User) => {
+    this.userService.loginManager(this.loginForm.value).subscribe((res: User) => {
       if (res == null) {
         this.somethingWrong = true
       }
       else {
         this.user = res;
-        localStorage.setItem("user", JSON.stringify(this.user));
-        this.route.navigateByUrl("/experts");
+        localStorage.setItem("manager", JSON.stringify(this.user));
+        this.route.navigateByUrl("/manager-settings");
       }
     }, err => console.log(err))
   }

@@ -2,9 +2,16 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
-
+* {
+    font-family:Calibri, 'Segue-UI', sans-serif !important; 
+    
+  }
+  mat-icon {
+    font-family: 'Material Icons' !important; 
+    
+  }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
 
 body,
 html {

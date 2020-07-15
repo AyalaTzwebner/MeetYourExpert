@@ -26,6 +26,10 @@ export class UsersService {
   login(user: any):Observable<User> {
     return this.http.post<User>(this.url + "login", user);
   }
+  loginManager(user: any):Observable<User> {
+    return this.http.post<User>(this.url + "loginManager", user);
+  }
+  
   post(user: User) {
     console.log("ng post!")
     return this.http.post(this.url + "signup", user);

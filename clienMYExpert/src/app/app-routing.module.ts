@@ -10,19 +10,46 @@ import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
 import { RecommendComponent } from './recommend/recommend.component';
 import { AddRecommendComponent } from './add-recommend/add-recommend.component';
+import { LoginGuardService } from './services/login-guard.service';
+import { ManagerLoginComponent } from './manager/manager-login/manager-login.component';
+import { ManagerExpertsComponent } from './manager/manager-experts/manager-experts.component';
+import { ManagerRecommendsComponent } from './manager/manager-recommends/manager-recommends.component';
+import { ManagerSettingsComponent } from './manager/manager-settings/manager-settings.component';
+import { ManagerloginGuardService } from './services/managerlogin-guard.service';
 
 
 const routes: Routes = [{
   path: "",
-  component: AddRecommendComponent
+  component: RecommendComponent
 }, {
   path: "login",
   component: LoginComponent
 },  {
   path: "about",
   component: AboutComponent
+},  {
+  path: "manager-login",
+  component: ManagerLoginComponent
+}, {
+  path: "manager-settings",
+  canActivate:[ManagerloginGuardService],
+  component: ManagerSettingsComponent,
+  children: [{
+    path: "manage-experts",
+    canActivate:[ManagerloginGuardService],
+    component: ManagerExpertsComponent,
+  }, {
+    path: "manage-recommends",
+    canActivate:[ManagerloginGuardService],
+    component: ManagerRecommendsComponent
+  }, {
+    path: "",
+    canActivate:[ManagerloginGuardService],
+    component: ManagerRecommendsComponent
+  }]
 }, {
   path: "signup",
+  
   component: SignUpComponent,
   children: [{
     path: "sign-up-expert",
@@ -39,7 +66,12 @@ const routes: Routes = [{
   component: DispExpertsComponent,
 }, {
   path: "experts/:id",
-  component: DispExpertComponent
+  component: DispExpertComponent,
+  children:[{
+      path:"recommend",
+      canActivate:[LoginGuardService],
+      component:AddRecommendComponent
+    }]
 }
 ];
 /*

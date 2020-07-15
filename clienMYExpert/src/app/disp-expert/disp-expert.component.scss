@@ -6,8 +6,15 @@ body{
     display: inline-block
 }
 mat-card{
-    margin:20px
+    margin:20px;
+    text-align: center;
 }
 img{
-    width:40px
+    width:55px
+}
+mat-card{
+    max-width:700px;
+    min-width:250px;
+    width:100%;
+    margin:auto;
 }

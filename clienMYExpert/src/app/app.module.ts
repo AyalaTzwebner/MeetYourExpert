@@ -30,6 +30,10 @@ import { AddRecommendComponent } from './add-recommend/add-recommend.component';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ManagerLoginComponent } from './manager/manager-login/manager-login.component';
+import { ManagerRecommendsComponent } from './manager/manager-recommends/manager-recommends.component';
+import { ManagerExpertsComponent } from './manager/manager-experts/manager-experts.component';
+import { ManagerSettingsComponent } from './manager/manager-settings/manager-settings.component';
 
 
 @NgModule({
@@ -47,6 +51,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RecommendComponent,
     AddRecommendComponent,
     StarRatingComponent,
+    ManagerLoginComponent,
+    ManagerRecommendsComponent,
+    ManagerExpertsComponent,
+    ManagerSettingsComponent,
    
   ],
   imports: [

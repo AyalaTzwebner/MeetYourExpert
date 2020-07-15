@@ -10,7 +10,7 @@
   <div>
   <mat-form-field appearance="legacy">
     <mat-label>הכנס סיסמא</mat-label>
-    <input matInput placeholder="" [formControl]="password" required>
+    <input type="password" matInput placeholder="" [formControl]="password" required>
     <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
   </mat-form-field></div></mat-card-content>
   <div  *ngIf="somethingWrong">

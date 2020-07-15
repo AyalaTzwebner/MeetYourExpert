@@ -16,23 +16,26 @@ export class DispExpertComponent implements OnInit {
   expert: Expert;
   cityString:string
   constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService) {
-    this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com", 38, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 1)
-    // this.activatedRoute.paramMap.subscribe(res => {
-    //   this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
-    //     this.expert = res[0];
-    //     console.log(this.expert)
-    //     this.cityString=cityService.getCityById(this.expert.city).name
-    //   },
-    //     err => {
-    //       console.log(err)
-    //     })
-    // });
+    // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
+    this.activatedRoute.paramMap.subscribe(res => {
+      this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
+        this.expert = res[0];
+        console.log(this.expert)
+        this.cityString=cityService.getCityById(this.expert.city).name
+      },
+        err => {
+          console.log(err)
+        })
+    });
   }
   fullStars(): number[] {
     let arr: number[] = [];
     let full, empty, i: number;
-    full=Math.floor(this.expert.score );
-    empty=Math.floor(5-this.expert.score );
+    console.log(this.expert)
+    full=Math.floor(this.expert.scores );
+    console.log(full)
+    empty=Math.floor(5-this.expert.scores );
+    console.log(empty)
     for (i = 0; i < full; i++)
       arr.push(1);
     if (full + empty < 5)

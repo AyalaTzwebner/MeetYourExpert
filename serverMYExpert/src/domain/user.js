@@ -5,7 +5,7 @@ var db = require('../mySqlDb')
 var getUserByLogin = (user) => {
   return db
     .executeStatement(`select * from users 
-    where userName ='${user.email}' and userPassword='${user.password}'`)
+    where email ='${user.email}' and userPassword='${user.password}'`)
     .then((userInfo) => { console.log("login:" + userInfo)
       return userInfo.length ? userInfo[0] : null
     }

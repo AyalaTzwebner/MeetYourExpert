@@ -14,7 +14,7 @@ export class AddRecommendComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { 
     this.recommendForm = formBuilder.group({
       details: [''],
-      description: ['']
+      description: [''],
     })
   }
   get details() {
