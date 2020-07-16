@@ -1,0 +1,17 @@
+@use '../../general' as *; 
+
+mat-card{
+    margin:auto;
+    margin-top: 15px;
+background: linear-gradient(to bottom, lightgreen,transparent);
+max-width: 850px;
+min-width:250px;
+width:100%;
+}
+.off{
+    background-color: red($color: #ff66662d) !important;
+}
+.on{
+    background-color: green($color: #6cc25673) !important;
+}
+

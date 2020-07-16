@@ -1,1 +1,18 @@
-<p>manager-experts works!</p>
+<mat-card *ngFor="let expert of allExperts">
+    
+<mat-card-header>
+<mat-card-title>
+    {{expert.businessName}}
+</mat-card-title>
+<mat-card-subtitle>
+    {{expert.userName}} | {{getSubjectName(expert.proSubject)}}
+</mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+{{expert.pro}}
+</mat-card-content>
+<mat-card-actions> 
+<button mat-raised-button *ngIf="expert.enable" color="off" (click)="changeStatus(expert.id,true)">השבת</button>
+<button mat-raised-button *ngIf="!expert.enable" color="on" (click)="changeStatus(expert.id,false)">הפעל</button>
+</mat-card-actions>
+</mat-card>

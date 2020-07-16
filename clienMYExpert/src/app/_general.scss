@@ -84,3 +84,56 @@ $noscroll:hidden;
     color:lightgoldenrodyellow
 }
 button:focus { outline: none; }
+
+
+
+
+//red button design
+.mat-button.mat-off,
+.mat-stroked-button.mat-off {
+    margin:5px;
+    color: #ffb252;
+    text-shadow: 1px 1px 0px black;
+}
+.mat-button.mat-off:hover,
+.mat-stroked-button.mat-off:hover {
+  background-color: rgb(255, 255, 239);
+}
+
+.mat-raised-button.mat-off,
+.mat-flat-button.mat-off,
+.mat-fab.mat-off,
+.mat-mini-fab.mat-off {
+  color: white;
+  background-color: #f90600b3;
+  text-shadow: 0px 1px 2px black;
+}
+
+.mat-icon-button.mat-off {
+    color:lightgoldenrodyellow
+}
+
+//green button design
+.mat-button.mat-on,
+.mat-stroked-button.mat-on {
+    margin:5px;
+    color: #ffb252;
+    text-shadow: 1px 1px 0px black;
+}
+.mat-button.mat-on:hover,
+.mat-stroked-button.mat-on:hover {
+  background-color: rgb(255, 255, 239);
+}
+
+.mat-raised-button.mat-on,
+.mat-flat-button.mat-on,
+.mat-fab.mat-on,
+.mat-mini-fab.mat-on {
+  color: white;
+  background-color: #65ff6c83;
+  text-shadow: 0px 1px 2px black;
+}
+
+.mat-icon-button.mat-on {
+    color:lightgoldenrodyellow
+}

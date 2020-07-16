@@ -34,6 +34,7 @@ import { ManagerLoginComponent } from './manager/manager-login/manager-login.com
 import { ManagerRecommendsComponent } from './manager/manager-recommends/manager-recommends.component';
 import { ManagerExpertsComponent } from './manager/manager-experts/manager-experts.component';
 import { ManagerSettingsComponent } from './manager/manager-settings/manager-settings.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { ManagerSettingsComponent } from './manager/manager-settings/manager-set
     MatAutocompleteModule,
     MatInputModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTabsModule
 
   ],
   providers: [],

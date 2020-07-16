@@ -1,28 +1,27 @@
-
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../classes/user';
 import { UsersService } from '../../services/users.service';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-manager-login',
+  templateUrl: './manager-login.component.html',
+  styleUrls: ['./manager-login.component.scss']
 })
 export class ManagerLoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginManagerForm: FormGroup;
   details: any;
   user: User;
   somethingWrong: boolean = false;
   constructor(private userService: UsersService, private formBuilder: FormBuilder,private route: Router) {
-    this.loginForm = formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]]
+    this.loginManagerForm = formBuilder.group({
+      name: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]]
     })
   }
   log_in() {
     console.log("login")
-    this.userService.loginManager(this.loginForm.value).subscribe((res: User) => {
+    this.userService.loginManager(this.loginManagerForm.value).subscribe((res: User) => {
       if (res == null) {
         this.somethingWrong = true
       }
@@ -35,31 +34,26 @@ export class ManagerLoginComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  check(): void {
-    console.log(this.loginForm.value.email, ", ", this.loginForm.value.email.valid)
-  }
-  get email() {
-    return this.loginForm.get("email");
+  get name() {
+    return this.loginManagerForm.get("name");
   }
 
   get password() {
-    return this.loginForm.get("password");
+    return this.loginManagerForm.get("password");
   }
   getPasswordErrorMessage() {
     if (this.password.hasError('required')) {
       return 'שדה חובה';
     }
-    else if (this.password.hasError('minlength'))
-      return ' סיסמא חייבת להיות בת 4 תוים לפחות'
+    else if (this.password.hasError('pattern'))
+      return 'סיסמת מנהל חייבת להיות בת 8 תוים לפחות ולכלול אותיות גדולות, קטנות, מספרים ותוים'
     else return 'ערך לא חוקי'
 
   }
-  getEmailErrorMessage() {
-    if (this.email.hasError('required')) {
+  getNameErrorMessage() {
+    if (this.name.hasError('required')) {
       return 'שדה חובה';
     }
-    else if (this.email.hasError('email'))
-      return 'כתובת מייל לא תקינה'
     else return 'ערך לא חוקי'
 
   }

@@ -18,9 +18,10 @@ import { ManagerSettingsComponent } from './manager/manager-settings/manager-set
 import { ManagerloginGuardService } from './services/managerlogin-guard.service';
 
 
+
 const routes: Routes = [{
   path: "",
-  component: RecommendComponent
+  component: ManagerSettingsComponent
 }, {
   path: "login",
   component: LoginComponent
