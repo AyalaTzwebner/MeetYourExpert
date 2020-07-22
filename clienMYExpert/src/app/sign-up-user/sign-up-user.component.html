@@ -1,13 +1,18 @@
 <div class="form-group form" dir="rtl">
     <p><b>מלא את פרטיך</b></p>
-    <input type="text" placeholder="*שם פרטי" class="form-control" [(ngModel)]="fname" name="firstName" />
-    <input type="text" placeholder="*שם משפחה" class="form-control"  [(ngModel)]="lname" name="lastName"/>
-    <input type="email" placeholder="*כתובת מייל" class="form-control" [(ngModel)]="user.email" name="email"/>
-    <input type="text" placeholder="*סיסמא" class="form-control" [(ngModel)]="user.userPassword" name="password"/>
-    <input list="city" class="form-control" placeholder="בחר עיר" name="city"  [(ngModel)]="city"/>
-    <datalist id="city" >
-        <option disabled selected>בחר עיר</option>
-        <option *ngFor = "let c of allCities" [value] = "c.name">
-    </datalist>
+    <input type="text" id="0" placeholder="*שם פרטי" class="form-control" [(ngModel)]="fname" name="firstName" [class.invalid]="validationArr[0]" (blur) = "check()"/>
+    <label class="invalidp" *ngIf="validationArr[0]">הכנס שם פרטי</label>
+    <input type="text" id="1"  placeholder="*שם משפחה" class="form-control"  [(ngModel)]="lname" name="lastName" [class.invalid]="validationArr[1]" (blur) = "check()"/>
+    <label class="invalidp" *ngIf="validationArr[1]">הכנס שם משפחה</label>
+    <input type="email" id="2" placeholder="*כתובת מייל" class="form-control" [(ngModel)]="user.email" name="email" [class.invalid]="validationArr[2]" (blur) = "check()"/>
+    <label class="invalidp" *ngIf="validationArr[2]">הכנס כתובת מייל</label>
+    <input type="text" id="3"  placeholder="*סיסמא" class="form-control" [(ngModel)]="user.userPassword" name="password" [class.invalid]="validationArr[3]" (blur) = "check()"/>
+    <label class="invalidp" *ngIf="validationArr[3]">הזן סיסמה בין 5 ל-10 תווים</label>
+    <input list="city" id="4" class="form-control" placeholder="בחר עיר" name="city"  [(ngModel)]="city" [class.invalid]="validationArr[4]" (blur) = "check()"/>
+    <label class="invalidp" *ngIf="validationArr[4]">בחר עיר מהרשימה</label>
+        <datalist id="city" >
+                <option disabled selected>בחר עיר</option>
+                <option *ngFor = "let c of allCities" [value] = "c.name">
+        </datalist>
     <button class="btn btn-outline-secondary btn-block" (click)="postUser()">הרשם</button>
 </div> 

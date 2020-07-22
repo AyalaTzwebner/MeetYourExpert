@@ -1,21 +1,29 @@
 <div class="form-group form wrapper" dir="rtl">
     <p><b>מלא את פרטיך</b></p>
-    <input type="text" placeholder="*שם פרטי" class="form-control" required="required"  [(ngModel)]="fname" />
-    <input type="text" placeholder="*שם משפחה" class="form-control" required="required"  [(ngModel)]="lname"/>
-    <input type="email" placeholder="*כתובת מייל" class="form-control" required="required"  [(ngModel)]="expert.email"/>
+    <input id="0" type="text" placeholder="*שם פרטי" class="form-control" required="required"  [(ngModel)]="fname"  [class.invalid]="validationArr[0]" (blur)="check()" />
+    <label class="invalidp" *ngIf="validationArr[0]">הכנס שם פרטי</label>
+    <input id="1"  type="text" placeholder="*שם משפחה" class="form-control" required="required"  [(ngModel)]="lname" [class.invalid]="validationArr[1]" (blur)="check()" />
+    <label class="invalidp" *ngIf="validationArr[1]">הכנס שם משפחה</label>
+    <input id="2"  type="email" placeholder="*כתובת מייל" class="form-control" required="required"  [(ngModel)]="expert.email" [class.invalid]="validationArr[2]" (blur)="check()" />
+    <label class="invalidp" *ngIf="validationArr[2]">הכנס כתובת מייל</label>
     <!-- <input type="text" pattern="[0-9]+" placeholder="מספר פלאפון" class="form-control"  required="required" /> -->
     <div>בחר עיר:</div>
-    <input list="city" class="form-control" placeholder="בחר עיר" required="required"  [(ngModel)]='currentCity' name="expertCity" ngDefaultControl/>
+    <input id="3"  list="city" class="form-control" placeholder="בחר עיר" required="required"  [(ngModel)]='currentCity' name="city"  [class.invalid]="validationArr[3]" (blur)="check()"  ngDefaultControl/>
+    <label class="invalidp" *ngIf="validationArr[3]">בחר עיר מהרשימה</label>
     <datalist id="city">
         <option *ngFor = "let c of allCities" [value] = "c.name">
     </datalist>
-    <input  type="text" list="prof" class="form-control" placeholder="תחום התמקצעות" required="required"  [(ngModel)]='currentSubject' name="expertField" ngDefaultControl />
+    <input  id="4"  type="text" list="prof" class="form-control" placeholder="תחום התמקצעות" required="required"  [(ngModel)]='currentSubject' name="field"  [class.invalid]="validationArr[4]" (blur)="check()"  ngDefaultControl />
+    <label class="invalidp" *ngIf="validationArr[4]">בחר תחום מהרשימה</label>
     <datalist id="prof" >
         <option *ngFor="let s of allSubjects" [value]="s.subName">{{s.subName}}</option>
 
     </datalist>
-    <input type="text" placeholder="שם חברה" class="form-control" [(ngModel)]="expert.businessName"/>
-    <input type="text" placeholder="תאור" class="form-control" [(ngModel)]="expert.description"/>
-    <input type="password" placeholder="סיסמה" required="required" [(ngModel)] = "expert.userPassword" class="form-control">
+    <input id="5"  type="text" placeholder="שם חברה" class="form-control" [(ngModel)]="expert.businessName"  [class.invalid]="validationArr[5]" (blur)="check()" />
+    <label class="invalidp" *ngIf="validationArr[5]">הכנס שם חברה </label>
+    <input  id="6" type="text" placeholder="תאור" class="form-control" [(ngModel)]="expert.description"  [class.invalid]="validationArr[6]" (blur)="check()" />
+    <label class="invalidp" *ngIf="validationArr[6]">הכנס תאור קצר על תחום העיסוק שלך</label>
+    <input id="7"  name="password" type="password" placeholder="סיסמה" required="required" [(ngModel)] = "expert.userPassword" class="form-control"  [class.invalid]="validationArr[7]" (blur)="check()" >
+    <label class="invalidp" *ngIf="validationArr[7]">הכנס סיסמה בין 5 ל-10 תווים</label>
     <button class="btn btn-outline-secondary btn-block" (click)="signup()">הרשם</button>
 </div>

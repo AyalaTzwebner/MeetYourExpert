@@ -9,3 +9,10 @@ input,button,select{
 datalist#city {
     width: 100vw;
 }
+.invalid{
+    border: 2px solid red;
+}
+.invalidp{
+    color:red;
+    font-size:smaller;
+}

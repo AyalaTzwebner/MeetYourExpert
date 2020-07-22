@@ -14,7 +14,7 @@ import { CitiesService } from '../services/cities.service';
 })
 export class DispExpertComponent implements OnInit {
   expert: Expert;
-  cityString:string
+  cityString:string;
   constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService) {
     // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
@@ -31,18 +31,14 @@ export class DispExpertComponent implements OnInit {
   fullStars(): number[] {
     let arr: number[] = [];
     let full, empty, i: number;
-    console.log(this.expert)
     full=Math.floor(this.expert.scores );
-    console.log(full)
     empty=Math.floor(5-this.expert.scores );
-    console.log(empty)
     for (i = 0; i < full; i++)
       arr.push(1);
     if (full + empty < 5)
       arr.push(0.5);
     for (i = 0; i < empty; i++)
       arr.push(0)
-    console.log(arr)
     return arr
   }
   ngOnInit(): void {

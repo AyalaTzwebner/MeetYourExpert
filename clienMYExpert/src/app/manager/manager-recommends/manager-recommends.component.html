@@ -1,1 +1,21 @@
-<p>manager-recommends works!</p>
+<mat-card *ngFor="let r of recommends">
+    <mat-card-header dir="rtl">
+        <mat-card-title dir="rtl">ממליץ: {{getUser(r.userId)}}</mat-card-title>
+        <mat-card-title dir="rtl">בעל מקצוע: {{getExpert(r.profId)}}</mat-card-title>
+        <mat-card-title dir="rtl"><strong>המלצה על: {{r.title}}</strong></mat-card-title>
+        <mat-card-content dir="rtl">{{r.content}}</mat-card-content><br/>
+        <button mat-raised-button color="primary" (click)="changeStatus(r.id ,r.isApproved)">{{getButtonValue(r.isAccepted)}}</button>
+    </mat-card-header>
+</mat-card>
+
+
+<!-- <mat-card *ngFor="let x of allexperts"><a routerLink="/experts/{{x.id}}" dir="rtl">
+    <mat-card-header dir="rtl">
+        <mat-card-title dir="rtl">{{x.userName}}</mat-card-title>
+        <mat-card-subtitle dir="rtl">{{getSubjectName(x.proSubject)}}</mat-card-subtitle>
+        <img mat-card-avatar src="http://turag.co.il/wp-content/uploads/2018/06/man.jpg">
+    </mat-card-header>
+    <mat-card-content>
+        <p dir="rtl">{{x.description}}</p>
+    </mat-card-content>
+</a></mat-card> -->

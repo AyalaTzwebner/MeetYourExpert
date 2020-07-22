@@ -6,3 +6,10 @@ input,button,select{
     background-color: white;
     padding: 20px;
 }
+.invalid{
+    border: 2px solid red;
+}
+.invalidp{
+    color:red;
+    font-size:smaller;
+}

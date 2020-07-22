@@ -23,7 +23,11 @@ import { ManagerloginGuardService } from './services/managerlogin-guard.service'
 
 const routes: Routes = [{
   path: "",
+<<<<<<< Updated upstream
   component: AboutComponent
+=======
+  component: ManagerExpertsComponent
+>>>>>>> Stashed changes
 }, {
   path: "login",
   component: LoginComponent
@@ -71,7 +75,7 @@ const routes: Routes = [{
   path: "experts/:id",
   component: DispExpertComponent,
   children:[{
-      path:"recommend",
+      path:"recommend/:id",
       canActivate:[LoginGuardService],
       component:AddRecommendComponent
     }]
