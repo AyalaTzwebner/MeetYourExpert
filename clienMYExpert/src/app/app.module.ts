@@ -35,6 +35,17 @@ import { ManagerRecommendsComponent } from './manager/manager-recommends/manager
 import { ManagerExpertsComponent } from './manager/manager-experts/manager-experts.component';
 import { ManagerSettingsComponent } from './manager/manager-settings/manager-settings.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { AddMeetingComponent } from './add-meeting/add-meeting.component';
+import { ExpertSettingsComponent } from './expert/expert-settings/expert-settings.component';
+import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meetings.component';
+import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
+
+
+
 
 
 @NgModule({
@@ -56,6 +67,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     ManagerRecommendsComponent,
     ManagerExpertsComponent,
     ManagerSettingsComponent,
+    AddMeetingComponent,
+    ExpertSettingsComponent,
+    ExpertMeetingsComponent,
+    ExpertProfileComponent,
    
   ],
   imports: [
@@ -77,7 +92,11 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatInputModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatExpansionModule
 
   ],
   providers: [],

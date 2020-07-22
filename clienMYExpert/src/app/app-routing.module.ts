@@ -19,9 +19,11 @@ import { ManagerloginGuardService } from './services/managerlogin-guard.service'
 
 
 
+
+
 const routes: Routes = [{
   path: "",
-  component: ManagerSettingsComponent
+  component: AboutComponent
 }, {
   path: "login",
   component: LoginComponent

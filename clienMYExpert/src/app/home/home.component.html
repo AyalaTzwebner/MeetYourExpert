@@ -1,26 +1,19 @@
-<!-- <div >
-    <h1 ><a routerLink="about">Home Page</a></h1>
-    <a routerLink="login" class="btn btn-outline-primary">Log in</a>
-    <a routerLink="signup" class="btn btn-outline-primary">Sign up</a>
-    <a routerLink="experts" class="btn btn-outline-primary">Experts</a>
- </div> -->
-
 <div class="head-wrapper">
 <nav class="navbar navbar-expand-sm ">
     <ul class="nav nav-bills nav-justified">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!user">
             <button mat-raised-button color="header">
             <a class="nav-link" routerLink="/signup">הרשם</a></button>
         </li>
-        <li class="nav-item"> 
+        <li class="nav-item" *ngIf="!user"> 
             <button mat-raised-button color="header">
             <a  class="nav-link" routerLink="/login">כניסה</a></button>
         </li>
-        <!-- <li class="nav-item"> 
-            <button mat-raised-button color="header">
-            <a  class="nav-link" routerLink="/login">יציאה</a></button>
-        </li> -->
-        <li class="nav-item"> 
+        <li class="nav-item" *ngIf="user"> 
+            <button mat-raised-button color="header" (click)="logOut()">
+            <a  class="nav-link">יציאה</a></button>
+        </li>
+        <li class="nav-item" *ngIf="!user"> 
             <button mat-raised-button color="header">
             <a  class="nav-link" routerLink="/manager-login">כניסת מנהל</a></button>
         </li>
@@ -30,5 +23,12 @@
         </li>
     </ul>
    </nav>
+
+   <div class="greetUser">
+    <button mat-raised-button color="header">
+        <a class="nav-link" routerLink="">שלום שמעון<br/>
+            לחץ כאן לאזור האישי
+        </a></button>
+   </div>
 </div>
 

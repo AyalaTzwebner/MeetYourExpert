@@ -3,6 +3,7 @@ import { User } from '../classes/user';
 import { UsersService } from '../services/users.service';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ExpertsService } from '../services/experts.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   details: any;
   user: User;
   somethingWrong: boolean = false;
-  constructor(private userService: UsersService, private formBuilder: FormBuilder,private route: Router) {
+  constructor(private userService: UsersService, private formBuilder: FormBuilder,private route: Router,private expertService:ExpertsService) {
     this.loginForm = formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]]
@@ -21,14 +22,24 @@ export class LoginComponent implements OnInit {
   }
   log_in() {
     console.log("login")
-    this.userService.login(this.loginForm.value).subscribe((res: User) => {
-      if (res == null) {
-        this.somethingWrong = true
+    this.userService.login(this.loginForm.value).subscribe(res => {
+      console.log(res)
+      if (res.found==false) {
+        this.somethingWrong = true;
       }
       else {
-        this.user = res;
-        localStorage.setItem("user", JSON.stringify(this.user));
-        this.route.navigateByUrl("/experts");
+        this.user = res.user;
+        if(res.expert==true)
+            {
+            localStorage.setItem("expert", JSON.stringify(this.user));        
+            this.route.navigateByUrl("/experts");
+          }
+            else{
+            localStorage.setItem("user", JSON.stringify(this.user));
+            this.route.navigateByUrl("/experts");
+          }
+          
+        
       }
     }, err => console.log(err))
   }
@@ -40,7 +51,6 @@ export class LoginComponent implements OnInit {
   get email() {
     return this.loginForm.get("email");
   }
-
   get password() {
     return this.loginForm.get("password");
   }
@@ -51,7 +61,6 @@ export class LoginComponent implements OnInit {
     else if (this.password.hasError('minlength'))
       return ' סיסמא חייבת להיות בת 4 תוים לפחות'
     else return 'ערך לא חוקי'
-
   }
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
@@ -60,6 +69,5 @@ export class LoginComponent implements OnInit {
     else if (this.email.hasError('email'))
       return 'כתובת מייל לא תקינה'
     else return 'ערך לא חוקי'
-
   }
 }

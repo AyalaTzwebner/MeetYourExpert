@@ -18,4 +18,7 @@ export class LoginGuardService {
       return true;
 
 }
+logOut():void{
+  
+}
 }
