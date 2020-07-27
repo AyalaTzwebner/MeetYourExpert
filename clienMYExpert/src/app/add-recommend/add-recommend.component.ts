@@ -17,6 +17,7 @@ export class AddRecommendComponent implements OnInit {
   iduser:number;
   cont:string = 'פירוט';
   submitted:boolean = false;
+  msg:string = '';
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private recommendService:RecommendsService) { 
     this.recommendForm = formBuilder.group({ 
       content: ['', Validators.required],
@@ -42,19 +43,31 @@ export class AddRecommendComponent implements OnInit {
     this.submitted = false;
   }
   save_recommend(){
+    let user:any = JSON.parse(localStorage.getItem("user"));
+    let expert:any = JSON.parse(localStorage.getItem("expert"));
+    let manager:any = JSON.parse(localStorage.getItem("manager"));
     this.submitted = true;
-    if (this.title.hasError('required') || this.content.hasError('required'))
-    return;
-    this.iduser = JSON.parse(localStorage.getItem("user")).id;
+    if (this.title.hasError('required') || this.content.hasError('required')){
+          this.msg = 'לא ניתן לשלוח המלצה ריקה';
+          return;
+    }
+    if (this.content.value.length>500)
+          {
+            this.msg = 'לא ניתן לשלוח מעל 500 תווים בתוכן';
+            return;
+          }
+    if (!user&&!expert&&!manager)
+        {   
+          this.msg = 'עליך להרשם כדי להוסיף המלצות';
+          return;
+        }
+    this.iduser = user ? JSON.parse(localStorage.getItem("user")).id : expert ? JSON.parse(localStorage.getItem("expert")).id :JSON.parse(localStorage.getItem("managre")).id  ;
     console.log(this.iduser);
     this.activatedRoute.paramMap.subscribe(res => this.idprof =  Number(res.get("id")));
     this.recommendForm.patchValue({stars:this.rating, userId:this.iduser, profId: this.idprof });
-    // alert(this.iduser + " " + this.idprof); --works correctly
+    alert(this.iduser + " " + this.idprof);
+    this.msg = 'ההמלצה נשלחה בהצלחה, וממתינה לאישור מערכת';
     this.recommendService.saveRecommend(this.recommendForm.value).subscribe(res=> console.log(res));
   }
-  getMessage():string{
-    if (this.title.hasError('required') || this.content.hasError('required'))
-        return 'לא ניתן לשלוח המלצה ריקה';
-    return 'ההמלצה נשלחה בהצלחה, וממתינה לאישור מערכת';
-  }
+
 }

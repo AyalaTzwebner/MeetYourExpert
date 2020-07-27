@@ -10,7 +10,7 @@
   <div id="wrap-stars">
   <mat-label><i>דרג את בעל המקצוע</i></mat-label>
 <app-star-rating  [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event)"></app-star-rating><br/>
-<mat-label *ngIf="submitted" id="msg">{{getMessage()}}</mat-label><br/>
+<mat-label *ngIf="submitted" id="msg">{{msg}}</mat-label><br/>
 </div>
 <button mat-raised-button type="submit" color="customed">שמור המלצה</button>
 </form>

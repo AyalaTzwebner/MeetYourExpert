@@ -1,15 +1,35 @@
 .mat-card{
-    margin:20px 20vw;
-    background:linear-gradient(#b8c3ff 80%, white);
-    height: 23vh;
-    width: 45vw;
-    text-align: center;
+    margin:auto;
+    margin-top: 15px;
+    background: linear-gradient(to bottom, #ffefda,transparent);
+    max-width: 850px;
+    min-width:250px;
+    width:100%;
 }
+
 .mat-card-content{
     font-size: larger ;
-    margin-top: 4vh;
     text-align: right;
+}
+.mat-card-footer{
+    margin-top: -20px;
 }
 .mat-card-title{
     margin-top: 5vh;;
+    font-size: large;
+}
+.mat-card-header{
+    text-align: right;
+}
+button{
+    margin-left: 1vw;
+    height: 37px;
+    margin-top: 14vh;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 0vw;
+    margin-bottom: 1vw;
+}
+mat-card-header-text{
+    text-align: right;
 }

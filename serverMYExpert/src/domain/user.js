@@ -44,5 +44,13 @@ var insertUser = (user) => {
     })
 }
 
-module.exports = { getUserByLogin, insertUser }
+var getUserById = async (id) => {
+
+  try {
+    return await db.executeStatement(`SELECT * FROM users WHERE id = '${id}'`)
+  } catch (e) {
+  }
+}
+
+module.exports = { getUserByLogin, insertUser, getUserById }
 

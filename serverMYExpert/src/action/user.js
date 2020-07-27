@@ -19,6 +19,14 @@ router.post('/loginManager', async function (req, res)
 }
 )
 
+router.get('/:id', async function (req, res)
+{
+  console.log("get user by id: " + req.params.id)
+  var user = await userDomain.getUserById(req.params.id);
+  console.log(user);
+  res.send(user);
+}
+)
 
 
 module.exports = router

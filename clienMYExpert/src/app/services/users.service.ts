@@ -13,12 +13,9 @@ export class UsersService {
   constantId: number = 10000;
   constructor(private http: HttpClient, private cities: CitiesService) {
   }
-  getUserById(id: number): User {
-    let u: User;
-    u = this.allUsers.find(user => user.id == id);
-    if (u != null)
-      return u;
-    return new User();
+  getUserById(id: number): Observable<User> {
+   return this.http.get<User>(this.url + id.toString());
+
   }
   getAllUsers(): User[] {
     return this.allUsers;

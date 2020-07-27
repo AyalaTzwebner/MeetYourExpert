@@ -15,6 +15,7 @@ import { CitiesService } from '../services/cities.service';
 export class DispExpertComponent implements OnInit {
   expert: Expert;
   cityString:string;
+  not_clicked:boolean = true;
   constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService) {
     // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
@@ -40,6 +41,15 @@ export class DispExpertComponent implements OnInit {
     for (i = 0; i < empty; i++)
       arr.push(0)
     return arr
+  }
+
+  clicked()
+  {
+    this.not_clicked = !this.not_clicked;
+  }
+
+  clickedTrue(){
+    this.not_clicked = true;
   }
   ngOnInit(): void {
 

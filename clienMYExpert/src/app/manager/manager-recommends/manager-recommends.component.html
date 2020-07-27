@@ -1,11 +1,16 @@
 <mat-card *ngFor="let r of recommends">
     <mat-card-header dir="rtl">
-        <mat-card-title dir="rtl">ממליץ: {{getUser(r.userId)}}</mat-card-title>
-        <mat-card-title dir="rtl">בעל מקצוע: {{getExpert(r.profId)}}</mat-card-title>
+        <mat-card-title dir="rtl"><strong>ממליץ: </strong>{{r.user_name}}</mat-card-title>
+        <mat-card-title dir="rtl"><strong>בעל מקצוע:</strong> {{r.expert_name}} </mat-card-title>
         <mat-card-title dir="rtl"><strong>המלצה על: {{r.title}}</strong></mat-card-title>
-        <mat-card-content dir="rtl">{{r.content}}</mat-card-content><br/>
-        <button mat-raised-button color="primary" (click)="changeStatus(r.id ,r.isApproved)">{{getButtonValue(r.isAccepted)}}</button>
     </mat-card-header>
+    <mat-card-content dir="rtl">
+        <p dir="rtl">{{r.content}}</p>
+    </mat-card-content>    
+    <button mat-raised-button color="primary" [style.backgroundColor] = "getButtonColor(r.isApproved)" (click)="changeStatus(r.id ,r.isApproved, r)">{{r.isApproved ? 'מאושר' : 'אשר'}}</button>
+
+    <!-- <mat-card-footer>
+    </mat-card-footer> -->
 </mat-card>
 
 

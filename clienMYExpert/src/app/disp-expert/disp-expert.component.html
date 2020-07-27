@@ -10,6 +10,8 @@
         <mat-icon *ngSwitchCase="0" style="color:gold">star_border</mat-icon>
     </div>
     <div> ממוצע דירוגים: {{expert.scores}}</div>
-    <a routerLink="recommend/{{expert.id}}">הוסף המלצה לבעל מקצוע זה</a>
-    <router-outlet></router-outlet>
+   <div (click)="clickedTrue()"> <a routerLink="recommend/{{expert.id}}" >הוסף המלצה לבעל מקצוע זה</a></div>
+
+<router-outlet></router-outlet>
 </mat-card>
+<mat-card  *ngIf="not_clicked"><a routerLink='recommends/{{expert.id}}' (click) = "clicked()">ראו המלצות</a></mat-card>

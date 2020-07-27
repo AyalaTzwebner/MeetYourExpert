@@ -16,18 +16,12 @@ import { ManagerExpertsComponent } from './manager/manager-experts/manager-exper
 import { ManagerRecommendsComponent } from './manager/manager-recommends/manager-recommends.component';
 import { ManagerSettingsComponent } from './manager/manager-settings/manager-settings.component';
 import { ManagerloginGuardService } from './services/managerlogin-guard.service';
-
-
-
-
+import { RecommendsService } from './services/recommends.service';
+import { DispRecommendsComponent } from './disp-recommends/disp-recommends.component';
 
 const routes: Routes = [{
   path: "",
-<<<<<<< Updated upstream
-  component: AboutComponent
-=======
-  component: ManagerExpertsComponent
->>>>>>> Stashed changes
+  component: ManagerSettingsComponent
 }, {
   path: "login",
   component: LoginComponent
@@ -78,7 +72,13 @@ const routes: Routes = [{
       path:"recommend/:id",
       canActivate:[LoginGuardService],
       component:AddRecommendComponent
-    }]
+    },
+    {
+      path:"recommends/:id",
+      component:DispRecommendsComponent
+    }
+  
+  ]
 }
 ];
 /*

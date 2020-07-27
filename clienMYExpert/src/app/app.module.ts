@@ -43,6 +43,7 @@ import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { ExpertSettingsComponent } from './expert/expert-settings/expert-settings.component';
 import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meetings.component';
 import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
+import { DispRecommendsComponent } from './disp-recommends/disp-recommends.component';
 
 
 
@@ -71,6 +72,7 @@ import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.c
     ExpertSettingsComponent,
     ExpertMeetingsComponent,
     ExpertProfileComponent,
+    DispRecommendsComponent,
    
   ],
   imports: [
