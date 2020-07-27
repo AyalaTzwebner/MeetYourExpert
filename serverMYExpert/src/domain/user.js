@@ -9,19 +9,10 @@ var getUserByLogin = (user) => {
     where email ='${user.email}' and userPassword='${user.password}'`)
     .then((userInfo) => {
       if (userInfo.length > 0) {
-        obj.found = true;
-        obj.user=userInfo[0];
-        return db.executeStatement(`SELECT * FROM professional WHERE id = ${userInfo[0].id}`).then((info => {
-          if (info.length > 0)
-            obj.expert = true;
-          else
-            obj.expert = false;
-          return obj
-        }))
+        return userInfo[0]
       }
       else {
-        obj.found = false;
-        return obj;
+ return null
       }
     }
     ).catch(err => {
@@ -32,8 +23,8 @@ var getUserByLogin = (user) => {
 var insertUser = (user) => {
   console.log("Im here!");
   return db
-    .executeStatement(`INSERT INTO users (userName,userPassword,email,city) 
-      VALUES('${user.userName}','${user.userPassword}','${user.email}',${user.city})`)
+    .executeStatement(`INSERT INTO users (userName,userPassword,email,city,isManager,userType) 
+      VALUES('${user.userName}','${user.userPassword}','${user.email}',${user.city},0,1)`)
     .then((userInfo) => {
       console.log("true");
       return true

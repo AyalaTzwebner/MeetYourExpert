@@ -29,11 +29,10 @@ router.put('/change-status',async function(req,res){
   var expertChangeStatus=await expertDomain.changeStatus(req.body);
   res.send(expertChangeStatus);
 })
-router.get('/check-expert',async function(req,res){
-  console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-  var isExpert=await expertDomain.isExpert(req.query);
-  console.log("returns",isExpert)
-  res.send(isExpert);
+router.put('/put-expert',async function(req,res){
+  console.log("HHHHHHHHHHHH")
+  var expertUpdate=await expertDomain.putExpert(req.body);
+  res.send(expertUpdate);
 })
 
 module.exports = router

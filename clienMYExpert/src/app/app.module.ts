@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MakeMeetComponent } from './make-meet/make-meet.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
@@ -44,6 +43,9 @@ import { ExpertSettingsComponent } from './expert/expert-settings/expert-setting
 import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meetings.component';
 import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
 import { DispRecommendsComponent } from './disp-recommends/disp-recommends.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -57,7 +59,6 @@ import { DispRecommendsComponent } from './disp-recommends/disp-recommends.compo
     DispExpertsComponent,
     DispExpertComponent,
     LoginComponent,
-    MakeMeetComponent,
     SignUpComponent,
     SignUpExpertComponent,
     SignUpUserComponent,
@@ -98,7 +99,10 @@ import { DispRecommendsComponent } from './disp-recommends/disp-recommends.compo
     MatPaginatorModule,
     MatSlideToggleModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatMenuModule,
 
   ],
   providers: [],

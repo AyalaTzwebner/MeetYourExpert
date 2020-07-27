@@ -1,34 +1,42 @@
 <div class="head-wrapper">
-<nav class="navbar navbar-expand-sm ">
-    <ul class="nav nav-bills nav-justified">
-        <li class="nav-item" *ngIf="!user">
-            <button mat-raised-button color="header">
-            <a class="nav-link" routerLink="/signup">הרשם</a></button>
-        </li>
-        <li class="nav-item" *ngIf="!user"> 
-            <button mat-raised-button color="header">
-            <a  class="nav-link" routerLink="/login">כניסה</a></button>
-        </li>
-        <li class="nav-item" *ngIf="user"> 
-            <button mat-raised-button color="header" (click)="logOut()">
-            <a  class="nav-link">יציאה</a></button>
-        </li>
-        <li class="nav-item" *ngIf="!user"> 
-            <button mat-raised-button color="header">
-            <a  class="nav-link" routerLink="/manager-login">כניסת מנהל</a></button>
-        </li>
-        <li class="nav-item">
-            <button mat-raised-button color="header">
-            <a class="nav-link" routerLink="/experts">בעלי מקצוע</a></button>
-        </li>
-    </ul>
-   </nav>
+    <nav class="navbar navbar-expand-sm ">
+        <ul class="nav nav-bills nav-justified">
+            <li class="nav-item" *ngIf="!user">
+                <button mat-raised-button color="header">
+                    <a class="nav-link" routerLink="/signup">הרשם</a>
+                </button>
+            </li>
+            <li class="nav-item" *ngIf="!user">
+                <button mat-raised-button color="header">
+                    <a class="nav-link" routerLink="/login">כניסה</a>
+                </button>
+            </li>
+            <li class="nav-item" *ngIf="user">
+                <button mat-raised-button color="header" (click)="logOut()">
+                    <a class="nav-link">יציאה</a>
+                </button>
+            </li>
+            <li class="nav-item" *ngIf="!user">
+                <button mat-raised-button color="header">
+                    <a class="nav-link" routerLink="/manager-login">כניסת מנהל</a>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button mat-raised-button color="header">
+                    <a class="nav-link" routerLink="/experts">בעלי מקצוע</a>
+                </button>
+            </li>
+        </ul>
+    </nav>
 
-   <div class="greetUser">
-    <button mat-raised-button color="header">
-        <a class="nav-link" routerLink="">שלום שמעון<br/>
-            לחץ כאן לאזור האישי
-        </a></button>
-   </div>
+    <div class="greetUser" *ngIf="user">
+        <p>שלום!!</p>
+        <a routerLink="/expertInfo/{{user.id}}/settings/profile">שלום {{user.userName}}</a>
+        <!-- <mat-menu #menu="matMenu" *ngIf="user.userType==2" [overlapTrigger]="false">
+            <button mat-menu-item><a routerLink="/expertInfo/{{user.id}}/settings/profile">פרופיל</a></button>
+            <button mat-menu-item><a routerLink="/expertInfo/{{user.id}}/settings/meetings">הזמנות ופגישות</a></button>
+        </mat-menu>
+        <button *ngIf="user.userType==2" mat-fab [matMenuTriggerFor]="menu"
+            [style.backgroundImage]="'url(http://turag.co.il/wp-content/uploads/2018/06/man.jpg)'">Menu</button> -->
+    </div>
 </div>
-

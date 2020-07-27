@@ -1,1 +1,46 @@
-<p>expert-profile works!</p>
+<!-- 
+    here there will be some disabled input that will contain the data of this expert
+    while pressing on 'edit' there will be option for editing the details
+    after pressing the 'save' button- input will going into disablity and the data will go into the DB
+    including special dialog for inserting image.
+    that's all! :)
+-->
+<mat-card>
+    <form dir="rtl" *ngIf="allCities" [formGroup]="detailsForm" (ngSubmit)="saveDetails()">
+
+        <mat-form-field appearance="outline" disabled="true">
+            <mat-label>שם בעל עסק</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" disabled="true">
+            <mat-label>סיסמא לאתר</mat-label>
+            <input matInput autocomplete="none" formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>שם העסק</mat-label>
+            <input matInput formControlName="businessName" autocomplete="none">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" disabled="true">
+            <mat-label>פרוט</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input type="text" placeholder="עיר" matInput formControlName="city" [matAutocomplete]="city">
+            <mat-autocomplete #city="matAutocomplete">
+                <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+                    {{city}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <img class="img_box" (click)="OpenAddFilesDialog()"  height="100"
+        [src]="detailsForm.get('imgUrl').value">
+        <input class="choose_img" #FileSelectInputDialog type="file" (change)="onSelectFile($event)" accept="image/*" formControlName="imgUrl"/>
+
+        <button mat-raised-button type="submit" color="customed">שמור פרטים</button>
+    </form>
+</mat-card>

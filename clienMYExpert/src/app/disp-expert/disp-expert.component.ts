@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Expert } from '../classes/expert';
 import { ExpertsService } from '../services/experts.service';
 import { ActivatedRoute } from '@angular/router';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
-import { group } from '@angular/animations';
 import { CitiesService } from '../services/cities.service';
+import {MatDialog} from '@angular/material/dialog';
+import { AddMeetingComponent } from '../add-meeting/add-meeting.component';
 
 
 @Component({
@@ -16,9 +16,9 @@ export class DispExpertComponent implements OnInit {
   expert: Expert;
   cityString:string;
   not_clicked:boolean = true;
-  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService) {
-    // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
-    this.activatedRoute.paramMap.subscribe(res => {
+  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,
+    private cityService:CitiesService,public dialog: MatDialog) {
+      this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
         this.expert = res[0];
         console.log(this.expert)
@@ -52,6 +52,13 @@ export class DispExpertComponent implements OnInit {
     this.not_clicked = true;
   }
   ngOnInit(): void {
+
+  }
+  openDialog(){
+    const dialogRef = this.dialog.open(AddMeetingComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
 
   }
 }

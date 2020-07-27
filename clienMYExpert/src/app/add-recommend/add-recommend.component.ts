@@ -22,9 +22,9 @@ export class AddRecommendComponent implements OnInit {
     this.recommendForm = formBuilder.group({ 
       content: ['', Validators.required],
       title: ['', Validators.required],
-      stars: [0],
-      profId: [0],
-      userId: [0]
+      stars: [''],
+      profId: [''],
+      userId: ['']
     })
   }
   get content() {

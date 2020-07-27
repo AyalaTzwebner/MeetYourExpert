@@ -4,7 +4,6 @@ import { DispExpertsComponent } from './disp-experts/disp-experts.component';
 import { DispExpertComponent } from './disp-expert/disp-expert.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
-import { MakeMeetComponent } from './make-meet/make-meet.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
@@ -19,38 +18,48 @@ import { ManagerloginGuardService } from './services/managerlogin-guard.service'
 import { RecommendsService } from './services/recommends.service';
 import { DispRecommendsComponent } from './disp-recommends/disp-recommends.component';
 
+import { ExpertSettingsComponent } from './expert/expert-settings/expert-settings.component';
+import { AddMeetingComponent } from './add-meeting/add-meeting.component';
+import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
+import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meetings.component';
+
+
+
+
+
 const routes: Routes = [{
   path: "",
-  component: ManagerSettingsComponent
+  component: ExpertSettingsComponent
+
 }, {
   path: "login",
   component: LoginComponent
-},  {
+}, {
   path: "about",
   component: AboutComponent
-},  {
+}, {
   path: "manager-login",
   component: ManagerLoginComponent
 }, {
   path: "manager-settings",
-  canActivate:[ManagerloginGuardService],
+  canActivate: [ManagerloginGuardService],
   component: ManagerSettingsComponent,
   children: [{
     path: "manage-experts",
-    canActivate:[ManagerloginGuardService],
+    canActivate: [ManagerloginGuardService],
     component: ManagerExpertsComponent,
   }, {
     path: "manage-recommends",
-    canActivate:[ManagerloginGuardService],
+    canActivate: [ManagerloginGuardService],
     component: ManagerRecommendsComponent
   }, {
     path: "",
-    canActivate:[ManagerloginGuardService],
+    canActivate: [ManagerloginGuardService],
     component: ManagerRecommendsComponent
   }]
 }, {
   path: "signup",
-  
+
   component: SignUpComponent,
   children: [{
     path: "sign-up-expert",
@@ -68,19 +77,27 @@ const routes: Routes = [{
 }, {
   path: "experts/:id",
   component: DispExpertComponent,
-  children:[{
-      path:"recommend/:id",
-      canActivate:[LoginGuardService],
-      component:AddRecommendComponent
-    },
-    {
-      path:"recommends/:id",
-      component:DispRecommendsComponent
-    }
-  
-  ]
-}
-];
+  children: [{
+    path: "recommend/:id",
+    canActivate: [LoginGuardService],
+    component: AddRecommendComponent
+  },
+  {
+    path: "recommends/:id",
+    component: DispRecommendsComponent
+  }]
+},
+{
+  path: "expertInfo/:id/settings",
+  component: ExpertSettingsComponent,
+  children: [{
+    path: "profile",
+    component: ExpertProfileComponent
+  }, {
+    path: "meetings",
+    component: ExpertMeetingsComponent
+  }]
+}];
 /*
 {path: "add-rental", canActivate: [LoginGuardService], component: AddRentalComponent},
 */

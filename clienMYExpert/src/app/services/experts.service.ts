@@ -36,4 +36,8 @@ export class ExpertsService {
   changeStatus(id,status){
     return this.http.put(this.url+"change-status",{id:id,status:status});
   }
+  putExpert(exp:Expert){
+    console.log("HHHHHHHHH")
+    return this.http.put(this.url+"put-expert",exp)
+  }
 }
