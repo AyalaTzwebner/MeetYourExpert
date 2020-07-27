@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MeetingService } from '../services/meeting.service';
 import { Meeting } from '../classes/meeting';
 import { ActivatedRoute } from '@angular/router';
+import { Expert } from '../classes/expert';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-add-meeting',
@@ -12,17 +15,15 @@ import { ActivatedRoute } from '@angular/router';
 export class AddMeetingComponent implements OnInit {
   addMeetingForm: FormGroup;
   expertId:number
-  constructor(private formBuilder: FormBuilder,private meetingService:MeetingService, private activatedRoute: ActivatedRoute) { 
+  constructor(private formBuilder: FormBuilder,private meetingService:MeetingService, private activatedRoute: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: Expert) { 
     this.addMeetingForm = formBuilder.group({
       time: ['',[Validators.required]],
       date: ['',[Validators.required]],
       title:['',[Validators.required]],
       content:['']
     });
-    this.activatedRoute.paramMap.subscribe(res =>
-      this.expertId=Number(res.get("id"))
-      ,err => console.log(err));
-  }
+    this.expertId=data.id}
   get time() {
     return this.addMeetingForm.get("time");
   }
@@ -38,7 +39,11 @@ export class AddMeetingComponent implements OnInit {
   ngOnInit(): void {
   }
   addMeeting():void{
+    
     let meet=new Meeting();
+    let user =localStorage.getItem("user");
+    let userData = JSON.parse(user);
+    meet.userId=userData.id;
     meet.content=this.content.value;
     meet.title=this.title.value;
     meet.date=this.date.value;

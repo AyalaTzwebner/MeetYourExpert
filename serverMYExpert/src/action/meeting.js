@@ -6,3 +6,4 @@ router.post('/add-meeting',async function(req,res){
     var addMeeting=await meetingDomain.insertMeeting(req.body);
     res.send(addMeeting);
 })
+module.exports = router

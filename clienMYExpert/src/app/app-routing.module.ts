@@ -29,7 +29,7 @@ import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meeting
 
 const routes: Routes = [{
   path: "",
-  component: ExpertSettingsComponent
+  component: ManagerSettingsComponent
 
 }, {
   path: "login",
@@ -78,12 +78,12 @@ const routes: Routes = [{
   path: "experts/:id",
   component: DispExpertComponent,
   children: [{
-    path: "recommend/:id",
+    path: "recommend",
     canActivate: [LoginGuardService],
     component: AddRecommendComponent
   },
   {
-    path: "recommends/:id",
+    path: "recommends",
     component: DispRecommendsComponent
   }]
 },

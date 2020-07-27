@@ -31,7 +31,7 @@
 
     <div class="greetUser" *ngIf="user">
         <p>שלום!!</p>
-        <a routerLink="/expertInfo/{{user.id}}/settings/profile">שלום {{user.userName}}</a>
+        <a *ngIf="user.userType==2" routerLink="/expertInfo/{{user.id}}/settings/profile">שלום {{user.userName}}</a>
         <!-- <mat-menu #menu="matMenu" *ngIf="user.userType==2" [overlapTrigger]="false">
             <button mat-menu-item><a routerLink="/expertInfo/{{user.id}}/settings/profile">פרופיל</a></button>
             <button mat-menu-item><a routerLink="/expertInfo/{{user.id}}/settings/meetings">הזמנות ופגישות</a></button>

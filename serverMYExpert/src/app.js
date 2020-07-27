@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 var cors = require('cors')
 var app = express()
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: "50mb" }))
 app.use(cors())
 app.use(express.static('public'))
 
@@ -20,6 +20,6 @@ app.use('/cities', cityAction);
 app.use('/subjects', subjectAction);
 app.use('/experts', expertAction);
 app.use('/recommend', recommendAction);
-app.use('/meetings', recommendAction);
+app.use('/meetings', meetingAction);
 app.get('/', (req, res) => res.send('Api Meet Your Expert'))
 module.exports = app

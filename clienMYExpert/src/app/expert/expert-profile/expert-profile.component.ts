@@ -51,6 +51,7 @@ export class ExpertProfileComponent implements OnInit {
     console.log(this.detailsForm.get("imgUrl"))
     this.editedExpert.userName = this.detailsForm.get("name").value;
     this.editedExpert.userPassword = this.detailsForm.get("password").value;
+    this.editedExpert.imgUrl = this.detailsForm.get("imgUrl").value;
     this.editedExpert.description = this.detailsForm.get("description").value;
     this.editedExpert.businessName = this.detailsForm.get("businessName").value;
     this.editedExpert.city = this.cityService.getCityByName(this.detailsForm.get("city").value)

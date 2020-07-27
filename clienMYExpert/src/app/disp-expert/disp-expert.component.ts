@@ -55,7 +55,7 @@ export class DispExpertComponent implements OnInit {
 
   }
   openDialog(){
-    const dialogRef = this.dialog.open(AddMeetingComponent);
+    const dialogRef = this.dialog.open(AddMeetingComponent,{data:{id:this.expert.id}});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

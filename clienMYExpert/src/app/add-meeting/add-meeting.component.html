@@ -1,11 +1,11 @@
-<form dir="rtl" [formGroup]="addMeetingForm" (ngSubmit)="addMeeting">
+<form dir="rtl" [formGroup]="addMeetingForm" (ngSubmit)="addMeeting()">
     <mat-form-field appearance="outline">
         <mat-label>בחר שעה</mat-label>
         <input matInput [formControl]="time" type="time" >
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>בחר יום</mat-label>
-        <input matInput type="date" autocomplete="none">
+        <input matInput type="date" autocomplete="none" [formControl]="date">
         <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker> -->
     </mat-form-field>
