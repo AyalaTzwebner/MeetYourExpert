@@ -13,7 +13,7 @@ img{
     width:55px
 }
 mat-card{
-    max-width:700px;
+    max-width:850px;
     min-width:250px;
     width:100%;
     margin:auto;
@@ -24,4 +24,14 @@ mat-card{
 // }
 #add{
     float: right;
+}
+mat-expansion-panel{
+    min-width: 250px;
+    max-width: 500px;
+    width: 100%;
+    margin:auto;
+    background: repeating-radial-gradient(transparent,#ffdf8d);
+}
+.mat-expansion-panel-body{
+    display: flex;
 }

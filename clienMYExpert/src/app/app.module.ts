@@ -14,7 +14,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
-import { RecommendComponent } from './recommend/recommend.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
@@ -62,7 +61,6 @@ import {MatMenuModule} from '@angular/material/menu';
     SignUpComponent,
     SignUpExpertComponent,
     SignUpUserComponent,
-    RecommendComponent,
     AddRecommendComponent,
     StarRatingComponent,
     ManagerLoginComponent,
@@ -74,7 +72,6 @@ import {MatMenuModule} from '@angular/material/menu';
     ExpertMeetingsComponent,
     ExpertProfileComponent,
     DispRecommendsComponent,
-   
   ],
   imports: [
     BrowserModule,
@@ -103,7 +100,6 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDialogModule,
     MatDatepickerModule,
     MatMenuModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,26 @@
 <mat-card dir="rtl">
-    <button mat-fab color="primary" id="add" matTooltip="לחץ כאן לקביעת פגישת ייעוץ" (click)="openDialog()">
+    <button mat-fab color="warn" id="add" matTooltip="לחץ כאן לקביעת פגישת ייעוץ" (click)="openDialog()">
         <mat-icon>forum</mat-icon>
       </button>
+      <!-- פגישה שנקבעה -אם יש -->
+      <mat-expansion-panel hideToggle *ngIf="currentUserMeeting">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            קבעת פגישת ייעוץ עם בעל מקצוע זה
+          </mat-panel-title>
+          <mat-panel-description>
+            <b> ליום</b> {{currentUserMeeting.date}} <b> לשעה</b> {{currentUserMeeting.time}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p><b>:נושא</b> {{currentUserMeeting.title}}</p>
+        <button mat-icon-button matTooltip="עריכה" matTooltipPosition="right" (click)="editMeeting()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="מחיקה" matTooltipPosition="left"  (click)="deleteMeeting()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-expansion-panel>
+      <!--  -->
     <h1 >{{expert.businessName}}</h1>
     <h3>{{expert.userName}}</h3>
     <img src="http://turag.co.il/wp-content/uploads/2018/06/man.jpg" />
@@ -9,7 +28,7 @@
     <p><b>{{expert.description}}</b></p>
     <div id="stars" *ngFor="let s of fullStars()" [ngSwitch]="s">
         <mat-icon *ngSwitchCase="1" style="color:gold">star</mat-icon>
-        <mat-icon *ngSwitchCase="0.5" style="color:gold">star_half</mat-icon>
+        <mat-icon *ngSwitchCase="0.5" style="color:gold" dir="rtl">star_half</mat-icon>
         <mat-icon *ngSwitchCase="0" style="color:gold">star_border</mat-icon>
     </div>
     <div> ממוצע דירוגים: {{expert.scores}}</div>

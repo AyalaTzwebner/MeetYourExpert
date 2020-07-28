@@ -3,8 +3,11 @@ import { Expert } from '../classes/expert';
 import { ExpertsService } from '../services/experts.service';
 import { ActivatedRoute } from '@angular/router';
 import { CitiesService } from '../services/cities.service';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddMeetingComponent } from '../add-meeting/add-meeting.component';
+import { MeetingService } from '../services/meeting.service';
+import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
+import { Meeting } from '../classes/meeting';
 
 
 @Component({
@@ -14,15 +17,27 @@ import { AddMeetingComponent } from '../add-meeting/add-meeting.component';
 })
 export class DispExpertComponent implements OnInit {
   expert: Expert;
-  cityString:string;
-  not_clicked:boolean = true;
+  cityString: string;
+  not_clicked: boolean = true;
+  currentUserMeeting: Meeting = null
   constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,
-    private cityService:CitiesService,public dialog: MatDialog) {
-      this.activatedRoute.paramMap.subscribe(res => {
+    private cityService: CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
+    this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
         this.expert = res[0];
         console.log(this.expert)
-        this.cityString=cityService.getCityById(this.expert.city).name
+        this.cityString = cityService.getCityById(this.expert.city).name;
+        this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
+        // שליפה של הפגישה אם יש
+        let user1 = localStorage.getItem("user")
+        if (user1) { 
+          let user2 = JSON.parse(user1);
+          this.meetingService.findUserMeeting(user2.id, this.expert.id).subscribe((res: Meeting) => {
+            if (res) {
+              this.currentUserMeeting = res;
+            }
+          }, err => console.log(err))
+        }
       },
         err => {
           console.log(err)
@@ -32,8 +47,8 @@ export class DispExpertComponent implements OnInit {
   fullStars(): number[] {
     let arr: number[] = [];
     let full, empty, i: number;
-    full=Math.floor(this.expert.scores );
-    empty=Math.floor(5-this.expert.scores );
+    full = Math.floor(this.expert.scores);
+    empty = Math.floor(5 - this.expert.scores);
     for (i = 0; i < full; i++)
       arr.push(1);
     if (full + empty < 5)
@@ -43,22 +58,30 @@ export class DispExpertComponent implements OnInit {
     return arr
   }
 
-  clicked()
-  {
+  clicked() {
     this.not_clicked = !this.not_clicked;
   }
 
-  clickedTrue(){
+  clickedTrue() {
     this.not_clicked = true;
   }
   ngOnInit(): void {
+  
 
   }
-  openDialog(){
-    const dialogRef = this.dialog.open(AddMeetingComponent,{data:{id:this.expert.id}});
+  openDialog() :void{
+    const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id, manager:false} });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-
   }
+  editMeeting():void{
+    const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id , manager:true} });
+  }
+  deleteMeeting():void{
+    this.meetingService.deleteMeeting(this.currentUserMeeting).subscribe(res=>{
+      this.meetingService.getExistedMeeting.emit(null);
+    },err=>console.log(err));
+  }
+
 }

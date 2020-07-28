@@ -7,7 +7,6 @@ import { AboutComponent } from './about/about.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpExpertComponent } from './sign-up-expert/sign-up-expert.component';
 import { SignUpUserComponent } from './sign-up-user/sign-up-user.component';
-import { RecommendComponent } from './recommend/recommend.component';
 import { AddRecommendComponent } from './add-recommend/add-recommend.component';
 import { LoginGuardService } from './services/login-guard.service';
 import { ManagerLoginComponent } from './manager/manager-login/manager-login.component';
@@ -29,7 +28,7 @@ import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meeting
 
 const routes: Routes = [{
   path: "",
-  component: ManagerSettingsComponent
+  component: AddRecommendComponent
 
 }, {
   path: "login",

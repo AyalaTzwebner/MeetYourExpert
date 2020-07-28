@@ -1,4 +1,4 @@
-<form dir="rtl" [formGroup]="addMeetingForm" (ngSubmit)="addMeeting()">
+<form dir="rtl" [formGroup]="addMeetingForm" (ngSubmit)="saveMeeting()">
     <mat-form-field appearance="outline">
         <mat-label>בחר שעה</mat-label>
         <input matInput [formControl]="time" type="time" >
@@ -17,5 +17,5 @@
         <mat-label >פרוט</mat-label>
         <textarea matInput [formControl] = "content"></textarea>
       </mat-form-field>
-    <button mat-raised-button type="submit" color="customed">שלח בקשה</button>
+    <button mat-raised-button [mat-dialog-close]="true" type="submit" color="customed">שמור בקשה</button>
 </form>

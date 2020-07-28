@@ -14,16 +14,27 @@ import { User } from '../classes/user';
 })
 export class AddMeetingComponent implements OnInit {
   addMeetingForm: FormGroup;
-  expertId:number
-  constructor(private formBuilder: FormBuilder,private meetingService:MeetingService, private activatedRoute: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public data: Expert) { 
+  expertId: number;
+  userId: number;
+  existedMeeting: Meeting = null;
+  constructor(private formBuilder: FormBuilder, private meetingService: MeetingService, private activatedRoute: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: Expert) {
     this.addMeetingForm = formBuilder.group({
-      time: ['',[Validators.required]],
-      date: ['',[Validators.required]],
-      title:['',[Validators.required]],
-      content:['']
+      time: [this.existedMeeting ? this.existedMeeting.time : '', [Validators.required]],
+      date: [this.existedMeeting ? this.existedMeeting.date : '', [Validators.required]],
+      title: [this.existedMeeting ? this.existedMeeting.title : '', [Validators.required]],
+      content: [this.existedMeeting ? this.existedMeeting.content : '']
     });
-    this.expertId=data.id}
+    let user = localStorage.getItem("user");
+    let userData = JSON.parse(user);
+    this.userId = userData.id;
+    this.expertId = data.id;
+    if (data.manager) {
+      meetingService.findUserMeeting(this.userId, this.expertId).subscribe(meet => {
+        this.existedMeeting = meet;
+      }, err => console.log(err))
+    }
+  }
   get time() {
     return this.addMeetingForm.get("time");
   }
@@ -38,17 +49,28 @@ export class AddMeetingComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  addMeeting():void{
-    
-    let meet=new Meeting();
-    let user =localStorage.getItem("user");
-    let userData = JSON.parse(user);
-    meet.userId=userData.id;
-    meet.content=this.content.value;
-    meet.title=this.title.value;
-    meet.date=this.date.value;
-    meet.time=this.time.value;
-    meet.profId=this.expertId;
-    this.meetingService.addMeeting(meet).subscribe(res=>console.log(res),err=>console.log(err))
+  saveMeeting(): void {
+    let meet = new Meeting();
+
+    meet.userId = this.userId;
+    meet.content = this.content.value;
+    meet.title = this.title.value;
+    meet.date = this.date.value;
+    meet.time = this.time.value;
+    meet.profId = this.expertId;
+    if (this.existedMeeting) {
+      meet.id=this.existedMeeting.id;
+      this.meetingService.updateMeeting(meet).subscribe(res=>console.log(res),err=>console.log(err))
+    }
+    else {
+      this.meetingService.addMeeting(meet).subscribe(res => {
+        if (res.insertId) {
+          this.meetingService.getExistedMeeting.emit(meet)
+        }
+        console.log(res)
+
+      }, err => console.log(err));
+    }
+
   }
 }
