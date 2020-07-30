@@ -28,7 +28,7 @@ import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meeting
 
 const routes: Routes = [{
   path: "",
-  component: AddRecommendComponent
+  component: ExpertSettingsComponent
 
 }, {
   path: "login",

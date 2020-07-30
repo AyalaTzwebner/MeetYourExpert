@@ -7,7 +7,7 @@ const pool = mysql.createPool({
 let connection = pool.promise()
 
 const executeStatement = async (query, listParams = []) => {
-  console.log(query);  
+  // console.log(query);  
   const [results] = await connection.query(query, listParams)
   return results
 }

@@ -23,7 +23,13 @@ var deleteMeeting = async (id) => {
 var updateMeeting = async (meet) => {
     try {
         return await db.executeStatement(`UPDATE meetings SET title = ${meet.title}, content = ${meet.content} 
-        , date = ${meet.date} , time = ${meet.time} ,  WHERE id = ${meet.id}`)
+        , date = ${meet.date} , time = ${meet.time}   WHERE id = ${meet.id}`)
     }catch(e){}
 }
-module.exports = { insertMeeting, getMeetingForUser, deleteMeeting, updateMeeting }
+var allMeetingsForExpert= async (id) =>{
+    try{
+        var res=await db.executeStatement(`SELECT * FROM meetings WHERE idProf = ${id}`);
+        return res;
+    }catch(e){}
+}
+module.exports = { insertMeeting, getMeetingForUser, deleteMeeting, updateMeeting ,allMeetingsForExpert}

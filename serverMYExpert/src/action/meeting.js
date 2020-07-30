@@ -18,4 +18,8 @@ router.put('/put-meeting',async function(req,res){
     var meetingUpdated = await meetingDomain.updateMeeting(req.body);
     res.send(meetingUpdated);
 })
+router.get('/get-meetings/:id',async function(req,res){
+    var allMeetingsForExpert= await meetingDomain.allMeetingsForExpert(req.params.id);
+    res.send(allMeetingsForExpert);
+})
 module.exports = router

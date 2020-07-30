@@ -115,8 +115,10 @@ var isExpert = async (params) => {
 }
 var putExpert = async (expert) =>{
   try{
-    var updateUser= db.executeStatement(`UPDATE users SET userName = '${expert.userName}' , userPassword = '${expert.userPassword}' , city = ${expert.city} , img = '${expert.imgUrl}' WHERE id = ${expert.id}`);
-    var updateExpert= db.executeStatement(`UPDATE professional SET businessName = '${expert.businessName}' , description = '${expert.description}' WHERE id = ${expert.id}`);
+    var updateUser=await db.executeStatement(`UPDATE users SET userName = '${expert.userName}' , userPassword = '${expert.userPassword}' , city = ${expert.city} , img = '${expert.imgUrl}' WHERE id = ${expert.id}`);
+    var updateExpert=await db.executeStatement(`UPDATE professional SET businessName = '${expert.businessName}' , description = '${expert.description}' WHERE id = ${expert.id}`);
+    console.log(updateUser);
+    console.log(updateExpert);
     return {updateUser:updateUser,updateExpert:updateExpert};
   }catch(e){}
 }

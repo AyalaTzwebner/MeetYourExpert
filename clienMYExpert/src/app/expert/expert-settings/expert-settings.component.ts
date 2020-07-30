@@ -11,10 +11,6 @@ import { ExpertsService } from 'src/app/services/experts.service';
 export class ExpertSettingsComponent implements OnInit {
 expert:Expert
   constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,) { 
-    
-  }
-
-  ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
         this.expert = res[0];
@@ -24,6 +20,11 @@ expert:Expert
           console.log(err)
         })
     });
+    
+  }
+
+  ngOnInit(): void {
+
     // this.expert=new Expert(1,"נחמן שימעוני","543211","nanachnachma@gmail.com",16,20,"","העסק הטוב ביותר","תבואו, תציצו, תיפגעו",3)
   }
 

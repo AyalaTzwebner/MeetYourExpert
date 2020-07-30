@@ -24,4 +24,7 @@ export class MeetingService {
   deleteMeeting(meeting: Meeting): Observable<any> {
     return this.http.delete<any>(this.url + "delete-meeting/" + meeting.id)
   }
+  getMeetingsForExpert(id:number):Observable<Meeting[]>{
+    return this.http.get<Meeting[]>(this.url+"get-meetings/"+id);
+  }
 }

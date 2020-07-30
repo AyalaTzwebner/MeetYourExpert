@@ -15,37 +15,37 @@ import { ExpertsService } from 'src/app/services/experts.service';
 })
 export class ExpertProfileComponent implements OnInit {
   @Input() expert: Expert;
-  allCities:City[];
-  editedExpert:Expert=new Expert();
+  allCities: City[];
+  editedExpert: Expert = new Expert();
   filteredCities: Observable<string[]>;
   citySelect = new FormControl();
   @ViewChild('FileSelectInputDialog') FileSelectInputDialog: ElementRef;
   detailsForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private cityService:CitiesService,private expertService:ExpertsService) {
-
-  }
-
-  ngOnInit(): void {
+  constructor(private formBuilder: FormBuilder, private cityService: CitiesService, private expertService: ExpertsService) {
     this.cityService.getAllCities().subscribe((res: City[]) => {
       this.allCities = res;
 
 
- this.detailsForm = this.formBuilder.group({
-      name: [this.expert.userName, [Validators.required]],
-      password: [this.expert.userPassword, [Validators.required]],
-      city: [this.cityService.getCityById(this.expert.city).name, [Validators.required]],
-      businessName: [this.expert.businessName, [Validators.required]],
-      description: [this.expert.description, [Validators.required]],
-      imgUrl: [this.expert.imgUrl]
-    });
-    this.filteredCities = this.detailsForm.get("city").valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterCity(value.toString()))
-    );
-      
+      this.detailsForm = this.formBuilder.group({
+        name: [this.expert.userName, [Validators.required]],
+        password: [this.expert.userPassword, [Validators.required]],
+        city: [this.cityService.getCityById(this.expert.city).name, [Validators.required]],
+        businessName: [this.expert.businessName, [Validators.required]],
+        description: [this.expert.description, [Validators.required]],
+        imgUrl: [this.expert.imgUrl]
+      });
+      this.filteredCities = this.detailsForm.get("city").valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterCity(value.toString()))
+      );
+
     }, err => console.log(err))
-   
-    
+  }
+
+  ngOnInit(): void {
+
+
+
   }
   saveDetails(): void {
     console.log(this.detailsForm.get("imgUrl"))
@@ -54,9 +54,10 @@ export class ExpertProfileComponent implements OnInit {
     this.editedExpert.imgUrl = this.detailsForm.get("imgUrl").value;
     this.editedExpert.description = this.detailsForm.get("description").value;
     this.editedExpert.businessName = this.detailsForm.get("businessName").value;
+    this.editedExpert.id=this.expert.id;
     this.editedExpert.city = this.cityService.getCityByName(this.detailsForm.get("city").value)
-    this.expertService.putExpert(this.editedExpert).subscribe(res=>{
-    },err=>console.log(err));
+    this.expertService.putExpert(this.editedExpert).subscribe(res => {
+    }, err => console.log(err));
 
   }
   public OpenAddFilesDialog() {
