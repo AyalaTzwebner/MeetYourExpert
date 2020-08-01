@@ -7,6 +7,7 @@ import { City } from 'src/app/classes/city';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ExpertsService } from 'src/app/services/experts.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-expert-profile',
@@ -14,30 +15,39 @@ import { ExpertsService } from 'src/app/services/experts.service';
   styleUrls: ['./expert-profile.component.scss']
 })
 export class ExpertProfileComponent implements OnInit {
-  @Input() expert: Expert;
+  expert: Expert;
   allCities: City[];
   editedExpert: Expert = new Expert();
   filteredCities: Observable<string[]>;
   citySelect = new FormControl();
   @ViewChild('FileSelectInputDialog') FileSelectInputDialog: ElementRef;
   detailsForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private cityService: CitiesService, private expertService: ExpertsService) {
+  constructor(private formBuilder: FormBuilder, private cityService: CitiesService, private expertService: ExpertsService, private experts: ExpertsService, private activatedRoute: ActivatedRoute) {
     this.cityService.getAllCities().subscribe((res: City[]) => {
       this.allCities = res;
+    });
+    this.activatedRoute.paramMap.subscribe(res => {
+      this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
+        this.expert = res[0];
+        console.log(this.expert);
+        this.detailsForm = this.formBuilder.group({
+          name: [this.expert.userName, [Validators.required]],
+          password: [this.expert.userPassword, [Validators.required]],
+          city: [this.cityService.getCityById(this.expert.city).name, [Validators.required]],
+          businessName: [this.expert.businessName, [Validators.required]],
+          description: [this.expert.description, [Validators.required]],
+          imgUrl: [this.expert.imgUrl]
+        });
+        this.filteredCities = this.detailsForm.get("city").valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterCity(value.toString()))
+        );
+      }, err => console.log(err));
 
 
-      this.detailsForm = this.formBuilder.group({
-        name: [this.expert.userName, [Validators.required]],
-        password: [this.expert.userPassword, [Validators.required]],
-        city: [this.cityService.getCityById(this.expert.city).name, [Validators.required]],
-        businessName: [this.expert.businessName, [Validators.required]],
-        description: [this.expert.description, [Validators.required]],
-        imgUrl: [this.expert.imgUrl]
-      });
-      this.filteredCities = this.detailsForm.get("city").valueChanges.pipe(
-        startWith(''),
-        map(value => this._filterCity(value.toString()))
-      );
+
+
+
 
     }, err => console.log(err))
   }
@@ -54,7 +64,7 @@ export class ExpertProfileComponent implements OnInit {
     this.editedExpert.imgUrl = this.detailsForm.get("imgUrl").value;
     this.editedExpert.description = this.detailsForm.get("description").value;
     this.editedExpert.businessName = this.detailsForm.get("businessName").value;
-    this.editedExpert.id=this.expert.id;
+    this.editedExpert.id = this.expert.id;
     this.editedExpert.city = this.cityService.getCityByName(this.detailsForm.get("city").value)
     this.expertService.putExpert(this.editedExpert).subscribe(res => {
     }, err => console.log(err));

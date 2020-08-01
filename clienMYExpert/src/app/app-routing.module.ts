@@ -28,8 +28,7 @@ import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meeting
 
 const routes: Routes = [{
   path: "",
-  component: ExpertSettingsComponent
-
+  component: ExpertMeetingsComponent
 }, {
   path: "login",
   component: LoginComponent
@@ -87,19 +86,12 @@ const routes: Routes = [{
   }]
 },
 {
-  path: "expertInfo/:id/settings",
-  component: ExpertSettingsComponent,
-  children: [{
-    path: "profile",
-    component: ExpertProfileComponent
-  }, {
-    path: "meetings",
+  path: "expertInfo/:id/profile",
+  component: ExpertProfileComponent,
+}, {
+    path: "expertInfo/:id/meetings",
     component: ExpertMeetingsComponent
-  }]
 }];
-/*
-{path: "add-rental", canActivate: [LoginGuardService], component: AddRentalComponent},
-*/
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
