@@ -13,10 +13,10 @@ export class HomeComponent implements OnInit {
   @ViewChild('menu', {static: true}) public menu: any;
   user:User=null;
   constructor(private route: Router,private userService: UsersService) { 
-    this.userService.getLoggedInName.subscribe(user => (this.user =user));
+  
   }
   ngOnInit(): void {
-
+    this.userService.getLoggedInName.subscribe(user => (this.user =user));
     console.log("start from here")
     this.user = JSON.parse(localStorage.getItem("user"));
     

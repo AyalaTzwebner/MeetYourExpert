@@ -6,6 +6,7 @@ export class User {
     email:string;
     city:number;
     userType:number;
+    imgUrl:string
     constructor(id?:number,userName?:string,userPassword?:string,email?:string,city?:number){
         this.id=id;
         this.userName=userName;

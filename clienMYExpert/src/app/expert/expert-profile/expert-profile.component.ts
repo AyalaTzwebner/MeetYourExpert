@@ -8,6 +8,8 @@ import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ExpertsService } from 'src/app/services/experts.service';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-expert-profile',
@@ -22,7 +24,7 @@ export class ExpertProfileComponent implements OnInit {
   citySelect = new FormControl();
   @ViewChild('FileSelectInputDialog') FileSelectInputDialog: ElementRef;
   detailsForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private cityService: CitiesService, private expertService: ExpertsService, private experts: ExpertsService, private activatedRoute: ActivatedRoute) {
+  constructor(private userService:UsersService,private formBuilder: FormBuilder, private cityService: CitiesService, private expertService: ExpertsService, private experts: ExpertsService, private activatedRoute: ActivatedRoute) {
     this.cityService.getAllCities().subscribe((res: City[]) => {
       this.allCities = res;
     });
@@ -61,12 +63,16 @@ export class ExpertProfileComponent implements OnInit {
     console.log(this.detailsForm.get("imgUrl"))
     this.editedExpert.userName = this.detailsForm.get("name").value;
     this.editedExpert.userPassword = this.detailsForm.get("password").value;
-    this.editedExpert.imgUrl = this.detailsForm.get("imgUrl").value;
     this.editedExpert.description = this.detailsForm.get("description").value;
     this.editedExpert.businessName = this.detailsForm.get("businessName").value;
     this.editedExpert.id = this.expert.id;
-    this.editedExpert.city = this.cityService.getCityByName(this.detailsForm.get("city").value)
-    this.expertService.putExpert(this.editedExpert).subscribe(res => {
+    this.editedExpert.city = this.cityService.getCityByName(this.detailsForm.get("city").value);
+    this.editedExpert.imgUrl=this.selectedFile.name;
+    this.expertService.insertImg(this.fd).subscribe(res => {
+      this.expertService.putExpert(this.editedExpert).subscribe(res=>{
+        // this.userService.getLoggedInName.emit(new User(this.editedExpert.id,edi);
+      },err=>console.log(err))
+      
     }, err => console.log(err));
 
   }
@@ -80,7 +86,7 @@ export class ExpertProfileComponent implements OnInit {
     let filtered = array.filter(option => { return option.toLowerCase().includes(filterValue) });
     return filtered
   }
-  image: File;
+  
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -91,4 +97,13 @@ export class ExpertProfileComponent implements OnInit {
       };
     }
   }
+  selectedFile: File = null;
+  fd = new FormData();
+
+  createFormData(event) {
+    this.selectedFile = <File>event.target.files[0];
+    this.fd.append('file', this.selectedFile, this.selectedFile.name);
+    this.detailsForm.get("imgUrl").setValue( this.selectedFile.name);
+  }
+
 }

@@ -1,7 +1,20 @@
 var express = require('express')
 var router = express.Router()
-var expertDomain = require('../domain/expert')
-
+var expertDomain = require('../domain/expert');
+var multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, '../clienMYExpert/src/assets/images/users')
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname)
+  }
+})
+const upload = multer({
+  storage: storage
+})
+//C:\Users\user1\Documents\Project\MeetYourExpert\clienMYExpert\src\assets\images\users
+//C:\Users\user1\Documents\Project\MeetYourExpert\clientMYExpert\src\assets\images\users
 router.post('/signup',async function(req,res){
   var expSignup= await expertDomain.insertExpert(req.body)
   console.log("signup occured!!!")
@@ -34,5 +47,14 @@ router.put('/put-expert',async function(req,res){
   var expertUpdate=await expertDomain.putExpert(req.body);
   res.send(expertUpdate);
 })
-
+router.post('/change-image',  upload.single('file'), (req, res) => {
+  // the file is uploaded when this route is called with formdata.
+  // now you can store the file name in the db if you want for further reference.
+  const filename = req.file.filename;
+  console.log("filename-" + filename)
+  const path = req.file. path;
+  console.log("path-" + path)
+  // Call your database method here with filename and path
+  res.json({'message': 'File uploaded'});
+});
 module.exports = router

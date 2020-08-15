@@ -36,10 +36,13 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+            <div>
+              <input type="file" (change)="createFormData($event)">
+            </div>
 
-        <!-- <img class="img_box" (click)="OpenAddFilesDialog()"  height="100"
-        [src]="detailsForm.get('imgUrl').value">
-        <input class="choose_img" #FileSelectInputDialog type="file" (change)="onSelectFile($event)" accept="image/*" formControlName="imgUrl"/> -->
+        <img *ngIf="detailsForm.get('imgUrl').value" class="img_box" (click)="OpenAddFilesDialog()"  height="150" width="250"
+        src="assets/images/users/{{detailsForm.get('imgUrl').value}}">
+       <!--  <input class="choose_img" #FileSelectInputDialog type="file" (change)="onSelectFile($event)" accept="image/*" formControlName="imgUrl"/> -->
 
         <button mat-raised-button type="submit" color="customed">שמור פרטים</button>
     </form>
