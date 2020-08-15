@@ -16,7 +16,6 @@ import { ManagerSettingsComponent } from './manager/manager-settings/manager-set
 import { ManagerloginGuardService } from './services/managerlogin-guard.service';
 import { RecommendsService } from './services/recommends.service';
 import { DispRecommendsComponent } from './disp-recommends/disp-recommends.component';
-
 import { ExpertSettingsComponent } from './expert/expert-settings/expert-settings.component';
 import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
@@ -27,8 +26,14 @@ import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meeting
 
 
 const routes: Routes = [{
+<<<<<<< Updated upstream
   path: '', pathMatch: 'full', redirectTo: '/about' },
  {
+=======
+  path: "",
+  component: DispExpertsComponent
+}, {
+>>>>>>> Stashed changes
   path: "login",
   component: LoginComponent
 }, {
@@ -72,18 +77,23 @@ const routes: Routes = [{
   path: "experts",
   component: DispExpertsComponent,
 }, {
-  path: "experts/:id",
+  path: "expert/:id",
   component: DispExpertComponent,
   children: [{
-    path: "recommend",
+    path: "recommend/:id",
     canActivate: [LoginGuardService],
     component: AddRecommendComponent
   },
   {
-    path: "recommends",
+    path: "recommends/:id",
     component: DispRecommendsComponent
   }]
 },
+{
+  path:"expertInfo/:id",
+  component: ExpertSettingsComponent
+}
+,
 {
   path: "expertInfo/:id/profile",
   component: ExpertProfileComponent,

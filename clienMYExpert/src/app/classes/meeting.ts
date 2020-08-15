@@ -2,8 +2,8 @@ import { Time } from '@angular/common';
 
 export class Meeting {
     id: number
-    profId: number;
-    userId: number;
+    idProf: number;
+    idUser: number;
     title: string;
     date: Date;
     time: Time
@@ -11,8 +11,8 @@ export class Meeting {
     isApproved: boolean;
     constructor(id?: number, profId?: number, userId?: number, title?: string, date?: Date, time?: Time, content?: string, isApproved?: boolean) {
         this.id = id;
-        this.profId = profId;
-        this.userId = userId;
+        this.idProf = profId;
+        this.idUser = userId;
         this.title = title;
         this.date = date;
         this.time = time;

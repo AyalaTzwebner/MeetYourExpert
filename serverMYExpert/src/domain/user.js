@@ -20,6 +20,18 @@ var getUserByLogin = (user) => {
       return err;
     })
 }
+
+var managerLogin = (manager) => {
+  try {
+    return db
+      .executeStatement(`select * from users
+      where user_type = 1 and userName = '${manager.name}' and userPassword='${manager.password}'`)
+  }
+  catch(e){
+    console.log(e);
+  }
+}
+
 var insertUser = (user) => {
   console.log("Im here!");
   return db
@@ -43,5 +55,8 @@ var getUserById = async (id) => {
   }
 }
 
-module.exports = { getUserByLogin, insertUser, getUserById }
+
+
+
+module.exports = { getUserByLogin, insertUser, getUserById, managerLogin }
 

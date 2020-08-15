@@ -5,6 +5,7 @@ import { UsersService } from './users.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { Meeting } from '../classes/meeting';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,11 @@ export class ExpertsService {
     console.log("HHHHHHHHH")
     return this.http.put(this.url+"put-expert",exp)
   }
+<<<<<<< Updated upstream
   insertImg(fd:FormData){
     return this.http.post(this.url+"change-image",fd);
   }
+=======
+
+>>>>>>> Stashed changes
 }

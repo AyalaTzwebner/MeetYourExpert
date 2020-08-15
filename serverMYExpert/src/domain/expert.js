@@ -2,8 +2,8 @@ var db = require('../mySqlDb')
 
 var insertExpert = (expert) => {
   return db
-    .executeStatement(`INSERT INTO users (userName,userPassword,email,city,isManager,userType) 
-      VALUES('${expert.userName}','${expert.userPassword}','${expert.email}',${expert.city},0,2)`)
+    .executeStatement(`INSERT INTO users (userName,userPassword,email,city, user_type) 
+      VALUES('${expert.userName}','${expert.userPassword}','${expert.email}',${expert.city}, 2)`)
     .then((insInfo) => {
       return db.executeStatement(`INSERT INTO professional (id,proSubject, businessName, description, scores) 
       VALUES('${insInfo.insertId}',${expert.proSubject}, '${expert.businessName}','${expert.description}' ,0)`)

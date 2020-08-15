@@ -22,18 +22,19 @@ export class LoginComponent implements OnInit {
     })
   }
   log_in() {
-    console.log("login")
     this.userService.login(this.loginForm.value).subscribe((res: User) => {
-      console.log(res)
       if (res == null) {
         this.somethingWrong = true;
       }
       else {
         this.user = res;
-        console.log(this.user)
         this.userService.getLoggedInName.emit(this.user);
         localStorage.setItem("user", JSON.stringify(this.user));
-        this.route.navigateByUrl("/experts");
+        if(this.user.user_type == 2){
+            this.route.navigateByUrl("/expertInfo/"+this.user.id);
+          }
+        else
+            this.route.navigateByUrl("/experts");
       }
     }, err => console.log(err))
 }

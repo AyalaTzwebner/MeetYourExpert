@@ -8,6 +8,8 @@ import { AddMeetingComponent } from '../add-meeting/add-meeting.component';
 import { MeetingService } from '../services/meeting.service';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { Meeting } from '../classes/meeting';
+import { IfStmt } from '@angular/compiler';
+
 
 
 @Component({
@@ -17,38 +19,38 @@ import { Meeting } from '../classes/meeting';
 })
 export class DispExpertComponent implements OnInit {
   expert: Expert;
-  cityString: string;
-  not_clicked: boolean = true;
+  cityString:string;
+  not_clicked:boolean = true;
   currentUserMeeting: Meeting = null
-  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,
-    private cityService: CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
+  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
+    // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
-        this.expert = res[0];
-        console.log(this.expert)
-        this.cityString = cityService.getCityById(this.expert.city).name;
-        this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
-        // שליפה של הפגישה אם יש
-        let user1 = localStorage.getItem("user")
-        if (user1) { 
-          let user2 = JSON.parse(user1);
-          this.meetingService.findUserMeeting(user2.id, this.expert.id).subscribe((res: Meeting) => {
-            if (res) {
-              this.currentUserMeeting = res;
-            }
-          }, err => console.log(err))
-        }
+      this.expert = res[0];
+      this.cityString=cityService.getCityById(this.expert.city).name
+    // שליפה של הפגישה אם יש
+      let user1 = localStorage.getItem("user")
+      if (user1!=null) {
+        let user2 = JSON.parse(user1);
+        this.meetingService.findUserMeeting(user2.id, this.expert.id).subscribe((res: Meeting) => {
+        if (res) {
+           this.currentUserMeeting = res;
+         }
+       }, err => console.log(err))
+     }
       },
         err => {
           console.log(err)
         })
     });
   }
+
+
   fullStars(): number[] {
     let arr: number[] = [];
     let full, empty, i: number;
-    full = Math.floor(this.expert.scores);
-    empty = Math.floor(5 - this.expert.scores);
+    full=Math.floor(this.expert.scores );
+    empty=Math.floor(5-this.expert.scores );
     for (i = 0; i < full; i++)
       arr.push(1);
     if (full + empty < 5)
@@ -58,30 +60,31 @@ export class DispExpertComponent implements OnInit {
     return arr
   }
 
-  clicked() {
+  clicked()
+  {
     this.not_clicked = !this.not_clicked;
   }
 
-  clickedTrue() {
+  clickedTrue(){
     this.not_clicked = true;
   }
   ngOnInit(): void {
-  
+    // this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
+     
+  }
 
-  }
-  openDialog() :void{
-    const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id, manager:false} });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-  editMeeting():void{
-    const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id , manager:true} });
-  }
-  deleteMeeting():void{
+  deleteMeeting(){
     this.meetingService.deleteMeeting(this.currentUserMeeting).subscribe(res=>{
       this.meetingService.getExistedMeeting.emit(null);
     },err=>console.log(err));
   }
-
+  editMeeting():void{
+    const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id , updating:true, isExpert:false} });
+  }
+  openDialog():void{
+    const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id, updating:false, isExpert:false} });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

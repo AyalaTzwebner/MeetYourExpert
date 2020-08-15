@@ -9,31 +9,41 @@
             קבעת פגישת ייעוץ עם בעל מקצוע זה
           </mat-panel-title>
           <mat-panel-description>
-            <b> ליום</b> {{currentUserMeeting.date}} <b> לשעה</b> {{currentUserMeeting.time}}
+            <b> ליום &nbsp;</b> {{currentUserMeeting.date | israelidate}} &nbsp; <b> לשעה &nbsp;</b> {{currentUserMeeting.time}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p><b>:נושא</b> {{currentUserMeeting.title}}</p>
+        <p><b>נושא:</b> {{currentUserMeeting.title}}</p>
+        <p *ngIf="!currentUserMeeting.isApproved"><strong>בעל המקצוע עדיין לא אישר את בקשתך</strong></p>
+        <p *ngIf="currentUserMeeting.isApproved"><strong>בקשתך אושרה ע"י בעל המקצוע, שים לב לפנות אליו במועד.</strong></p>
         <button mat-icon-button matTooltip="עריכה" matTooltipPosition="right" (click)="editMeeting()">
-          <mat-icon>edit</mat-icon>
+        <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button matTooltip="מחיקה" matTooltipPosition="left"  (click)="deleteMeeting()">
+ 
           <mat-icon>delete</mat-icon>
         </button>
       </mat-expansion-panel>
-      <!--  -->
+     <!---->
+
+
+
     <h1 >{{expert.businessName}}</h1>
     <h3>{{expert.userName}}</h3>
     <img src="http://turag.co.il/wp-content/uploads/2018/06/man.jpg" />
-    <h4>אנו עובדים באזור {{cityString}} ובאזורי נוספים...</h4>
+    <h4>אנו עובדים באזור {{cityString}} ובאזורים נוספים...</h4>
     <p><b>{{expert.description}}</b></p>
     <div id="stars" *ngFor="let s of fullStars()" [ngSwitch]="s">
         <mat-icon *ngSwitchCase="1" style="color:gold">star</mat-icon>
         <mat-icon *ngSwitchCase="0.5" style="color:gold" dir="rtl">star_half</mat-icon>
         <mat-icon *ngSwitchCase="0" style="color:gold">star_border</mat-icon>
     </div>
-    <div> ממוצע דירוגים: {{expert.scores}}</div>
-   <div (click)="clickedTrue()"> <a routerLink="recommend" >הוסף המלצה לבעל מקצוע זה</a></div>
+    <div> ממוצע דירוגים: {{expert.scores.toFixed(1)}}</div>
+   <div (click)="clickedTrue()"> <a routerLink="recommend/{{expert.id}}" >הוסף המלצה לבעל מקצוע זה</a></div>
 
 <router-outlet></router-outlet>
 </mat-card>
-<mat-card  *ngIf="not_clicked"><a routerLink='recommends' (click) = "clicked()">ראו המלצות</a></mat-card>
+
+<!-- <mat-card  *ngIf="not_clicked"><a routerLink='recommends' (click) = "clicked()">ראו המלצות</a></mat-card> -->
+<mat-card  class="rec">
+    <a routerLink='recommends/{{expert.id}}'   id="seeRecommend" *ngIf="not_clicked" (click) = "clicked()">ראו המלצות</a>
+</mat-card>

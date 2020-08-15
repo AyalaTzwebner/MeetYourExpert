@@ -9,11 +9,11 @@
         <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker> -->
     </mat-form-field>
-    <mat-form-field appearance="outline" >
+    <mat-form-field appearance="outline" *ngIf=!data.isExpert >
         <mat-label>נושא הייעוץ</mat-label>
-        <input matInput [formControl]="title" autocomplete="none" >
+        <input matInput [formControl]="title" autocomplete="none">
       </mat-form-field>
-      <mat-form-field appearance="outline" >
+      <mat-form-field appearance="outline" *ngIf=!data.isExpert >
         <mat-label >פרוט</mat-label>
         <textarea matInput [formControl] = "content"></textarea>
       </mat-form-field>

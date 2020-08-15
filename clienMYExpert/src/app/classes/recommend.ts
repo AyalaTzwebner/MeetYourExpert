@@ -10,4 +10,5 @@ export class Recommend {
     p:User;
     u:User;
     isApproved:boolean;
+    date_posted:Date;
 }

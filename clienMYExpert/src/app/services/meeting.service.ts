@@ -12,7 +12,9 @@ export class MeetingService {
   constructor(private http: HttpClient) {
 
   }
-  addMeeting(meet: Meeting): Observable<any> {
+  addMeeting(meet: Meeting): Observable<any>
+   {
+    console.log("adding meeting");
     return this.http.post(this.url + "add-meeting", meet);
   }
   updateMeeting(meet:Meeting):Observable<any>{
@@ -27,4 +29,13 @@ export class MeetingService {
   getMeetingsForExpert(id:number):Observable<Meeting[]>{
     return this.http.get<Meeting[]>(this.url+"get-meetings/"+id);
   }
+
+  approveMeeting(meet:Meeting):Observable<Meeting>{
+    return this.http.put<Meeting>(this.url + "approve-meeting",meet);
+  }
+
+  cancelMeeting(meet:Meeting):Observable<Meeting>{
+    return this.http.put<Meeting>(this.url+"cancel-meeting", meet);
+  }
+
 }

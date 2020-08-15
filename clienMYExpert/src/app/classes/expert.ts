@@ -12,7 +12,6 @@ export class Expert {
     imgUrl:string;
     scores:number;
     enable:boolean;
-    manager:boolean;
 
     constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string,businessName?:string,description?:string,score?:number) {
         this.id = id;
@@ -25,7 +24,6 @@ export class Expert {
         this.businessName=businessName;
         this.description=description;
         this.scores=score;
-        this.manager=false
         this.enable=true
     }
 }

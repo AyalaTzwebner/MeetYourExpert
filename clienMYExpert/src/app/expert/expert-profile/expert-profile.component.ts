@@ -31,7 +31,6 @@ export class ExpertProfileComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
         this.expert = res[0];
-        console.log(this.expert);
         this.detailsForm = this.formBuilder.group({
           name: [this.expert.userName, [Validators.required]],
           password: [this.expert.userPassword, [Validators.required]],

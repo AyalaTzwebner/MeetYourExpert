@@ -4,6 +4,7 @@ import { RecommendsService } from 'src/app/services/recommends.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ExpertsService } from 'src/app/services/experts.service';
 import { User } from 'src/app/classes/user';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -13,52 +14,61 @@ import { User } from 'src/app/classes/user';
 })
 export class ManagerRecommendsComponent implements OnInit {
 
+  pageEvent: PageEvent;
+  pageIndex: number;
+  pageSize: number;
+  length: number;
   recommends : Recommend[];
   user:User;
   expert:User;
   users:User[];
   experts:User[];
   constructor(private recommendService:RecommendsService, private userService:UsersService, private expertService:ExpertsService) {
-      this.recommendService.getAllRecommends().subscribe( (res:Recommend[]) => this.recommends = res);
-      // for(let r of this.recommends)
-      // {
-      //   this.userService.getUserById(r.userId).subscribe((res:User) => this.users.push(res) );
-      //   this.userService.getUserById(r.profId).subscribe((res:User) => this.experts.push(res) );
-      // }
-      // alert('length: '+ this.users.length);
+      // this.recommendService.getAllRecommends().subscribe( (res:Recommend[]) => this.recommends = res); --slashed today wednesday, return if not working
    }
 
   ngOnInit(): void {
-  }
-  getUser(id:number):string
-  {
-//  this.userService.getUserById(id).subscribe((res:User) => this.user = res);
-//  if (this.user == undefined)
-//     return id.toString();
-//     return this.user.userName;
-    return "soon";
-  }
-  getExpert(id:number):string
-  {
-    // this.userService.getUserById(id).subscribe((res:User) => this.expert = res);
-    // if (this.user == undefined)
-    // return id.toString();
-    // return this.expert.userName;
-    return "soon";
+    this.recommendService.getPerPage(3, 0).subscribe(
+      (res: any) => {
 
+        this.recommends = res.results;
+        this.pageIndex = res.pagination.current;
+        this.pageSize = res.pagination.perPage;
+        this.length = res.pagination.length;
+      },
+      err => {
+          console.log(err);
+      }
+    )
+    
   }
 
 
-  changeStatus(id:number, currentStstus:boolean, r:Recommend){
+
+  changeStatus(r:Recommend){
+      this.recommendService.changeStatus(r).subscribe();
       r.isApproved = !r.isApproved;
-      this.recommendService.changeStatus(id, currentStstus).subscribe();
-      console.log(r);
-
   }
 
   getButtonColor(isApproved:boolean){
       let color:string = isApproved ? 'green':'red';
       return color;
+  }
+
+  public getServerData(event?: PageEvent) {
+
+    this.recommendService.getPerPage(event.pageSize, event.pageIndex).subscribe(
+      (res: any) => {
+        this.recommends = res.results;
+        this.pageIndex = res.pagination.current;
+        this.pageSize = res.pagination.perPage;
+        this.length = res.pagination.length;
+      },
+      err => {
+        console.log(err)
+      }
+    );
+    return event;
   }
 // #b53f83
 }

@@ -7,7 +7,6 @@ import { Subject } from '../classes/subject';
 import { City } from '../classes/city';
 import { SubjectsService } from '../services/subjects.service';
 import { CitiesService } from '../services/cities.service';
-import { strict } from 'assert';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -28,6 +27,7 @@ export class DispExpertsComponent implements OnInit {
   currentSubject: string;//לא צריך
   searchName: string;
   param: Subject;
+  notFound:boolean = false;
 
   citySelect = new FormControl();
   subjectSelect = new FormControl();
@@ -41,7 +41,6 @@ export class DispExpertsComponent implements OnInit {
     this.experts.getAllExperts().subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
-        console.log(this.allexperts)
       },
       err => {
         console.log("some error:", err)
@@ -76,6 +75,10 @@ export class DispExpertsComponent implements OnInit {
     this.experts.filterExperts(s, s1, c, n).subscribe(
       (res: Expert[]) => {
         this.allexperts = res;
+        if(!(res.length>0))
+              this.notFound = true;
+        else
+              this.notFound = false;
         console.log(this.allexperts)
       },
       err => {

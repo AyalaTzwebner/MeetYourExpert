@@ -20,14 +20,14 @@ export class ManagerLoginComponent implements OnInit {
     })
   }
   log_in() {
-    console.log("login")
     this.userService.loginManager(this.loginManagerForm.value).subscribe((res: User) => {
-      if (res == null) {
+      if (res[0].id==undefined) {
         this.somethingWrong = true
       }
       else {
-        this.user = res;
-        localStorage.setItem("manager", JSON.stringify(this.user));
+        this.somethingWrong = false;
+        this.user = res[0];
+        localStorage.setItem("user", JSON.stringify(this.user));
         this.route.navigateByUrl("/manager-settings");
       }
     }, err => console.log(err))

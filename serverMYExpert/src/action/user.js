@@ -16,6 +16,9 @@ router.post('/signup',async function(req,res){
 router.post('/loginManager', async function (req, res) 
 {
   console.log('welcome, manger!')
+  var managerLogin = await userDomain.managerLogin(req.body)
+  console.log(managerLogin);
+  res.send(managerLogin);
 }
 )
 

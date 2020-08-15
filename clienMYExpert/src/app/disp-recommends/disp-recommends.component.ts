@@ -11,11 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DispRecommendsComponent implements OnInit {
   recommends:Recommend[] = [];
-  id:string
+  id:string;
+  notFound:boolean = false;
   constructor(private recommendService:RecommendsService, private activatedRoute:ActivatedRoute)
   {
     this.activatedRoute.paramMap.subscribe(res => this.id = res.get('id'));
-    this.recommendService.getAllApprovedRecommends(Number(this.id)).subscribe( (res:Recommend[]) => this.recommends = res );
+    this.recommendService.getAllApprovedRecommends(Number(this.id)).subscribe( (res:Recommend[]) => {this.recommends = res; if (!(res.length>0)) this.notFound = true; else this.notFound = false;} );
   }
 
   fullStars(r:Recommend): number[] {

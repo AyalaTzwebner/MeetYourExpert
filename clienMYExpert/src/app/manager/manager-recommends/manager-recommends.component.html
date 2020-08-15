@@ -1,26 +1,24 @@
+<mat-paginator #paginator 
+        [length]="length" 
+        [pageIndex]="pageIndex" 
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[3, 6, 9, 12]" 
+        (page)="pageEvent = getServerData($event)">
+</mat-paginator>
+
+
 <mat-card *ngFor="let r of recommends">
     <mat-card-header dir="rtl">
-        <mat-card-title dir="rtl"><strong>ממליץ: </strong>{{r.user_name}}</mat-card-title>
-        <mat-card-title dir="rtl"><strong>בעל מקצוע:</strong> {{r.expert_name}} </mat-card-title>
-        <mat-card-title dir="rtl"><strong>המלצה על: {{r.title}}</strong></mat-card-title>
+        <mat-card-title dir="rtl">ממליץ: <strong>{{r.user_name}} </strong> | בעל מקצוע: <strong>{{r.expert_name}}</strong></mat-card-title>
+        <!-- <mat-card-subtitle dir="rtl"><strong>בעל מקצוע:</strong>  </mat-card-subtitle> -->
     </mat-card-header>
     <mat-card-content dir="rtl">
-        <p dir="rtl">{{r.content}}</p>
-    </mat-card-content>    
-    <button mat-raised-button color="primary" [style.backgroundColor] = "getButtonColor(r.isApproved)" (click)="changeStatus(r.id ,r.isApproved, r)">{{r.isApproved ? 'מאושר' : 'אשר'}}</button>
-
-    <!-- <mat-card-footer>
-    </mat-card-footer> -->
+        <p dir="rtl"><strong><i>כותרת: </i></strong>{{r.title}}</p>
+        <p dir="rtl"><strong><i>תוכן: </i></strong> {{r.content}}</p>
+        <p><strong><i>ניקוד: </i></strong>{{r.stars}}</p>
+        <p><strong><i>בתאריך: </i></strong>{{r.date_posted | israelidate}}</p>
+    </mat-card-content> 
+    <button mat-raised-button color="primary" [style.backgroundColor] = "getButtonColor(r.isApproved)" (click)="changeStatus(r)">{{r.isApproved ? 'מאושר' : 'אשר'}}</button>
 </mat-card>
 
 
-<!-- <mat-card *ngFor="let x of allexperts"><a routerLink="/experts/{{x.id}}" dir="rtl">
-    <mat-card-header dir="rtl">
-        <mat-card-title dir="rtl">{{x.userName}}</mat-card-title>
-        <mat-card-subtitle dir="rtl">{{getSubjectName(x.proSubject)}}</mat-card-subtitle>
-        <img mat-card-avatar src="http://turag.co.il/wp-content/uploads/2018/06/man.jpg">
-    </mat-card-header>
-    <mat-card-content>
-        <p dir="rtl">{{x.description}}</p>
-    </mat-card-content>
-</a></mat-card> -->

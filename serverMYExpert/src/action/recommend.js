@@ -3,8 +3,8 @@ var router = express.Router()
 var recommendDomain = require('../domain/recommend');
 
 router.post('/saveRecommend', async function(req, res){
-    console.log("I am here")
     var response = await recommendDomain.addRecommend(req.body);
+    console.log(response);
     res.send(response);
 })
 
@@ -12,7 +12,6 @@ router.post('/saveRecommend', async function(req, res){
 
 router.get('/getApprovedRecommends/:id', async function(req, res)
 {
-      console.log("I am in finding recommends!");
       var commends = await recommendDomain.getApprovedRecommends(req.params.id);
       res.send(commends);
 })
@@ -23,12 +22,20 @@ router.get('/getRecommends', async function(req, res)
     res.send(commends);
 })
 
-router.put('/changeStatus', async function(req,res)
+router.get('/all/page/:page',async function(req,res){
+    var getRecommendsOfPage=await recommendDomain.getRecommendsOfPage(req.query);
+    console.log("recommends:");
+    console.log( getRecommendsOfPage );
+    res.send(getRecommendsOfPage);
+})
+
+
+router.put('/changeStatus', async function(req ,res)
 {
-    console.log( req.body.commentId + " " + req.body.status);
-    var statusChanged = await recommendDomain.changeStatus(req.body.commentId,req.body.status);
+    var statusChanged = await recommendDomain.changeStatus(req.body);
     res.send(statusChanged);
 })
+
 
 
 

@@ -1,31 +1,41 @@
+<mat-card *ngIf="!approvedMeetigns.length&&!unapprovedMeetings.length"><mat-card-subtitle>אין עדיין פגישות להציג.</mat-card-subtitle></mat-card>
+
+
 <mat-card *ngFor="let m of approvedMeetigns">
     <mat-card-header>
 <mat-card-title>
-{{m.title}}
+נושא השיחה: {{m.title}}
 </mat-card-title>
 <mat-card-subtitle>
     {{m.userId}}
 </mat-card-subtitle></mat-card-header>
 <mat-card-content>
-    {{m.date}}
+    {{m.date | israelidate}}
 </mat-card-content>
 <mat-card-actions>
-    <button mat-raised-button color="warn">click here</button>
+    <button mat-icon-button matTooltip="שנה זמן" matTooltipPosition="right"  (click)="openDialog(m)"> <mat-icon>edit</mat-icon></button>      
+    <button mat-raised-button color="error" (click)="changeStatusOfMeeting(m)">{{m.isApproved? "בטל":"אשר את הפגישה"}}</button>
+    <!-- <button mat-raised-button color="warn" (click)="approveMeeting(m)" *ngIf="!m.isApproved">אשר את הפגישה</button> -->
 </mat-card-actions>
 </mat-card>
+
 <mat-divider></mat-divider>
+
 <mat-card *ngFor="let m of unapprovedMeetings">
     <mat-card-header>
         <mat-card-title>
-        {{m.title}}
+      נושא השיחה:  {{m.title}}
         </mat-card-title>
-        <mat-card-subtitle>
-            {{m.userId}}
-        </mat-card-subtitle></mat-card-header>
-        <mat-card-content>
-            {{m.date}}
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="warn">click here</button>
+        <mat-card-title>
+          תאריך:  {{m.date |  israelidate}}
+        </mat-card-title>
+        <mat-card-title>
+            שעה:  {{m.time}}
+        </mat-card-title>
+    </mat-card-header>
+        <mat-card-actions>  
+            <button mat-icon-button matTooltip="שנה זמן" matTooltipPosition="right"  (click)="openDialog(m)"> <mat-icon>edit</mat-icon></button>      
+            <button mat-raised-button color="error" (click)="changeStatusOfMeeting(m)">{{m.isApproved? "בטל":"אשר את הפגישה"}}</button>
+            <!-- <button mat-raised-button color="warn" (click)="approveMeeting(m)" *ngIf="!m.isApproved">אשר את הפגישה</button> -->
         </mat-card-actions>
 </mat-card>

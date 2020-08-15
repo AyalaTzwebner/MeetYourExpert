@@ -34,7 +34,7 @@ export class ManagerExpertsComponent implements OnInit {
         this.length = res.pagination.length;
       },
       err => {
-
+          console.log(err);
       }
     )
   }
@@ -59,7 +59,6 @@ export class ManagerExpertsComponent implements OnInit {
 
     this.expertsService.getPerPage(event.pageSize, event.pageIndex).subscribe(
       (res: any) => {
-        console.log(res.results[0])
         this.allExperts = res.results;
         this.pageIndex = res.pagination.current;
         this.pageSize = res.pagination.perPage;

@@ -45,6 +45,7 @@ import { DispRecommendsComponent } from './disp-recommends/disp-recommends.compo
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMenuModule} from '@angular/material/menu';
+import { IsraelidatePipe } from './israelidate.pipe';
 
 
 
@@ -72,6 +73,7 @@ import {MatMenuModule} from '@angular/material/menu';
     ExpertMeetingsComponent,
     ExpertProfileComponent,
     DispRecommendsComponent,
+    IsraelidatePipe,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-import { City } from './city';
 export class User {
     id:number;
     userName:string;
@@ -6,7 +5,11 @@ export class User {
     email:string;
     city:number;
     userType:number;
+<<<<<<< Updated upstream
     imgUrl:string
+=======
+    user_type:number;
+>>>>>>> Stashed changes
     constructor(id?:number,userName?:string,userPassword?:string,email?:string,city?:number){
         this.id=id;
         this.userName=userName;

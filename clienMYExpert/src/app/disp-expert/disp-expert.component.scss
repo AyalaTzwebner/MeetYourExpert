@@ -1,7 +1,8 @@
 @use '../general' as *;
 
 body{
-    background-color:$colorE;}
+    background-color:$colorE;
+}
 #stars{
     display: inline-block
 }
@@ -18,10 +19,6 @@ mat-card{
     width:100%;
     margin:auto;
 }
-// #torecommend{
-//     margin-top: 2vw;
-
-// }
 #add{
     float: right;
 }
@@ -35,3 +32,4 @@ mat-expansion-panel{
 .mat-expansion-panel-body{
     display: flex;
 }
+

@@ -44,8 +44,7 @@ export class AddRecommendComponent implements OnInit {
   }
   save_recommend(){
     let user:any = JSON.parse(localStorage.getItem("user"));
-    let expert:any = JSON.parse(localStorage.getItem("expert"));
-    let manager:any = JSON.parse(localStorage.getItem("manager"));
+
     this.submitted = true;
     if (this.title.hasError('required') || this.content.hasError('required')){
           this.msg = 'לא ניתן לשלוח המלצה ריקה';
@@ -56,16 +55,15 @@ export class AddRecommendComponent implements OnInit {
             this.msg = 'לא ניתן לשלוח מעל 500 תווים בתוכן';
             return;
           }
-    if (!user&&!expert&&!manager)
+    if (!user)
         {   
           this.msg = 'עליך להרשם כדי להוסיף המלצות';
           return;
         }
-    this.iduser = user ? JSON.parse(localStorage.getItem("user")).id : expert ? JSON.parse(localStorage.getItem("expert")).id :JSON.parse(localStorage.getItem("managre")).id  ;
-    console.log(this.iduser);
+    this.iduser =  JSON.parse(localStorage.getItem("user")).id;
     this.activatedRoute.paramMap.subscribe(res => this.idprof =  Number(res.get("id")));
     this.recommendForm.patchValue({stars:this.rating, userId:this.iduser, profId: this.idprof });
-    alert(this.iduser + " " + this.idprof);
+    alert(this.iduser + " " + this.idprof); 
     this.msg = 'ההמלצה נשלחה בהצלחה, וממתינה לאישור מערכת';
     this.recommendService.saveRecommend(this.recommendForm.value).subscribe(res=> console.log(res));
   }

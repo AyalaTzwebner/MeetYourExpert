@@ -48,7 +48,8 @@
     </div>
 </div>
 
-<mat-card *ngFor="let x of allexperts"><a routerLink="/experts/{{x.id}}" dir="rtl">
+<mat-card *ngFor="let x of allexperts">
+    <a routerLink="/expert/{{x.id}}" dir="rtl">
         <mat-card-header dir="rtl">
             <mat-card-title dir="rtl">{{x.userName}}</mat-card-title>
             <mat-card-subtitle dir="rtl">{{getSubjectName(x.proSubject)}}</mat-card-subtitle>
@@ -57,4 +58,8 @@
         <mat-card-content>
             <p dir="rtl">{{x.description}}</p>
         </mat-card-content>
-    </a></mat-card>
+    </a>
+</mat-card>
+
+
+<mat-card *ngIf="notFound"><mat-card-subtitle>.אין תוצאות התואמות את הערך שחיפשת</mat-card-subtitle></mat-card>
