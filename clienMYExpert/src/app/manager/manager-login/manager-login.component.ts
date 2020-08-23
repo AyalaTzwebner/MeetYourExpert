@@ -27,6 +27,7 @@ export class ManagerLoginComponent implements OnInit {
       else {
         this.somethingWrong = false;
         this.user = res[0];
+        this.userService.getLoggedInName.emit(this.user);
         localStorage.setItem("user", JSON.stringify(this.user));
         this.route.navigateByUrl("/manager-settings");
       }

@@ -41,11 +41,9 @@ export class ExpertsService {
     console.log("HHHHHHHHH")
     return this.http.put(this.url+"put-expert",exp)
   }
-<<<<<<< Updated upstream
   insertImg(fd:FormData){
     return this.http.post(this.url+"change-image",fd);
   }
-=======
 
->>>>>>> Stashed changes
+  
 }

@@ -2,7 +2,7 @@ var db = require('../mySqlDb')
 
 var insertExpert = (expert) => {
   return db
-    .executeStatement(`INSERT INTO users (userName,userPassword,email,city, user_type) 
+    .executeStatement(`INSERT INTO users (userName,userPassword,email,city, userType) 
       VALUES('${expert.userName}','${expert.userPassword}','${expert.email}',${expert.city}, 2)`)
     .then((insInfo) => {
       return db.executeStatement(`INSERT INTO professional (id,proSubject, businessName, description, scores) 

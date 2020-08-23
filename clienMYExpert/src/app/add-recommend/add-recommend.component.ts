@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RecommendsService } from '../services/recommends.service';
+import { Recommend } from '../classes/recommend';
 
 @Component({
   selector: 'app-add-recommend',
@@ -62,6 +63,7 @@ export class AddRecommendComponent implements OnInit {
         }
     this.iduser =  JSON.parse(localStorage.getItem("user")).id;
     this.activatedRoute.paramMap.subscribe(res => this.idprof =  Number(res.get("id")));
+    this.recommendService.getRecommend.emit(new Recommend(this.idprof,this.iduser,this.title.value,this.content.value,this.rating))
     this.recommendForm.patchValue({stars:this.rating, userId:this.iduser, profId: this.idprof });
     alert(this.iduser + " " + this.idprof); 
     this.msg = 'ההמלצה נשלחה בהצלחה, וממתינה לאישור מערכת';

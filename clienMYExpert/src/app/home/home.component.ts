@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   @ViewChild('menu', {static: true}) public menu: any;
   user:User=null;
   constructor(private route: Router,private userService: UsersService) { 
-<<<<<<< Updated upstream
   
   }
   ngOnInit(): void {
@@ -22,13 +21,6 @@ export class HomeComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user"));
     
     console.log(this.user)
-=======
-  // this.user=this.userService.getCurrentUser();
-  this.user = JSON.parse(localStorage.getItem("user")); 
-  }
-  ngOnInit(): void {
-
->>>>>>> Stashed changes
   }
   logOut() {
     localStorage.setItem("user", null);

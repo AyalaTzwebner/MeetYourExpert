@@ -14,9 +14,8 @@ export class ManagerloginGuardService {
           this.router.navigate(["/about"]);
           return false;
       }
-      if (JSON.parse(user).user_type!=1)
+      if (JSON.parse(user).userType!=3)
           {
-            alert(JSON.parse(user).user_type);
             this.router.navigate(["/about"]);
             return false;
           }

@@ -9,6 +9,7 @@ import { MeetingService } from '../services/meeting.service';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { Meeting } from '../classes/meeting';
 import { IfStmt } from '@angular/compiler';
+import { RecommendsService } from '../services/recommends.service';
 
 
 
@@ -22,7 +23,7 @@ export class DispExpertComponent implements OnInit {
   cityString:string;
   not_clicked:boolean = true;
   currentUserMeeting: Meeting = null
-  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
+  constructor(private recommendService:RecommendsService,private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
     // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
@@ -69,7 +70,8 @@ export class DispExpertComponent implements OnInit {
     this.not_clicked = true;
   }
   ngOnInit(): void {
-    // this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
+    this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
+    this.recommendService.getRecommend.subscribe(recommend=>{});
      
   }
 

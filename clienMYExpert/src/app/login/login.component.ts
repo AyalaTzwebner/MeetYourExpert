@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.user = res;
         this.userService.getLoggedInName.emit(this.user);
         localStorage.setItem("user", JSON.stringify(this.user));
-        if(this.user.user_type == 2){
+        if(this.user.userType == 2){
             this.route.navigateByUrl("/expertInfo/"+this.user.id);
           }
         else

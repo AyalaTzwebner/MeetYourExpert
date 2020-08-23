@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Recommend } from '../classes/recommend';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecommendsService {
+  @Output() public getRecommend: EventEmitter<Recommend> = new EventEmitter();
 
   getPerPage(pageSize:number,pageIndex:number){
     return this.http.get(this.url+"all/page/"+pageIndex,{params:new HttpParams().set('npp',pageSize.toString()).set('page',pageIndex.toString())})  

@@ -20,20 +20,15 @@ import { ExpertSettingsComponent } from './expert/expert-settings/expert-setting
 import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
 import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meetings.component';
+import { ExpertloginGuardService } from './services/expertlogin-guard.service';
 
 
 
 
 
 const routes: Routes = [{
-<<<<<<< Updated upstream
   path: '', pathMatch: 'full', redirectTo: '/about' },
  {
-=======
-  path: "",
-  component: DispExpertsComponent
-}, {
->>>>>>> Stashed changes
   path: "login",
   component: LoginComponent
 }, {
@@ -97,9 +92,11 @@ const routes: Routes = [{
 {
   path: "expertInfo/:id/profile",
   component: ExpertProfileComponent,
+  canActivate: [ExpertloginGuardService],
 }, {
     path: "expertInfo/:id/meetings",
-    component: ExpertMeetingsComponent
+    component: ExpertMeetingsComponent,
+    canActivate: [ExpertloginGuardService],
 }];
 
 @NgModule({
