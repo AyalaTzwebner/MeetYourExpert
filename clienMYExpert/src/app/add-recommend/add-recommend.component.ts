@@ -21,8 +21,8 @@ export class AddRecommendComponent implements OnInit {
   msg:string = '';
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private recommendService:RecommendsService) { 
     this.recommendForm = formBuilder.group({ 
-      content: ['', Validators.required],
-      title: ['', Validators.required],
+      content: [''],
+      title: [''],
       stars: [''],
       profId: [''],
       userId: ['']

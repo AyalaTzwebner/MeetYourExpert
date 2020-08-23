@@ -31,6 +31,7 @@ var getRecommends = async () =>
 
 var changeStatus = async (recommend) =>
 {
+    console.log("the recommend: ",recommend);
     try{
         if (!recommend.isApproved)
         var statement = `UPDATE commends SET isApproved = true WHERE id = ${recommend.id}`;

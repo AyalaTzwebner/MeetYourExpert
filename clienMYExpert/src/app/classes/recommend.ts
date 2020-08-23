@@ -7,9 +7,9 @@ export class Recommend {
     title: string;
     content: string;
     stars: number;
-    p: User;
-    u: User;
-    isApproved: boolean; date_posted: Date; constructor(profId?: number, userId?: number, title?: string, content?: string,
+    isApproved: boolean; 
+    date_posted: Date; 
+    constructor(profId?: number, userId?: number, title?: string, content?: string,
         stars?: number, date_posted?: Date) {
             this.profId=profId;
             this.userId=userId;

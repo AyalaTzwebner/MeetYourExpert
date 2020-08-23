@@ -22,11 +22,11 @@ VALUES('${meeting.idProf}','${meeting.idUser}','${meeting.title}','${meeting.con
             html: `<div style="background-color: bisque; margin: auto; padding: 25px; width: 90%; height: 100%;"><div dir="rtl" 
             style="background-color: white; margin: auto; width: 100%; height: 100%;"><p style="text-align: center;">שלום ${meetingInfo.expert[0].userName}</p>
             <p style="text-align: center;">${meetingInfo.user[0].userName} רוצה לקבוע אתך פגישת ייעוץ</p><p style="text-align: center;">בשעה ${meetingInfo.meeting.time} ביום ${meetingInfo.meeting.date}</p>
-            <p style="text-align: center;">נושא: ${meetingInfo.meeting.title}&nbsp;</p><p style="text-align: center;"><a title="all message" href="http://localhost:4200/expertInfo/${meetingInfo.idProf}/meetings">לחץ כאן לראות עוד</a></p><div 
+            <p style="text-align: center;">נושא: ${meetingInfo.meeting.title}&nbsp;</p><p style="text-align: center;"><a title="all message" href="http://localhost:4200/expertInfo/${meetingInfo.expert[0].id}/meetings">לחץ כאן לראות עוד</a></p><div 
             id="actions" ><p style="text-align: center; background-color: bisque; border: 2px inset; width: 130px; height: 30px; 
             margin: 10px; display: inline-block;"><a style="color: black;" title="approve" href="http://localhost:4200/expertInfo/${meetingInfo.idProf}/meetings">אשר פגישה</a></p><p 
             style="text-align: center; background-color: bisque; border: 2px inset; width: 130px; height: 30px; margin:10px; 
-            display: inline-block;"><a style="color: black;" title="options" href="http://localhost:4200/expertInfo/${meetingInfo.idProf}/meetings">אפשרויות נוספות</a></p></div></div></div>`,
+            display: inline-block;"><a style="color: black;" title="options" href="http://localhost:4200/expertInfo/${meetingInfo.expert[0].id}/meetings">אפשרויות נוספות</a></p></div></div></div>`,
           }, (error, result, fullResult) => {
             if (error) console.error(error);
             console.log(result);

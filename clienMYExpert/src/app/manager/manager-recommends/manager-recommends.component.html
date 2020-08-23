@@ -18,6 +18,8 @@
         <p><strong><i>ניקוד: </i></strong>{{r.stars}}</p>
         <p><strong><i>בתאריך: </i></strong>{{r.date_posted | israelidate}}</p>
     </mat-card-content> 
+    <!-- <button mat-raised-button *ngIf="r.isApproved" color="off" (click)="changeStatus(r)">השבת</button>
+    <button mat-raised-button *ngIf="!r.isApproved" color="on" (click)="changeStatus(r)">הפעל</button> -->
     <button mat-raised-button color="primary" [style.backgroundColor] = "getButtonColor(r.isApproved)" (click)="changeStatus(r)">{{r.isApproved ? 'מאושר' : 'אשר'}}</button>
 </mat-card>
 

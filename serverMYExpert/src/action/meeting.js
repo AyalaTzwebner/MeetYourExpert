@@ -2,6 +2,14 @@ var express = require('express')
 var router = express.Router()
 var meetingDomain = require('../domain/meeting')
 
+const cron = require("node-cron");
+const fs = require("fs");
+
+cron.schedule("1 * * * *", function() {
+    console.log("running a task every minute");
+  });
+
+
 router.post('/add-meeting',async function(req,res){
     console.log(req.body)
     var addMeeting=await meetingDomain.insertMeeting(req.body);
