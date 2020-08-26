@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+<<<<<<< Updated upstream
 
+=======
+import { JsonPipe } from '@angular/common';
+>>>>>>> Stashed changes
 @Injectable({
   providedIn: 'root'
 })
 export class ExpertloginGuardService {
 
+<<<<<<< Updated upstream
   public constructor(private router: Router) { }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -24,4 +29,20 @@ export class ExpertloginGuardService {
       return true;
 
   }
+=======
+  constructor(private router:Router) { }
+
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    let expert = localStorage.getItem("user");
+    if (expert === null){
+      this.router.navigate(["/about"]);
+      return false;
+      }
+    if (JSON.parse(expert)[0].user_type == 2){
+      return true;
+    }
+    return false;
+  }
+
+>>>>>>> Stashed changes
 }

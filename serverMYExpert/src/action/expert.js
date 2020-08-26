@@ -13,8 +13,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage
 })
-//C:\Users\user1\Documents\Project\MeetYourExpert\clienMYExpert\src\assets\images\users
-//C:\Users\user1\Documents\Project\MeetYourExpert\clientMYExpert\src\assets\images\users
+
 router.post('/signup',async function(req,res){
   var expSignup= await expertDomain.insertExpert(req.body)
   console.log("signup occured!!!")

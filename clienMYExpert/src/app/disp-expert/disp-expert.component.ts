@@ -19,20 +19,33 @@ import { RecommendsService } from '../services/recommends.service';
   styleUrls: ['./disp-expert.component.scss']
 })
 export class DispExpertComponent implements OnInit {
+  profPicture:string = "assets/images/users/";
+  alternativePicture:string = "http://turag.co.il/wp-content/uploads/2018/06/man.jpg";
   expert: Expert;
   cityString:string;
   not_clicked:boolean = true;
+<<<<<<< Updated upstream
   currentUserMeeting: Meeting = null
   constructor(private recommendService:RecommendsService,private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
+=======
+  currentUserMeeting: Meeting = null;
+  notMe:boolean = true;
+  recommendsNumber:any;
+  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService, private RecommendService:RecommendsService) {
+>>>>>>> Stashed changes
     // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
       this.expert = res[0];
       this.cityString=cityService.getCityById(this.expert.city).name
+    //שליפה של מספר הממליצים
+      this.RecommendService.countRecommends(this.expert.id).subscribe( (res:any) => {this.recommendsNumber = res[0]; console.log(this.recommendsNumber)});
     // שליפה של הפגישה אם יש
       let user1 = localStorage.getItem("user")
-      if (user1!=null) {
+      if (user1!=null&&user1!='null') {
         let user2 = JSON.parse(user1);
+        if(user2.id==this.expert.id)
+            this.notMe=false;
         this.meetingService.findUserMeeting(user2.id, this.expert.id).subscribe((res: Meeting) => {
         if (res) {
            this.currentUserMeeting = res;
@@ -84,6 +97,12 @@ export class DispExpertComponent implements OnInit {
     const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id , updating:true, isExpert:false} });
   }
   openDialog():void{
+    let user = localStorage.getItem("user");
+    if(!user||user=='null')
+        {
+          alert("You have to register to add a meeting");
+          return;
+        }
     const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id, updating:false, isExpert:false} });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

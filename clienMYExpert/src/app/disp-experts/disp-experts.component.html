@@ -53,7 +53,9 @@
         <mat-card-header dir="rtl">
             <mat-card-title dir="rtl">{{x.userName}}</mat-card-title>
             <mat-card-subtitle dir="rtl">{{getSubjectName(x.proSubject)}}</mat-card-subtitle>
-            <img mat-card-avatar src="http://turag.co.il/wp-content/uploads/2018/06/man.jpg">
+            <img mat-card-avatar [src]="x.imgUrl==null? alternativePicture : profPicture+x.imgUrl">
+            
+            <!-- http://turag.co.il/wp-content/uploads/2018/06/man.jpg -->
         </mat-card-header>
         <mat-card-content>
             <p dir="rtl">{{x.description}}</p>

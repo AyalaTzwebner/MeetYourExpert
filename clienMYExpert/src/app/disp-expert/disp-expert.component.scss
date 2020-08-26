@@ -11,7 +11,9 @@ mat-card{
     text-align: center;
 }
 img{
-    width:55px
+    width: 55px;
+    margin-right: 5vw;
+    margin-left:1.7vw;
 }
 mat-card{
     max-width:850px;
@@ -32,4 +34,9 @@ mat-expansion-panel{
 .mat-expansion-panel-body{
     display: flex;
 }
-
+h1{
+    font-size: 30px;
+}
+h3{
+    font-size: 25px;
+}

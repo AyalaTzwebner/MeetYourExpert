@@ -19,6 +19,8 @@ export class AddRecommendComponent implements OnInit {
   cont:string = 'פירוט';
   submitted:boolean = false;
   msg:string = '';
+ //2 is for okay, 1 is not okay because a recommend had been added, and 2 is not okay because a meeting never had accoured.
+  canRecommend:any = 10;
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private recommendService:RecommendsService) { 
     this.recommendForm = formBuilder.group({ 
       content: [''],
@@ -26,7 +28,12 @@ export class AddRecommendComponent implements OnInit {
       stars: [''],
       profId: [''],
       userId: ['']
-    })
+    });
+    let user:any = JSON.parse(localStorage.getItem("user"));
+    this.activatedRoute.paramMap.subscribe((res) => {this.idprof =  Number(res.get("id"));
+    this.recommendService.checkValidation(user, this.idprof).subscribe((res)=> {console.log(res); this.canRecommend = res });
+  });
+
   }
   get content() {
     return this.recommendForm.get("content");
@@ -67,7 +74,8 @@ export class AddRecommendComponent implements OnInit {
     this.recommendForm.patchValue({stars:this.rating, userId:this.iduser, profId: this.idprof });
     alert(this.iduser + " " + this.idprof); 
     this.msg = 'ההמלצה נשלחה בהצלחה, וממתינה לאישור מערכת';
-    this.recommendService.saveRecommend(this.recommendForm.value).subscribe(res=> console.log(res));
+    this.recommendService.saveRecommend(this.recommendForm.value).subscribe( (res) => {console.log(res); if(res==null) this.msg="לא ניתן להמליץ פעמיים";});
+
   }
 
 }

@@ -15,6 +15,9 @@ export class RecommendsService {
 
   url:string = "http://localhost:3000/recommend/";
   constructor(private http:HttpClient) { }
+  checkValidation(user:any, profid:number){
+    return this.http.post(this.url+"addingRecommendValidation", [user, profid]);
+  }
   saveRecommend(rec:any)
   { 
   return  this.http.post<Recommend>(this.url + "saveRecommend", rec);
@@ -30,5 +33,8 @@ export class RecommendsService {
  
  getAllApprovedRecommends(id: number):Observable<Recommend[]> {
     return this.http.get<Recommend[]>(this.url + "getApprovedRecommends/" + id);
+  }
+  countRecommends(id:number){
+    return this.http.get(this.url + "countRecommends/" + id);
   }
 }

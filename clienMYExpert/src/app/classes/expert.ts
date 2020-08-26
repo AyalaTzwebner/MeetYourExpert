@@ -13,7 +13,9 @@ export class Expert {
     scores:number;
     enable:boolean;
 
-    constructor(id?: number, userName?: string, userPassword?: string, email?: string, city?: number, proSubject?: number,img?:string,businessName?:string,description?:string,score?:number) {
+    constructor(id?: number, userName?: string, userPassword?: string, email?: string, 
+        city?: number, proSubject?: number,img?:string,businessName?:string
+        ,description?:string,score?:number) {
         this.id = id;
         this.userName = userName;
         this.userPassword = userPassword;

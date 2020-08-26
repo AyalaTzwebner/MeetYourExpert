@@ -30,6 +30,7 @@ export class ExpertMeetingsComponent implements OnInit {
          this.meetingService.getMeetingsForExpert(this.expert.id).subscribe((res: Meeting[]) => {
            this.approvedMeetigns = res.filter(m => m.isApproved == true);
            this.unapprovedMeetings = res.filter(m => m.isApproved == false);    
+           console.log(res);
          }, err => console.log(err));
        }, err => console.log(err));
      });

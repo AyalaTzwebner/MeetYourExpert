@@ -46,6 +46,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMenuModule} from '@angular/material/menu';
 import { IsraelidatePipe } from './israelidate.pipe';
+import { QuestionsComponent } from './forum/questions/questions.component';
+import { QuestionComponent } from './forum/question/question.component';
 
 
 
@@ -74,6 +76,8 @@ import { IsraelidatePipe } from './israelidate.pipe';
     ExpertProfileComponent,
     DispRecommendsComponent,
     IsraelidatePipe,
+    QuestionsComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,

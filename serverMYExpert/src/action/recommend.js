@@ -2,13 +2,26 @@ var express = require('express')
 var router = express.Router()
 var recommendDomain = require('../domain/recommend');
 
+
+router.post('/addingRecommendValidation', async function(req, res){
+    console.log(req.body);
+    console.log("sep######################");
+    console.log(req.body[1]);
+    var response = await recommendDomain.addingRecommendValidation(req.body[0], req.body[1]);
+    console.log(response);
+    res.send(response)
+})
+
 router.post('/saveRecommend', async function(req, res){
     var response = await recommendDomain.addRecommend(req.body);
-    console.log(response);
     res.send(response);
 })
 
-
+router.get('/countRecommends/:id', async function(req,res){
+    var response = await recommendDomain.countRecommends(req.params.id);
+    console.log(response);
+    res.send(response);
+})
 
 router.get('/getApprovedRecommends/:id', async function(req, res)
 {
@@ -24,8 +37,6 @@ router.get('/getRecommends', async function(req, res)
 
 router.get('/all/page/:page',async function(req,res){
     var getRecommendsOfPage=await recommendDomain.getRecommendsOfPage(req.query);
-    console.log("recommends:");
-    console.log( getRecommendsOfPage );
     res.send(getRecommendsOfPage);
 })
 

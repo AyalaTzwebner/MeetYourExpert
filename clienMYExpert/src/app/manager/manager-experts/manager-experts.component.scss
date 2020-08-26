@@ -14,7 +14,17 @@ width:100%;
 .on{
     background-color: green($color: #6cc25673) !important;
 }
+.mat-card-title{
+    font-size: 25px;
+text-align: right;
 
+}
+.mat-card-subtitle{
+    font-size: 16px;
+    margin-top: 8px;
+    text-align: right;
+
+}
 /* active tab */
 // ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
 //     color:red;

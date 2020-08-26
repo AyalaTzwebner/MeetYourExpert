@@ -1,4 +1,7 @@
-<form dir="rtl" [formGroup]="recommendForm" (ngSubmit)="save_recommend()" >
+<p *ngIf="canRecommend.status==0">אין אפשרות להמליץ בלי פגישה קודמת</p>
+<p *ngIf="canRecommend.status==1">אין אפשרות להמליץ פעמיים</p>
+<div *ngIf="canRecommend.status==2">
+  <form dir="rtl" [formGroup]="recommendForm" (ngSubmit)="save_recommend()" >
 <mat-form-field appearance="outline" >
     <mat-label>תמצת את העבודה</mat-label>
     <input matInput [formControl]="title" autocomplete="none" (focus) = "initSubmitted()">
@@ -14,3 +17,4 @@
 </div>
 <button mat-raised-button type="submit" color="customed">שמור המלצה</button>
 </form>
+</div>

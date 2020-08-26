@@ -58,13 +58,13 @@ li{
 }
 .head-wrapper{
     width: 100vw;
-    height: 50vh;
+    height: 30vh;
     background-color: lightyellow;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     margin: 0;
-    background-image: url("../../img/2471617.jpg");
+    background-image: url("../../img/8680.jpg");
     box-shadow: 0px 2px 5px black;
 }
 .greetUser{
@@ -88,4 +88,20 @@ li{
 }
 a{
     width:max-content
+}
+.greetGuest{
+    min-width: 100px;
+    max-width: 127px;
+    width: 100%;
+    background-color: 200;
+    float: right;
+    text-align: revert;
+    direction: rtl;
+    margin-top: 16px;
+    font-size: 1.5em;
+}
+.sub_header{
+    height: 5vh;
+    width: 100%;
+    direction: rtl;
 }

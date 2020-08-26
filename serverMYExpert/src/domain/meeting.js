@@ -36,7 +36,7 @@ VALUES('${meeting.idProf}','${meeting.idUser}','${meeting.title}','${meeting.con
 var getMeetingForUser = async (params) => {
     try {
         console.log(params);
-        var res = await db.executeStatement(`SELECT * FROM meetings WHERE idProf = ${params.expert} and idUser = ${params.user}`);
+        var res = await db.executeStatement(`SELECT * FROM meetings m WHERE idProf = ${params.expert} and idUser = ${params.user} and datediff(m.date,now())>0`);
         if (res && res.length > 0)
             return res[0];
         else return null;
@@ -55,9 +55,15 @@ var updateMeeting = async (meet) => {
         , date = '${meet.date}' , time = '${meet.time}'   WHERE id = ${meet.id}`)
     }catch(e){}
 }
+<<<<<<< Updated upstream
 var allMeetingsForExpert = async (id) => {
     try {
         var res = await db.executeStatement(`SELECT * FROM meetings WHERE idProf = ${id}`);
+=======
+var allMeetingsForExpert= async (id) =>{
+    try{
+        var res=await db.executeStatement(`SELECT * FROM meetings m WHERE idProf = ${id} and datediff(m.date,now())>0`);
+>>>>>>> Stashed changes
         return res;
     } catch (e) { }
 }

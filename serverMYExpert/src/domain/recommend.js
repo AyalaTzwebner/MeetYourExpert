@@ -1,13 +1,44 @@
 var db = require('../mySqlDb')
 
+var addingRecommendValidation = async(user, pro) =>
+{
+    try{
+        //2 is for okay, 1 is not okay because a recommend had been added, and 2 is not okay because a meeting never had accoured.
+        console.log("I am HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        var res = {status: 2};
+        var hasMeeting = await db.executeStatement(`SELECT *
+        FROM meetings
+        WHERE idProf=${pro} AND idUser=${user.id} AND isApproved = TRUE AND datediff(now(), date)>0`);
+        if (!hasMeeting.length)
+             res = {status: 0};
+        var isTwice = await db.executeStatement(`SELECT * FROM commends
+        WHERE profId = ${pro} AND userId = ${user.id}`);
+        if(isTwice.length)
+             res = {status: 1}; 
+        console.log("res is:"+res);
+        return res;      
+    }
+    catch{
+
+    }
+}
+
 var addRecommend = async (recommend) =>
 {
     try {
-        console.log("i am in domain");
+        var isTwice = await db.executeStatement(`SELECT * FROM commends
+        WHERE profId = ${recommend.profId} AND userId = ${recommend.userId}`);
+        console.log(isTwice);
+        if (isTwice.length)
+            {
+                var res=null;
+                console.log("not added!");
+            }
+        else{
         var res = db.
             executeStatement(`INSERT INTO commends(profId, userId, title, content, stars, date_posted)
         VALUES (${recommend.profId}, ${recommend.userId}, '${recommend.title}', '${recommend.content}', ${recommend.stars},  NOW())`);
-                 
+        }        
        
         return res;
     }
@@ -113,4 +144,19 @@ var getRecommendsOfPage = async (params) =>
     }
 }
 
-module.exports = { addRecommend , getRecommends, changeStatus, getApprovedRecommends, getRecommendsOfPage}
+var countRecommends = async (id) =>{
+    try{
+        return db.
+            executeStatement(`select count(*) as 'count'
+            from commends
+            where profId=${id} and isApproved = true
+            group by profId;
+            `);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+
+module.exports = { addRecommend , getRecommends, changeStatus, getApprovedRecommends, getRecommendsOfPage, addingRecommendValidation, countRecommends }

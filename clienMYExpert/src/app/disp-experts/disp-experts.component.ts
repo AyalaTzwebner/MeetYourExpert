@@ -18,6 +18,8 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class DispExpertsComponent implements OnInit {
 
+  profPicture:string = "assets/images/users/";
+  alternativePicture:string = "http://turag.co.il/wp-content/uploads/2018/06/man.jpg";
   allexperts: Expert[];
   allCities: City[];
   allSubjects: Subject[];

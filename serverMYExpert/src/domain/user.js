@@ -33,7 +33,6 @@ var managerLogin = (manager) => {
 }
 
 var insertUser = (user) => {
-  console.log("Im here!");
   return db
     .executeStatement(`INSERT INTO users (userName,userPassword,email,city,isManager,userType) 
       VALUES('${user.userName}','${user.userPassword}','${user.email}',${user.city},0,1)`)
