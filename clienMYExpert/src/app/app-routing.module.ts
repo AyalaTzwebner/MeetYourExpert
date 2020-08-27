@@ -96,12 +96,12 @@ const routes: Routes = [
   path: "expert/:id",
   component: DispExpertComponent,
   children: [{
-    path: "recommend/:id",
+    path: "add-recommend",
     canActivate: [LoginGuardService],
     component: AddRecommendComponent
   },
   {
-    path: "recommends/:id",
+    path: "recommends",
     component: DispRecommendsComponent
   }]
 },

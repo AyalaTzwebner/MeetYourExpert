@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
         if(this.user.userType == 2){
             this.route.navigateByUrl("/expertInfo/"+this.user.id);
           }
+        if(this.user.userType==3){
+          this.route.navigateByUrl("/manager-settings");
+        }
         else
             this.route.navigateByUrl("/experts");
       }
