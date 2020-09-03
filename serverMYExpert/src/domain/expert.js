@@ -22,7 +22,9 @@ var insertExpert = (expert) => {
 //   }
 var getExperts = async () => {
   try {
-    return await db.executeStatement(`SELECT * FROM professional p INNER JOIN users u ON p.id = u.id WHERE enable=true`)
+    return await db.executeStatement(`SELECT u.id, userName, userPassword, email, city, imgUrl, userType, proSubject, businessName, description, scores, enable, c.name as 'cityName'
+    FROM professional p INNER JOIN users u ON p.id = u.id LEFT JOIN cities c ON u.city = c.id
+    WHERE enable=true;`)
   } catch (e) {
   }
 }

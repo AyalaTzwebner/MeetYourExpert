@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { JsonPipe } from '@angular/common';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 @Injectable({
   providedIn: 'root'
 })

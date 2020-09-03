@@ -57,7 +57,10 @@ var updateMeeting = async (meet) => {
 var allMeetingsForExpert = async (id) => {
     try {
         var res = await db.executeStatement(`SELECT * FROM meetings WHERE idProf = ${id}`);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         return res;
     } catch (e) { }
 }

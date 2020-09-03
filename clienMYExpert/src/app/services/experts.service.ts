@@ -45,8 +45,5 @@ export class ExpertsService {
     return this.http.post(this.url+"change-image",fd);
   }
 
-<<<<<<< Updated upstream
   
-=======
->>>>>>> Stashed changes
 }

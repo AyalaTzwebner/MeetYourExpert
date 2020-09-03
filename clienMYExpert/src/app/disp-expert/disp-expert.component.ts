@@ -10,7 +10,7 @@ import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { Meeting } from '../classes/meeting';
 import { IfStmt } from '@angular/compiler';
 import { RecommendsService } from '../services/recommends.service';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,15 +24,10 @@ export class DispExpertComponent implements OnInit {
   expert: Expert;
   cityString:string;
   not_clicked:boolean = true;
-<<<<<<< Updated upstream
   currentUserMeeting: Meeting = null
-  constructor(private recommendService:RecommendsService,private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService) {
-=======
-  currentUserMeeting: Meeting = null;
   notMe:boolean = true;
-  recommendsNumber:any;
+  recommendsNumber:any = false;
   constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService, private RecommendService:RecommendsService) {
->>>>>>> Stashed changes
     // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
@@ -84,7 +79,7 @@ export class DispExpertComponent implements OnInit {
   }
   ngOnInit(): void {
     this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
-    this.recommendService.getRecommend.subscribe(recommend=>{});
+    this.RecommendService.getRecommend.subscribe(recommend=>{});
      
   }
 
@@ -100,7 +95,7 @@ export class DispExpertComponent implements OnInit {
     let user = localStorage.getItem("user");
     if(!user||user=='null')
         {
-          alert("You have to register to add a meeting");
+          Swal.fire('אופס...', 'יש להרשם כדי לבצע פגישה', 'error');
           return;
         }
     const dialogRef = this.dialog.open(AddMeetingComponent, { data: { id: this.expert.id, updating:false, isExpert:false} });

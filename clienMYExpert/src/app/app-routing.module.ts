@@ -20,29 +20,18 @@ import { ExpertSettingsComponent } from './expert/expert-settings/expert-setting
 import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { ExpertProfileComponent } from './expert/expert-profile/expert-profile.component';
 import { ExpertMeetingsComponent } from './expert/expert-meetings/expert-meetings.component';
-<<<<<<< Updated upstream
 import { ExpertloginGuardService } from './services/expertlogin-guard.service';
-=======
 import { QuestionComponent } from './forum/question/question.component';
 import { QuestionsComponent } from './forum/questions/questions.component';
->>>>>>> Stashed changes
 
 
 
 
 
-<<<<<<< Updated upstream
+
 const routes: Routes = [{
   path: '', pathMatch: 'full', redirectTo: '/about' },
-=======
-const routes: Routes = [
-  // {
-  // path: '', pathMatch: 'full', redirectTo: '/about' },
-  {
-    path:'',
-    component:QuestionsComponent
-  },
->>>>>>> Stashed changes
+
  {
   path: "login",
   component: LoginComponent
