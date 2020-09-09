@@ -6,6 +6,8 @@ import { ExpertsService } from '../services/experts.service';
 import { User } from '../classes/user';
 import { Subject } from '../classes/subject';
 import { City } from '../classes/city';
+import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-sign-up-expert',
@@ -23,7 +25,7 @@ export class SignUpExpertComponent implements OnInit {
   companyName:string;
   description:string;
   validationArr:boolean[] = [];
-  constructor(private cityService: CitiesService, private subjectService: SubjectsService, private expertService: ExpertsService) {
+  constructor(private userService:UsersService, private cityService: CitiesService, private subjectService: SubjectsService, private expertService: ExpertsService, private router:Router) {
     for(let i=0;i<8;i++){
       this.validationArr.push(false);
       }
@@ -42,7 +44,13 @@ export class SignUpExpertComponent implements OnInit {
     this.expert.userName = this.fname + " " + this.lname;
     this.expert.proSubject=this.subjectService.getSubjectByName(this.currentSubject)
     this.expert.city=this.cityService.getCityByName(this.currentCity)
-    this.expertService.signup(this.expert).subscribe(res => console.log("response: " + res), err => console.log(err))
+    this.expertService.signup(this.expert).subscribe(res => {
+      console.log(res);
+      this.expert.id=res.insertId
+      localStorage.setItem("user", JSON.stringify(this.expert));
+      this.router.navigate(["/expertInfo/"+this.expert.id+"/profile"]);
+      this.userService.getLoggedInName.emit(new User(this.expert.id,this.expert.userName,this.expert.userPassword,this.expert.email,this.expert.city,2,this.expert.imgUrl));},
+       err => console.log(err))
   }
 
   isValid():boolean{

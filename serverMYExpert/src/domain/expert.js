@@ -1,15 +1,18 @@
 var db = require('../mySqlDb')
 
-var insertExpert = (expert) => {
-  return db
+var insertExpert =async (expert) => {
+  try{
+  var insertUser= await db
     .executeStatement(`INSERT INTO users (userName,userPassword,email,city, userType) 
-      VALUES('${expert.userName}','${expert.userPassword}','${expert.email}',${expert.city}, 2)`)
-    .then((insInfo) => {
-      return db.executeStatement(`INSERT INTO professional (id,proSubject, businessName, description, scores) 
-      VALUES('${insInfo.insertId}',${expert.proSubject}, '${expert.businessName}','${expert.description}' ,0)`)
-    }).catch(err => {
-      return err
-    });
+      VALUES('${expert.userName}','${expert.userPassword}','${expert.email}',${expert.city}, 2)`);
+    var insertExpert= await
+       db.executeStatement(`INSERT INTO professional (id,proSubject, businessName, description, scores) 
+      VALUES('${insertUser.insertId}',${expert.proSubject}, '${expert.businessName}','${expert.description}' ,0)`);
+      console.log(insertUser);
+    console.log(insertExpert.insertId)
+return insertUser
+  }catch(e){}
+
 }
 // var getExperts = () => {
 //   console.log("1");

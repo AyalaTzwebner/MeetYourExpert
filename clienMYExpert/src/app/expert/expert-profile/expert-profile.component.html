@@ -40,7 +40,7 @@
               <input type="file" (change)="createFormData($event)">
             </div>
 
-        <img *ngIf="detailsForm.get('imgUrl').value" class="img_box" (click)="OpenAddFilesDialog()"  height="150" width="250"
+        <img *ngIf="detailsForm.get('imgUrl').value" class="img_box" (click)="OpenAddFilesDialog()"  height="150" width="150"
         src="assets/images/users/{{detailsForm.get('imgUrl').value}}">
        <!--  <input class="choose_img" #FileSelectInputDialog type="file" (change)="onSelectFile($event)" accept="image/*" formControlName="imgUrl"/> -->
 

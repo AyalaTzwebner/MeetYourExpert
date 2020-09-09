@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   
   }
   ngOnInit(): void {
-    this.userService.getLoggedInName.subscribe(user => (this.user =user));
+    this.userService.getLoggedInName.subscribe(user => {console.log(user);this.user =user});
     console.log("start from here")
     this.user = JSON.parse(localStorage.getItem("user"));
     
@@ -27,4 +27,7 @@ export class HomeComponent implements OnInit {
     this.user=null;
     this.route.navigateByUrl("/about");
   }
+
+  
+
 }

@@ -16,8 +16,8 @@ export class ExpertsService {
   constructor(private subjects: SubjectsService, private users: UsersService, private http: HttpClient) {
   }
 
-  signup(expert: Expert) {
-    return this.http.post(this.url + "signup", expert);
+  signup(expert: Expert):Observable<any> {
+    return this.http.post<any>(this.url + "signup", expert);
   }
 
   getAllExperts(): Observable<Expert[]> {

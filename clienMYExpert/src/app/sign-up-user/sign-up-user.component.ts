@@ -3,6 +3,7 @@ import { CitiesService } from '../services/cities.service';
 import { User } from '../classes/user';
 import { UsersService } from '../services/users.service';
 import { City } from '../classes/city';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-user',
@@ -17,7 +18,7 @@ export class SignUpUserComponent implements OnInit {
   allCities:City[];
   validationArr:boolean[] = [];
   validflag:boolean;
-  constructor(private cityService: CitiesService, private userService: UsersService) {
+  constructor(private cityService: CitiesService, private userService: UsersService, private router:Router) {
     console.log("Got here!")
     this.cityService.getAllCities().subscribe((res:City[])=>{
     this.allCities=res;},err=>console.log(err))
@@ -35,7 +36,11 @@ export class SignUpUserComponent implements OnInit {
     this.user.city=this.cityService.getCityByName(this.city);
     console.log(this.user.city)
     this.user.userName = this.fname + " " + this.lname;
-    this.userService.post(this.user).subscribe(res => alert("response: " + res), err => console.log(err))
+    this.userService.post(this.user).subscribe(res => { 
+      this.user.id=res.insertId
+      localStorage.setItem("user", JSON.stringify(this.user));
+      this.router.navigate(["/experts"])}, err => console.log(err))
+      this.userService.getLoggedInName.emit(this.user);
   }
   isValid():boolean{
     var inputs = document.getElementsByTagName("input");

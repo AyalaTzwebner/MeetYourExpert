@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecommendsService } from '../services/recommends.service';
 import { Recommend } from '../classes/recommend';
 
@@ -19,9 +19,9 @@ export class AddRecommendComponent implements OnInit {
   cont:string = 'פירוט';
   submitted:boolean = false;
   msg:string = '';
- //2 is for okay, 1 is not okay because a recommend had been added, and 2 is not okay because a meeting never had accoured.
+ //2 is for okay, 1 is not okay because a recommend had been added, and 0 is not okay because a meeting never had accoured.
   canRecommend:any = 10;
-  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private recommendService:RecommendsService) { 
+  constructor(private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private recommendService:RecommendsService) { 
     this.recommendForm = formBuilder.group({ 
       content: [''],
       title: [''],
@@ -30,10 +30,8 @@ export class AddRecommendComponent implements OnInit {
       userId: ['']
     });
     let user:any = JSON.parse(localStorage.getItem("user"));
-    this.activatedRoute.paramMap.subscribe((res) => {this.idprof =  Number(res.get("id"));
+    this.idprof = this.idprof = Number(this.router.url.split('/')[2]);
     this.recommendService.checkValidation(user, this.idprof).subscribe((res)=> {console.log(res); this.canRecommend = res });
-  });
-
   }
   get content() {
     return this.recommendForm.get("content");

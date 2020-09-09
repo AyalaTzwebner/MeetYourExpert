@@ -28,9 +28,9 @@ export class UsersService {
   loginManager(user: any):Observable<User> {
     return this.http.post<User>(this.url + "loginManager", user);
   }
-  post(user: User) {
-    console.log("ng post!")
-    return this.http.post(this.url + "signup", user);
+  post(user: User):Observable<any> {
+    console.log("ng post!");
+    return this.http.post<any>(this.url + "signup", user);
   }
   getCurrentUser():User{
     let user:User=new User();

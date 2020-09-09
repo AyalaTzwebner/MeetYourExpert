@@ -3,14 +3,15 @@ var db = require('../mySqlDb')
 var addingRecommendValidation = async(user, pro) =>
 {
     try{
-        //2 is for okay, 1 is not okay because a recommend had been added, and 2 is not okay because a meeting never had accoured.
+        //2 is for okay, 1 is not okay because a recommend had been added, and 0 is not okay because a meeting never had accoured.
         console.log("I am HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         var res = {status: 2};
         var hasMeeting = await db.executeStatement(`SELECT *
         FROM meetings
-        WHERE idProf=${pro} AND idUser=${user.id} AND isApproved = TRUE AND datediff(now(), date)>0`);
-        if (!hasMeeting.length)
-             res = {status: 0};
+        WHERE idProf=${pro} AND idUser=${user.id} AND sentEmail = 1`);
+        if (!hasMeeting.length){
+            console.log("pro: " + pro + " user: "+user.id); console.log(hasMeeting.length);
+             res = {status: 0};}
         var isTwice = await db.executeStatement(`SELECT * FROM commends
         WHERE profId = ${pro} AND userId = ${user.id}`);
         if(isTwice.length)

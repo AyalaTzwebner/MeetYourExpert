@@ -59,7 +59,6 @@ var updateMeeting = async (meet) => {
 var allMeetingsForExpert = async (id) => {
     try {
         var res = await db.executeStatement(`SELECT * FROM meetings WHERE idProf = ${id}`);
-
         return res;
     } catch (e) { }
 }
@@ -83,7 +82,9 @@ var cancelMeeting = async (meet) => {
 }
 var getOverduoMeetings =async (date) => {
     try {
-        var meetings = await db.executeStatement(`SELECT * FROM meetings WHERE isApproved = 1 and date <= DATE(NOW())`);
+        var meetings = await db.executeStatement(`SELECT * FROM meetings WHERE isApproved = 1 and date <= DATE(NOW()) and sentEmail = 0`);
+        console.log(meetings);
+        await db.executeStatement(`UPDATE meetings SET sentEmail = 1 WHERE isApproved = 1 and date <= DATE(NOW()) and sentEmail = 0`);
         return meetings
     }
     catch (e) { }

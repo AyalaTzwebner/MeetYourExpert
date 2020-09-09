@@ -74,7 +74,8 @@ const routes: Routes = [{
   }, {
     path: "sign-up-user",
     component: SignUpUserComponent
-  }, {
+  },
+   {
     path: "",
     component: SignUpUserComponent
   }]
@@ -86,7 +87,7 @@ const routes: Routes = [{
   component: DispExpertComponent,
   children: [{
     path: "add-recommend",
-    canActivate: [LoginGuardService],
+    // canActivate: [LoginGuardService],
     component: AddRecommendComponent
   },
   {

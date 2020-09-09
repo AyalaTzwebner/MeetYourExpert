@@ -53,7 +53,7 @@ router.post('/change-image',  upload.single('file'), (req, res) => {
   console.log("filename-" + filename)
   const path = req.file. path;
   console.log("path-" + path)
-  // Call your database method here with filename and path
+  // Call your database method here with filename and path            
   res.json({'message': 'File uploaded'});
 });
 module.exports = router

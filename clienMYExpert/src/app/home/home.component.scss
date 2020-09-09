@@ -4,7 +4,10 @@ $basicColor:#7171ff;
 $basicBack:lightgray;
 $basicWidth:100vw;
 
-
+.a{
+    width:max-content;
+    height: max-content;
+}
 div{
 
     // background-image:url('https://image.freepik.com/free-photo/young-businesspeople-putting-their-hands-together_23-2148187231.jpg');
@@ -24,8 +27,9 @@ a:after{
 nav{
     margin: 0;
     padding: 0;
-    position: fixed;
+    // position: fixed;
     z-index: 1;
+    float: left;
 }
 .logo{
     margin-left: -10px;
@@ -66,6 +70,8 @@ li{
     margin: 0;
     background-image: url("../../img/8680.jpg");
     box-shadow: 0px 2px 5px black;
+    position: fixed;
+    z-index: 2;
 }
 .greetUser{
     min-width:100px;
@@ -104,4 +110,11 @@ a{
     height: 5vh;
     width: 100%;
     direction: rtl;
+}
+.temp{
+    width: 100vw;
+    height: 30vh;
+    margin: 0;
+    z-index:-1
+
 }
