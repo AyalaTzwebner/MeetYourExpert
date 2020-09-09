@@ -25,8 +25,10 @@ export class LoginGuardService {
       let meeting: Meeting;
       let userId = user.id;
       let expertId = route.paramMap.get("id");
+      console.log(expertId)
       this.meetingService.findUserMeeting(Number(userId), Number(expertId)).subscribe(
         (res: Meeting) => {
+          console.log(res)
           if (!res)
           {
             console.log("1")

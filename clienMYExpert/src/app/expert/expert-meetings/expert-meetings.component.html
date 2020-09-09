@@ -16,6 +16,8 @@
     <button mat-icon-button matTooltip="שנה זמן" matTooltipPosition="right"  (click)="openDialog(m)"> <mat-icon>edit</mat-icon></button>      
     <button mat-raised-button color="error" (click)="changeStatusOfMeeting(m)">{{m.isApproved? "בטל":"אשר את הפגישה"}}</button>
     <!-- <button mat-raised-button color="warn" (click)="approveMeeting(m)" *ngIf="!m.isApproved">אשר את הפגישה</button> -->
+    <input type="text" *ngIf="canceling" matInput placeholder="סיבת הביטול: שדה חובה">
+    <button mat-raised-button color="error" *ngIf="canceling" (click)="deleteMeeting(m)">שמור ביטול</button>
 </mat-card-actions>
 </mat-card>
 

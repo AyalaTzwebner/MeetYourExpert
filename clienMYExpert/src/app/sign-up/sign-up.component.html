@@ -1,7 +1,6 @@
 <div class="wrapper">
-<ul class="nav nav-tabs nav-justified">
-    <li class="nav-item bg-outline-secondary"><a class="nav-link active" routerLink="sign-up-user" routerLinkActive="active">משתמש רגיל</a></li >
-    <li class="nav-item" ><a class="nav-link" routerLink="sign-up-expert" routerLinkActive="active">בעל מקצוע</a></li>
-</ul>
-<router-outlet></router-outlet>
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="משתמש"><app-sign-up-expert></app-sign-up-expert></mat-tab>
+        <mat-tab label="בעל מקצוע"><app-sign-up-user></app-sign-up-user></mat-tab>
+      </mat-tab-group>
 </div>

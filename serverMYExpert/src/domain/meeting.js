@@ -3,7 +3,7 @@ const send = require('gmail-send')({
     user: 'meetyourexpert2020@gmail.com',
     pass: 'thkvusxh20',
     from: 'פגוש את המומחה',
-    subject: 'קביעת ייעוץ',
+
 });
 
 var insertMeeting = async (meeting) => {
@@ -17,6 +17,7 @@ VALUES('${meeting.idProf}','${meeting.idUser}','${meeting.title}','${meeting.con
         console.log(meetingInfo.expert[0].email)
 
         send({
+            subject: 'קביעת ייעוץ',
             to: meetingInfo.expert[0].email,
             html: `<div style="background-color: bisque; margin: auto; padding: 25px; width: 90%; height: 100%;"><div dir="rtl" 
             style="background-color: white; margin: auto; width: 100%; height: 100%;"><p style="text-align: center;">שלום ${meetingInfo.expert[0].userName}</p>
@@ -36,6 +37,7 @@ var getMeetingForUser = async (params) => {
     try {
         console.log(params);
         var res = await db.executeStatement(`SELECT * FROM meetings m WHERE idProf = ${params.expert} and idUser = ${params.user} and datediff(m.date,now())>0`);
+        console.log(res)
         if (res && res.length > 0)
             return res[0];
         else return null;
@@ -57,10 +59,7 @@ var updateMeeting = async (meet) => {
 var allMeetingsForExpert = async (id) => {
     try {
         var res = await db.executeStatement(`SELECT * FROM meetings WHERE idProf = ${id}`);
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         return res;
     } catch (e) { }
 }
@@ -95,14 +94,14 @@ var inviteRecommend =async (meeting) => {
         meetingInfo.expert = await db.executeStatement(`SELECT * FROM users WHERE id = '${meeting.idProf}'`);
         meetingInfo.user = await db.executeStatement(`SELECT * FROM users WHERE id = '${meeting.idUser}'`)
         send({
+            subject: 'הזמנה להמליץ',
             to: meetingInfo.user[0].email,
             html: `<div style="background-color: bisque; margin: auto; padding: 25px; width: 90%; height: 100%;">
             <div dir="rtl" style="background-color: white; margin: auto; width: 100%; height: 100%;">
             <p style="text-align: center;">שלום ${meetingInfo.user[0].userName}</p><p style="text-align: center;">נשמח אם תיכנס&nbsp;
             <a title="recommend" href="http://localhost:4200/expert/${meetingInfo.expert[0].id}/add-recommend">לכאן</a>&nbsp;להמליץ על 
             ${meetingInfo.expert[0].userName}</p><p style="text-align: center; background-color: bisque; border: 2px inset; width: 130px; 
-            height: 30px; margin: 10px; display: inline-block;"><a style="color: black;" title="approve" href="http://localhost:4200
-            /expert/${meetingInfo.expert[0].id}/add-recommend">להכנס לטופס ההמלצה</a></p></div></div></div>`,
+            height: 30px; margin: 10px; display: inline-block;"><a style="color: black;" title="approve" href="http://localhost:4200/expert/${meetingInfo.expert[0].id}/add-recommend">להכנס לטופס ההמלצה</a></p></div></div></div>`,
         }, (error, result, fullResult) => {
             if (error) console.error(error);
             console.log(result);

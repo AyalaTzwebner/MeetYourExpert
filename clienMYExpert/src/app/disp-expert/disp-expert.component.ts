@@ -27,14 +27,14 @@ export class DispExpertComponent implements OnInit {
   currentUserMeeting: Meeting = null
   notMe:boolean = true;
   recommendsNumber:any = false;
-  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService, private RecommendService:RecommendsService) {
+  constructor(private experts: ExpertsService, private activatedRoute: ActivatedRoute,private cityService:CitiesService, public dialog: MatDialog, private meetingService: MeetingService, private recommendService:RecommendsService) {
     // this.expert = new Expert(20, "דוד שרוני", "davidddd", "davidsharoni@gmail.com",26, 2, "https://cdn1.pro.co.il/prod/images/Business/ProfilePicture/115/4d5d83955a5d12e67fd2e07de94978b6.jpg", "מריו אינסטלציה", "מריו אינסטלציה עוסק במגוון תחומים על קו האינסטלציה עם שימת דגש על איכות חומרים, מחירים שפויים ויחס אישי ואדיב", 3.74)
     this.activatedRoute.paramMap.subscribe(res => {
       this.experts.getById(Number(res.get("id"))).subscribe((res: Expert) => {
       this.expert = res[0];
       this.cityString=cityService.getCityById(this.expert.city).name
     //שליפה של מספר הממליצים
-      this.RecommendService.countRecommends(this.expert.id).subscribe( (res:any) => {this.recommendsNumber = res[0]; console.log(this.recommendsNumber)});
+      this.recommendService.countRecommends(this.expert.id).subscribe( (res:any) => {this.recommendsNumber = res[0]; console.log(this.recommendsNumber)});
     // שליפה של הפגישה אם יש
       let user1 = localStorage.getItem("user")
       if (user1!=null&&user1!='null') {
@@ -79,7 +79,7 @@ export class DispExpertComponent implements OnInit {
   }
   ngOnInit(): void {
     this.meetingService.getExistedMeeting.subscribe(meet=>this.currentUserMeeting=meet)
-    this.RecommendService.getRecommend.subscribe(recommend=>{});
+    this.recommendService.getRecommend.subscribe(recommend=>{});
      
   }
 

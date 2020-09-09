@@ -21,6 +21,7 @@ export class ExpertMeetingsComponent implements OnInit {
   approvedMeetigns: Meeting[]=[];
   unapprovedMeetings: Meeting[]=[];
   buttonContent:string = " ";
+  canceling:boolean=false;
   constructor(private formBuilder: FormBuilder, private meetingService: MeetingService, private experts: ExpertsService, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
     // this.approvedMeetigns.push(new Meeting(1,27,23,"abcd",new Date("12/08/2020")));
     // this.unapprovedMeetings.push(new Meeting(2,27,24,"ABCD",new Date("01/09/2020")))
@@ -48,11 +49,16 @@ export class ExpertMeetingsComponent implements OnInit {
         this.meetingService.approveMeeting(meet).subscribe();
       }
       else{
+        this.canceling=true;
         meet.isApproved=false;
-        this.meetingService.cancelMeeting(meet).subscribe();
+       
       }
   }
-
+  deleteMeeting(meet:Meeting){
+     this.meetingService.cancelMeeting(meet).subscribe(
+       res=>this.canceling=false
+     );
+  }
   cancelMeeting(meet:Meeting){
     meet.isApproved=false;
   }

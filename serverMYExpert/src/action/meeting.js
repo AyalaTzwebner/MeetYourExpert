@@ -5,7 +5,7 @@ var meetingDomain = require('../domain/meeting')
 const cron = require("node-cron");
 const fs = require("fs");
 
-cron.schedule("39 13 * * *",async function () {
+cron.schedule("4 22 * * *",async function () {
     console.log("running a task every day");
     let meetings =await meetingDomain.getOverduoMeetings();
     for (let i = 0; i < meetings.length; i++) {
